@@ -2,4 +2,9 @@
     <string name="app_name">ProjetoFinalPart1</string>
     <string name="drawer_open">Aberto</string>
     <string name="drawer_close">Fechado</string>
+    <string name="regist">Registo</string>
+    <string name="list">Lista</string>
+    <string name="dashboard">Página Inicial</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

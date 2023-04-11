@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group>
+        <item
+            android:id="@+id/nav_dashboard"
+            android:icon="@drawable/baseline_dashboard"
+            android:title="@string/dashboard" />
+        <item
+            android:id="@+id/nav_regist"
+            android:icon="@drawable/baseline_app_registration"
+            android:title="@string/regist" />
+        <item
+            android:id="@+id/nav_list"
+            android:icon="@drawable/baseline_list"
+            android:title="@string/list" />
+    </group>
+
+</menu>
