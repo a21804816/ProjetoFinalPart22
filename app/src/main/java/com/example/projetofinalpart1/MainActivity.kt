@@ -14,6 +14,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        if(!screenRotated(savedInstanceState)) {
+            NavigationManager.goToDashboardFragment(supportFragmentManager)
+        }
     }
 
     override fun onStart() {
@@ -37,6 +40,11 @@ class MainActivity : AppCompatActivity() {
             binding.drawer, binding.toolbar,
             R.string.drawer_open, R.string.drawer_close
         )
+
+        binding.bottomNavigation.setOnNavigationItemSelectedListener { menuItem ->
+            onClickNavigationItem(menuItem)
+            true
+        }
         binding.navDrawer.setNavigationItemSelectedListener{
             onClickNavigationItem(it)
         }
@@ -61,6 +69,10 @@ class MainActivity : AppCompatActivity() {
         }
         binding.drawer.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    private fun screenRotated(savedInstanceState: Bundle?): Boolean {
+        return savedInstanceState != null
     }
 
 }
