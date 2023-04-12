@@ -1,14 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".RegistFragment">
+    android:layout_height="match_parent">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/regist" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:layout_margin="16dp"
+        android:background="#FFFFFF"
+        android:elevation="4dp"
+        >
 
-</FrameLayout>
+        <EditText
+            android:id="@+id/nome_filme_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/nomeFilme"
+            android:inputType="text"
+            android:backgroundTint="#333333"
+            android:textColorHint="#AAAAAA"
+            android:textColor="#333333"
+            android:padding="12dp"
+            android:layout_marginBottom="8dp"/>
+
+        <EditText
+            android:id="@+id/cinema_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/nomeCinema"
+            android:inputType="text"
+            android:backgroundTint="#333333"
+            android:textColorHint="#AAAAAA"
+            android:textColor="#333333"
+            android:padding="12dp"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/avaliacao1a10"
+            android:textColor="#333333"
+            android:textSize="18sp"
+            android:padding="12dp"
+            android:layout_marginBottom="8dp"/>
+
+        <SeekBar
+            android:id="@+id/avaliacao_slider"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:max="10"
+            android:padding="12dp"
+            android:progress="5"
+            android:progressTintMode="src_in"
+            android:thumbTintMode="src_in" />
+
+        <EditText
+            android:id="@+id/data_edit_text"
+            android:text="@string/dataVisualizacao"
+            android:textSize="18sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:inputType="date"
+            android:backgroundTint="#333333"
+            android:textColorHint="#AAAAAA"
+            android:textColor="#333333"
+            android:padding="12dp"
+            android:layout_marginBottom="8dp"/>
+
+        <Button
+            android:id="@+id/tirar_foto_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/tirarFotografias"
+            android:textColor="@color/white"
+            android:layout_marginTop="16dp"/>
+
+        <EditText
+            android:id="@+id/observacoes_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="131dp"
+            android:hint="@string/observacoes200"
+            android:maxLength="200"
+            android:maxLines="3"
+            android:padding="8dp"
+            android:layout_marginTop="16dp"/>
+
+        <Button
+            android:id="@+id/registar_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/registarFilme"
+            android:textColor="@color/white"
+            android:layout_marginTop="16dp"/>
+
+
+    </LinearLayout>
+
+</LinearLayout>

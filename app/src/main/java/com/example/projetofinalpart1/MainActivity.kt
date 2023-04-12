@@ -40,14 +40,15 @@ class MainActivity : AppCompatActivity() {
             binding.drawer, binding.toolbar,
             R.string.drawer_open, R.string.drawer_close
         )
-
-        binding.bottomNavigation.setOnNavigationItemSelectedListener { menuItem ->
-            onClickNavigationItem(menuItem)
-            true
-        }
         binding.navDrawer.setNavigationItemSelectedListener{
             onClickNavigationItem(it)
+            true
         }
+        binding.bottomNavigation.setOnItemSelectedListener {
+            onClickNavigationItemBottom(it)
+            true
+        }
+
         binding.drawer.addDrawerListener(toggle)
         toggle.syncState()
     }
@@ -55,6 +56,7 @@ class MainActivity : AppCompatActivity() {
     private fun onClickNavigationItem(item: MenuItem): Boolean {
         when(item.itemId) {
             R.id.nav_dashboard ->
+
                 NavigationManager.goToDashboardFragment(
                     supportFragmentManager
                 )
@@ -63,6 +65,25 @@ class MainActivity : AppCompatActivity() {
                     supportFragmentManager
                 )
             R.id.nav_list ->
+                NavigationManager.goToListFragment(
+                    supportFragmentManager
+                )
+        }
+        binding.drawer.closeDrawer(GravityCompat.START)
+        return true
+    }
+
+    private fun onClickNavigationItemBottom(item: MenuItem): Boolean {
+        when(item.itemId) {
+            R.id.bottom_dashboard ->
+                NavigationManager.goToDashboardFragment(
+                    supportFragmentManager
+                )
+            R.id.bottom_regist ->
+                NavigationManager.goToRegistFragment(
+                    supportFragmentManager
+                )
+            R.id.bottom_list ->
                 NavigationManager.goToListFragment(
                     supportFragmentManager
                 )
