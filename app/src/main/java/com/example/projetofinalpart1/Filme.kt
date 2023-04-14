@@ -1,5 +1,6 @@
 package com.example.projetofinalpart1
 
+
 var listaFilmes = mutableListOf<Filme>()
 
 object Filme {
@@ -14,23 +15,44 @@ object Filme {
     fun registarFilme(
         nomeRegisto: String,
         cinemaRegisto: String,
-        avaliacaoRegisto: String, dataRegisto: String,
+        avaliacaoRegisto: String,
+        dataRegisto: String,
         observacoesRegisto: String,
         fotografiaRegisto: String
-    ): Filme {
-        if (nomeRegisto.isBlank() || cinemaRegisto.isBlank() || avaliacaoRegisto.isBlank() || dataRegisto.isBlank()) {
-            return Filme
+    ): Boolean {
+        if (nomeRegisto.isBlank() || cinemaRegisto.isBlank() || dataRegisto.isBlank()) {
+            return false
         }
-
         nomeFilme = nomeRegisto
         nomeCinema = cinemaRegisto
         avaliacao = avaliacaoRegisto
         dataVisualizacao = dataRegisto
         observacoes = observacoesRegisto
         fotografia = fotografiaRegisto
-        return Filme
+
+        listaFilmes.add(Filme)
+        return true
     }
 
+    fun verificarNomeFilme(nome:String): Boolean {
+        if(nome.isBlank()){
+            return false;
+        }
+        return true
+    }
 
+    fun verificarNomeCinema(nome:String): Boolean {
+        if(nome.isBlank()){
+            return false;
+        }
+        return true
+    }
+
+    fun verificarData(data:String): Boolean {
+        if(data.isBlank()){
+            return false;
+        }
+        return true
+    }
 }
 
