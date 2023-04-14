@@ -88,6 +88,12 @@ class RegistFragment : Fragment() {
             override fun onStopTrackingTouch(seekBar: SeekBar?) {}
         })
 
+        binding.nomeFilmeEditText.setOnFocusChangeListener { _, hasFocus ->
+            if (!hasFocus && binding.nomeFilmeEditText.text.isNotBlank()) {
+                binding.nomeFilmeEditText.setBackgroundColor(Color.TRANSPARENT)
+            }
+        }
+
     }
 
     private fun updateLable(c: Calendar) {

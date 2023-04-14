@@ -7,6 +7,7 @@
     android:layout_marginStart="12dp"
     android:layout_marginTop="12dp"
     android:layout_marginEnd="12dp"
+    android:layout_marginBottom="60dp"
     android:background="#FFFFFF"
     android:orientation="vertical"
     tools:context=".RegistFragment">
@@ -31,7 +32,8 @@
             android:paddingTop="10dp"
             android:paddingEnd="20dp"
             android:paddingBottom="10dp"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            />
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
@@ -159,6 +161,5 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"/>
-
 
 </LinearLayout>
