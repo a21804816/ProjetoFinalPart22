@@ -41,10 +41,9 @@ class RegistFragment : Fragment() {
                 Toast.makeText(requireContext(), "Filme registado com sucesso!", Toast.LENGTH_LONG).show()
                 binding.nomeFilmeEditText.text.clear()
                 binding.cinemaEditText.text.clear()
-                binding.avaliacaoSlider.progress = 0
+                binding.avaliacaoSlider.progress = 5
                 binding.dataEditText.text=""
                 binding.observacoesEditText.text.clear()
-                binding.tirarFotoButton.text = ""
             } else {
                 val errorMessage = getString(R.string.erroRegistoFilme)
                 if(!verificarNomeFilme(nomeFilme)){
@@ -73,6 +72,7 @@ class RegistFragment : Fragment() {
                 calendario.get(Calendar.MONTH),
                 calendario.get(Calendar.DAY_OF_MONTH)
             ).show()
+            binding.dataEditText.error = null
         }
 
         binding.avaliacaoSlider.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
