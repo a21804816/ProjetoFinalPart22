@@ -21,7 +21,9 @@ class MapFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        imageView.setImageResource(R.drawable.mapa)
+        imageView.setImageResource(R.drawable.ic_launcher_background)
     }
+
+
 
 }

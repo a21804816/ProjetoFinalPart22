@@ -23,6 +23,9 @@ object NavigationManager {
     fun goToListFragment(fm: FragmentManager) {
         placeFragment(fm, ListFragment())
     }
+    fun goToMapFragment(fm: FragmentManager) {
+        placeFragment(fm, MapFragment())
+    }
 
 
 
