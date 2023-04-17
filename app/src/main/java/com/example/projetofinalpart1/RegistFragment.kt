@@ -72,6 +72,7 @@ class RegistFragment : Fragment() {
                 calendario.get(Calendar.MONTH),
                 calendario.get(Calendar.DAY_OF_MONTH)
             ).show()
+            binding.dataEditText.error = null
         }
 
         binding.avaliacaoSlider.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
