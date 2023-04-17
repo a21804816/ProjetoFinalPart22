@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
+
 import com.example.projetofinalpart1.databinding.FragmentListBinding
 import com.google.android.material.tabs.TabLayout
 
@@ -48,7 +48,8 @@ class ListFragment : Fragment() {
 
                     }
                     1 -> {
-                        NavigationManager.goToMapFragment(requireFragmentManager())
+                        NavigationManager.goToMapFragment(requireActivity().supportFragmentManager)
+                        binding.tabLayout.getTabAt(1)?.select()
                     }
                 }
             }

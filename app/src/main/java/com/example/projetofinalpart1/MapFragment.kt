@@ -1,13 +1,14 @@
+package com.example.projetofinalpart1
+
 import android.os.Bundle
-import android.renderscript.ScriptGroup.Binding
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
+
 import androidx.fragment.app.Fragment
-import com.example.projetofinalpart1.NavigationManager
-import com.example.projetofinalpart1.R
-import com.example.projetofinalpart1.databinding.FragmentListBinding
+
+
 import com.example.projetofinalpart1.databinding.FragmentMapBinding
 import com.google.android.material.tabs.TabLayout
 
@@ -42,7 +43,8 @@ class MapFragment : Fragment() {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 when (tab?.position) {
                     0 -> {
-                        NavigationManager.goToListFragment(requireFragmentManager())
+                        NavigationManager.goToListFragment(requireActivity().supportFragmentManager)
+
                     }
                     1 -> {
 

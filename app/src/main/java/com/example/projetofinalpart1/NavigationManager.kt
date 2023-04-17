@@ -1,6 +1,5 @@
 package com.example.projetofinalpart1
 
-import MapFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 
