@@ -12,52 +12,21 @@
     android:orientation="vertical"
     tools:context=".RegistFragment">
 
-    <androidx.cardview.widget.CardView
+    <EditText
+        android:id="@+id/nome_filme_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        app:cardElevation="10dp">
+        android:hint="@string/nomeFilme"
+        android:textSize="20sp"
+        style="@style/EditTextLayout"/>
 
-        <EditText
-            android:id="@+id/nome_filme_edit_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:drawablePadding="8dp"
-            android:hint="@string/nomeFilme"
-            android:inputType="text"
-            android:paddingStart="20dp"
-            android:paddingTop="10dp"
-            android:paddingEnd="20dp"
-            android:paddingBottom="10dp"
-            android:textSize="20sp"
-            />
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
+    <EditText
+        android:id="@+id/cinema_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        app:cardElevation="10dp">
-
-        <EditText
-            android:id="@+id/cinema_edit_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:drawablePadding="8dp"
-            android:hint="@string/nomeCinema"
-            android:inputType="text"
-            android:paddingStart="20dp"
-            android:paddingTop="10dp"
-            android:paddingEnd="20dp"
-            android:paddingBottom="10dp"
-            android:textSize="20sp" />
-    </androidx.cardview.widget.CardView>
+        android:hint="@string/nomeCinema"
+        android:textSize="20sp"
+        style="@style/EditTextLayout"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -72,8 +41,8 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:text="@string/avaliacao1a10"
-            android:textColor="#333333"
-            android:textSize="18sp" />
+            android:textColor="@color/black"
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/avaliacao_valor"
@@ -81,8 +50,8 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:text="5"
-            android:textColor="#333333"
-            android:textSize="18sp" />
+            android:textColor="@color/primaryColor"
+            android:textSize="20sp" />
 
     </LinearLayout>
 
@@ -98,49 +67,22 @@
         android:progressTintMode="src_in"
         android:thumbTintMode="src_in" />
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/data_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:orientation="horizontal">
+        android:hint="@string/dataVisualizacao"
+        android:textSize="20sp"
+        style="@style/EditTextLayout"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:text="@string/dataVisualizacao"
-            android:textColor="#333333"
-            android:textSize="18sp" />
-
-        <TextView
-            android:id="@+id/data_edit_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:text="10"
-            android:textColor="#333333"
-            android:textSize="18sp" />
-
-    </LinearLayout>
-    <androidx.cardview.widget.CardView
+    <EditText
+        android:id="@+id/observacoes_edit_text"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        app:cardElevation="10dp">
-
-        <EditText
-            android:id="@+id/observacoes_edit_text"
-            android:layout_width="match_parent"
-            android:layout_height="97dp"
-            android:hint="@string/observacoes200"
-            android:maxLength="200"
-            android:maxLines="3" />
-
-    </androidx.cardview.widget.CardView>
+        android:layout_height="97dp"
+        android:hint="@string/observacoes200"
+        android:maxLength="200"
+        style="@style/EditTextLayout"
+        android:inputType="textMultiLine" />
 
     <Button
         android:id="@+id/tirar_foto_button"

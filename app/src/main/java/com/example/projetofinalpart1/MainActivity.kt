@@ -3,9 +3,11 @@ package com.example.projetofinalpart1
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.SeekBar
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import com.example.projetofinalpart1.databinding.ActivityMainBinding
+import com.example.projetofinalpart1.databinding.FragmentRegistBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding

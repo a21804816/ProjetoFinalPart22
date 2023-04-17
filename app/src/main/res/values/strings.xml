@@ -9,9 +9,10 @@
     <string name="nomeFilme">Nome do Filme*</string>
     <string name="avaliacao1a10">Pontua o filme de 1 a 10:</string>
     <string name="nomeCinema">Nome do Cinema*</string>
-    <string name="dataVisualizacao">Data:</string>
+    <string name="dataVisualizacao">Data ex: 01–04-2023</string>
     <string name="tirarFotografias">Tirar Foto</string>
     <string name="observacoes200">Observações (máx. 200 caracteres)</string>
     <string name="registarFilme">Registar Filme</string>
+    <string name="erroRegistoFilme">Campo não preenchido</string>
 
 </resources>
