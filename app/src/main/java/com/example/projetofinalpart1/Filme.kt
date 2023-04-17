@@ -1,38 +1,40 @@
 package com.example.projetofinalpart1
 
 
+class Filme(
+    var nomeFilme: String,
+    var nomeCinema: String,
+    var avaliacao: String,
+    var dataVisualizacao: String,
+    var observacoes: String,
+    var fotografia: String
+)
+
 var listaFilmes = mutableListOf<Filme>()
 
-object Filme {
+fun registarFilme(
+    nomeRegisto: String,
+    cinemaRegisto: String,
+    avaliacaoRegisto: String,
+    dataRegisto: String,
+    observacoesRegisto: String,
+    fotografiaRegisto: String
 
-    var nomeFilme: String = ""
-    var nomeCinema: String = ""
-    var avaliacao: String = ""
-    var dataVisualizacao: String = ""
-    var observacoes: String = ""
-    var fotografia: String = ""
-
-    fun registarFilme(
-        nomeRegisto: String,
-        cinemaRegisto: String,
-        avaliacaoRegisto: String,
-        dataRegisto: String,
-        observacoesRegisto: String,
-        fotografiaRegisto: String
-    ): Boolean {
-        if (nomeRegisto.isBlank() || cinemaRegisto.isBlank() || dataRegisto.isBlank()) {
-            return false
-        }
-        nomeFilme = nomeRegisto
-        nomeCinema = cinemaRegisto
-        avaliacao = avaliacaoRegisto
-        dataVisualizacao = dataRegisto
-        observacoes = observacoesRegisto
-        fotografia = fotografiaRegisto
-
-        listaFilmes.add(Filme)
-        return true
+): Boolean {
+    if (nomeRegisto.isBlank() || cinemaRegisto.isBlank() || dataRegisto.isBlank()) {
+        return false
     }
+    val filme = Filme(
+        nomeRegisto,
+        cinemaRegisto,
+        avaliacaoRegisto,
+        dataRegisto,
+        observacoesRegisto,
+        fotografiaRegisto
+    )
+    listaFilmes.add(filme)
+    return true
+}
 
     fun verificarNomeFilme(nome:String): Boolean {
         if(nome.isBlank()){
@@ -54,5 +56,5 @@ object Filme {
         }
         return true
     }
-}
+
 

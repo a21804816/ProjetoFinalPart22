@@ -1,5 +1,6 @@
 package com.example.projetofinalpart1
 
+import MapFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 
@@ -22,5 +23,7 @@ object NavigationManager {
     fun goToListFragment(fm: FragmentManager) {
         placeFragment(fm, ListFragment())
     }
+
+
 
 }
