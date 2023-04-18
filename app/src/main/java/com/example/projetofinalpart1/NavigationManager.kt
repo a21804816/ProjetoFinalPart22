@@ -1,5 +1,6 @@
 package com.example.projetofinalpart1
 
+import DashboardFragment
 import DetalhesFragment
 import android.os.Bundle
 import androidx.fragment.app.Fragment

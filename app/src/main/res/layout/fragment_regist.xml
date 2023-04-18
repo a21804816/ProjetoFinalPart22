@@ -104,4 +104,10 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"/>
 
+    <ImageView
+        android:id="@+id/fotoImageView"
+        android:layout_width="match_parent"
+        android:layout_height="83dp"
+        android:layout_marginTop="16dp"
+        android:scaleType="centerCrop" />
 </LinearLayout>

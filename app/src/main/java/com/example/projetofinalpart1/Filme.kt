@@ -1,5 +1,8 @@
 package com.example.projetofinalpart1
 
+import android.graphics.Bitmap
+import java.util.ArrayList
+
 
 class Filme(
     var nomeFilme: String,
@@ -7,7 +10,7 @@ class Filme(
     var avaliacao: String,
     var dataVisualizacao: String,
     var observacoes: String,
-    var fotografia: String
+    var fotografia: ArrayList<Bitmap>
 )
 
 var listaFilmes = mutableListOf<Filme>()
@@ -18,7 +21,7 @@ fun registarFilme(
     avaliacaoRegisto: String,
     dataRegisto: String,
     observacoesRegisto: String,
-    fotografiaRegisto: String
+    fotografiaRegisto: ArrayList<Bitmap>
 
 ): Boolean {
     if (nomeRegisto.isBlank() || cinemaRegisto.isBlank() || dataRegisto.isBlank()) {

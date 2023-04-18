@@ -1,5 +1,6 @@
 package com.example.projetofinalpart1
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.DatePickerDialog
 import android.content.Intent
@@ -20,6 +21,7 @@ import java.util.*
 class RegistFragment : Fragment() {
     private lateinit var binding: FragmentRegistBinding
     private val REQUEST_IMAGE_CAPTURE = 1
+    val imageList = ArrayList<Bitmap>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -31,6 +33,7 @@ class RegistFragment : Fragment() {
         return binding.root
     }
 
+    @SuppressLint("QueryPermissionsNeeded")
     override fun onStart() {
         super.onStart()
         binding.nomeFilmeEditText
@@ -40,8 +43,8 @@ class RegistFragment : Fragment() {
             val avaliacao = binding.avaliacaoSlider.progress.toString()
             val data = binding.dataEditText.text.toString()
             val observacoes = binding.observacoesEditText.text.toString()
-            val foto = binding.tirarFotoButton.toString()
-            val filme = registarFilme(nomeFilme, nomeCinema, avaliacao, data, observacoes, foto)
+            val fotos= imageList
+            val filme = registarFilme(nomeFilme, nomeCinema, avaliacao, data, observacoes, fotos)
 
             if (filme) {
                 Toast.makeText(requireContext(), "Filme registado com sucesso!", Toast.LENGTH_LONG).show()
@@ -50,6 +53,7 @@ class RegistFragment : Fragment() {
                 binding.avaliacaoSlider.progress = 5
                 binding.dataEditText.text=""
                 binding.observacoesEditText.text.clear()
+                imageList.clear()
             } else {
                 val errorMessage = getString(R.string.erroRegistoFilme)
                 if(!verificarNomeFilme(nomeFilme)){
@@ -72,15 +76,14 @@ class RegistFragment : Fragment() {
             }
         }
 
-        val calendario = Calendar.getInstance()
-        val datePicker = DatePickerDialog.OnDateSetListener { view, year, month, day ->
-            calendario.set(Calendar.YEAR, year)
-            calendario.set(Calendar.MONTH, month)
-            calendario.set(Calendar.DAY_OF_MONTH, day)
-            updateLable(calendario)
-        }
-
         binding.dataEditText.setOnClickListener {
+            val calendario = Calendar.getInstance()
+            val datePicker = DatePickerDialog.OnDateSetListener { view, year, month, day ->
+                calendario.set(Calendar.YEAR, year)
+                calendario.set(Calendar.MONTH, month)
+                calendario.set(Calendar.DAY_OF_MONTH, day)
+                updateLable(calendario)
+            }
             DatePickerDialog(requireContext(), datePicker, calendario.get(Calendar.YEAR),
                 calendario.get(Calendar.MONTH),
                 calendario.get(Calendar.DAY_OF_MONTH)
@@ -108,7 +111,8 @@ class RegistFragment : Fragment() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
             val imageBitmap = data?.extras?.get("data") as Bitmap
-            // Save the imageBitmap to the list of films
+            binding.fotoImageView.setImageBitmap(imageBitmap)
+            imageList.add(imageBitmap)
         }
     }
 
