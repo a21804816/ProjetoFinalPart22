@@ -16,8 +16,6 @@ class MapFragment : Fragment() {
 
     private lateinit var binding: FragmentMapBinding
 
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
@@ -45,11 +43,13 @@ class MapFragment : Fragment() {
                     0 -> {
                         NavigationManager.goToListFragment(requireActivity().supportFragmentManager)
 
+
                     }
                     1 -> {
 
                     }
                 }
+                binding.tabLayout.getTabAt(tab?.position ?: 1)?.select()
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {}

@@ -22,16 +22,19 @@ class ListFragment : Fragment() {
             R.layout.fragment_list, container, false
         )
         binding = FragmentListBinding.bind(view)
-        
 
-        return binding.root
-    }
+        val adapter = FilmeAdapter(listaFilmes) { filme ->
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+            val bundle = Bundle().apply {
+                putString("nomeFilme", filme.nomeFilme)
+                putString("nomeCinema", filme.nomeCinema)
+                putString("avaliacao", filme.avaliacao)
+                putString("dataVisualizacao", filme.dataVisualizacao)
+                putString("observacoes", filme.observacoes)
+            }
 
-        val adapter = FilmeAdapter(listaFilmes)
-
+            NavigationManager.goToDetalhesFragment(requireActivity().supportFragmentManager, bundle)
+        }
 
         binding.recyclerView.apply {
             this.adapter = adapter
@@ -52,6 +55,7 @@ class ListFragment : Fragment() {
                         binding.tabLayout.getTabAt(1)?.select()
                     }
                 }
+                binding.tabLayout.getTabAt(tab?.position ?: 0)?.select()
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {}
@@ -59,10 +63,10 @@ class ListFragment : Fragment() {
             override fun onTabReselected(tab: TabLayout.Tab?) {}
         })
 
+
+        return binding.root
     }
-
 }
-
 
 
 

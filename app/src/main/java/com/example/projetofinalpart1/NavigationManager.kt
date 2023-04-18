@@ -1,5 +1,7 @@
 package com.example.projetofinalpart1
 
+import DetalhesFragment
+import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 
@@ -25,6 +27,12 @@ object NavigationManager {
     fun goToMapFragment(fm: FragmentManager) {
         placeFragment(fm, MapFragment())
     }
+    fun goToDetalhesFragment(fragmentManager: FragmentManager, bundle: Bundle) {
+        val detalhesFragment = DetalhesFragment()
+        detalhesFragment.arguments = bundle
+        placeFragment(fragmentManager, detalhesFragment)
+    }
+
 
 
 
