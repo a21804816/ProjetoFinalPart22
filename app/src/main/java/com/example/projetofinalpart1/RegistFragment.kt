@@ -1,7 +1,11 @@
 package com.example.projetofinalpart1
 
+import android.app.Activity
 import android.app.DatePickerDialog
+import android.content.Intent
+import android.graphics.Bitmap
 import android.os.Bundle
+import android.provider.MediaStore
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +19,8 @@ import java.util.*
 
 class RegistFragment : Fragment() {
     private lateinit var binding: FragmentRegistBinding
+    private val REQUEST_IMAGE_CAPTURE = 1
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
@@ -59,6 +65,13 @@ class RegistFragment : Fragment() {
             }
         }
 
+        binding.tirarFotoButton.setOnClickListener{
+            val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+            if (takePictureIntent.resolveActivity(requireActivity().packageManager) != null) {
+                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
+            }
+        }
+
         val calendario = Calendar.getInstance()
         val datePicker = DatePickerDialog.OnDateSetListener { view, year, month, day ->
             calendario.set(Calendar.YEAR, year)
@@ -88,6 +101,15 @@ class RegistFragment : Fragment() {
         val myFormat = "dd-MM-yyyy"
         val sd = SimpleDateFormat(myFormat, Locale.UK)
         binding.dataEditText.text = sd.format(calendario.time)
+    }
+
+    @Deprecated("Deprecated in Java")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
+            val imageBitmap = data?.extras?.get("data") as Bitmap
+            // Save the imageBitmap to the list of films
+        }
     }
 
 }
