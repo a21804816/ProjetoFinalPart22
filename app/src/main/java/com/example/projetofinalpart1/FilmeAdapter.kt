@@ -1,7 +1,6 @@
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.projetofinalpart1.DashboardFragment.Companion.newInstance
 import com.example.projetofinalpart1.Filme
 import com.example.projetofinalpart1.NavigationManager
 import com.example.projetofinalpart1.R
