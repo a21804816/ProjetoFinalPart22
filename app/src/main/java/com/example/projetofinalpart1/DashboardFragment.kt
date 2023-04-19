@@ -8,10 +8,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.projetofinalpart1.NavigationManager
 import com.example.projetofinalpart1.R
+import com.example.projetofinalpart1.TendeciasAdapter
 import com.example.projetofinalpart1.databinding.FragmentDashboardBinding
 import java.text.SimpleDateFormat
 import java.util.*
-import com.example.projetofinalpart1.databinding.MovieItemBinding
 import com.example.projetofinalpart1.listaFilmes
 
 class DashboardFragment : Fragment() {
@@ -57,30 +57,10 @@ class DashboardFragment : Fragment() {
 
         val layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.moviesList.layoutManager = layoutManager
-        binding.moviesList.adapter = MoviesAdapter(movies)
+        binding.moviesList.adapter = TendeciasAdapter(movies)
     }
 
 }
-class MoviesAdapter(val movies: List<Int>): RecyclerView.Adapter<MoviesAdapter.MovieViewHolder>() {
-    private lateinit var binding: MovieItemBinding
 
-    inner class MovieViewHolder(binding: MovieItemBinding): RecyclerView.ViewHolder(binding.root) {
-        val movieImage: ImageView = binding.movieImage
-        val movieImage2: ImageView = binding.movieImage2
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
-        val inflater = LayoutInflater.from(parent.context)
-        val binding = MovieItemBinding.inflate(inflater, parent, false)
-        return MovieViewHolder(binding)
-    }
-
-    override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        holder.movieImage.setImageResource(movies[position])
-        holder.movieImage2.setImageResource(movies[position]+2)
-    }
-
-    override fun getItemCount(): Int = movies.size
-}
 data class Movie(val imageResourceId: Int)
 
