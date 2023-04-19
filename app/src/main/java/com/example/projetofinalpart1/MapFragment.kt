@@ -42,14 +42,14 @@ class MapFragment : Fragment() {
                 when (tab?.position) {
                     0 -> {
                         NavigationManager.goToListFragment(requireActivity().supportFragmentManager)
-
+                        binding.tabLayout.getTabAt(tab?.position ?: 0)?.select()
 
                     }
                     1 -> {
 
                     }
                 }
-                binding.tabLayout.getTabAt(tab?.position ?: 1)?.select()
+
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {}
