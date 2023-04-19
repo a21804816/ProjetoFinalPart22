@@ -6,11 +6,13 @@ import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.projetofinalpart1.NavigationManager
 import com.example.projetofinalpart1.R
 import com.example.projetofinalpart1.databinding.FragmentDashboardBinding
 import java.text.SimpleDateFormat
 import java.util.*
 import com.example.projetofinalpart1.databinding.MovieItemBinding
+import com.example.projetofinalpart1.listaFilmes
 
 class DashboardFragment : Fragment() {
 
@@ -29,11 +31,24 @@ class DashboardFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Set user name and image
-        binding.userName.text = "Hi, John"
-        binding.userImage.setImageResource(R.drawable.movie1)
+        val adapter = FilmeAdapter(listaFilmes) { filme ->
 
-        // Set up movies list
+            val bundle = Bundle().apply {
+                putString("nomeFilme", filme.nomeFilme)
+                putString("nomeCinema", filme.nomeCinema)
+                putString("avaliacao", filme.avaliacao)
+                putString("dataVisualizacao", filme.dataVisualizacao)
+                putString("observacoes", filme.observacoes)
+            }
+
+            NavigationManager.goToDetalhesFragment(requireActivity().supportFragmentManager, bundle)
+        }
+
+        binding.recyclerView.apply {
+            this.adapter = adapter
+            layoutManager = LinearLayoutManager(context)
+        }
+
         val movies = listOf(
             R.drawable.movie1,
             R.drawable.movie2,
@@ -51,6 +66,7 @@ class MoviesAdapter(val movies: List<Int>): RecyclerView.Adapter<MoviesAdapter.M
 
     inner class MovieViewHolder(binding: MovieItemBinding): RecyclerView.ViewHolder(binding.root) {
         val movieImage: ImageView = binding.movieImage
+        val movieImage2: ImageView = binding.movieImage2
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
@@ -61,6 +77,7 @@ class MoviesAdapter(val movies: List<Int>): RecyclerView.Adapter<MoviesAdapter.M
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         holder.movieImage.setImageResource(movies[position])
+        holder.movieImage2.setImageResource(movies[position]+2)
     }
 
     override fun getItemCount(): Int = movies.size
