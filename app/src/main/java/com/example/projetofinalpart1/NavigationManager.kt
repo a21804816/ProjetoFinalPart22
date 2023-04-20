@@ -1,10 +1,9 @@
 package com.example.projetofinalpart1
 
-import DashboardFragment
-import DetalhesFragment
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import com.example.projetofinalpart1.fragments.*
 
 object NavigationManager {
     private fun placeFragment(fm: FragmentManager, fragment: Fragment) {

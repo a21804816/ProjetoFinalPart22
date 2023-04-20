@@ -10,7 +10,7 @@
     android:layout_marginBottom="60dp"
     android:background="#FFFFFF"
     android:orientation="vertical"
-    tools:context=".RegistFragment">
+    tools:context=".fragments.RegistFragment">
 
     <EditText
         android:id="@+id/nome_filme_edit_text"

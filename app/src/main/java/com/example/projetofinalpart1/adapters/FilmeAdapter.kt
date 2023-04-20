@@ -1,17 +1,13 @@
 import android.content.res.Configuration
 import android.graphics.Bitmap
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.projetofinalpart1.Filme
-import com.example.projetofinalpart1.NavigationManager
-import com.example.projetofinalpart1.R
+import com.example.projetofinalpart1.model.Filme
 
 import com.example.projetofinalpart1.databinding.FilmeItemBinding
-import com.example.projetofinalpart1.listaFilmes
 
 class FilmeAdapter(private var filmes: List<Filme>, private val onFilmeItemClick: (Filme) -> Unit) : RecyclerView.Adapter<FilmeViewHolder>() {
 

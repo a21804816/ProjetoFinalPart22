@@ -1,18 +1,17 @@
+package com.example.projetofinalpart1.fragments
+
+import FilmeAdapter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.projetofinalpart1.NavigationManager
 import com.example.projetofinalpart1.R
-import com.example.projetofinalpart1.TendeciasAdapter
+import com.example.projetofinalpart1.adapters.TendeciasAdapter
 import com.example.projetofinalpart1.databinding.FragmentDashboardBinding
-import java.text.SimpleDateFormat
-import java.util.*
-import com.example.projetofinalpart1.listaFilmes
+import com.example.projetofinalpart1.model.listaFilmes
 
 class DashboardFragment : Fragment() {
 
@@ -61,6 +60,3 @@ class DashboardFragment : Fragment() {
     }
 
 }
-
-data class Movie(val imageResourceId: Int)
-

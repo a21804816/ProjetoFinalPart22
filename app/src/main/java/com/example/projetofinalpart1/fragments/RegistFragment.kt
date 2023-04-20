@@ -1,4 +1,4 @@
-package com.example.projetofinalpart1
+package com.example.projetofinalpart1.fragments
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -11,11 +11,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.DatePicker
 import android.widget.SeekBar
 import android.widget.Toast
+import com.example.projetofinalpart1.R
 
 import com.example.projetofinalpart1.databinding.FragmentRegistBinding
-import java.text.SimpleDateFormat
+import com.example.projetofinalpart1.model.ObjetoFilme
 import java.util.*
 
 class RegistFragment : Fragment() {
@@ -44,25 +46,21 @@ class RegistFragment : Fragment() {
             val data = binding.dataEditText.text.toString()
             val observacoes = binding.observacoesEditText.text.toString()
             val fotos= imageList
-            val filme = registarFilme(nomeFilme, nomeCinema, avaliacao, data, observacoes, fotos)
+
+            val filme = ObjetoFilme.registarFilme(nomeFilme, nomeCinema, avaliacao, data, observacoes, fotos)
 
             if (filme) {
-                Toast.makeText(requireContext(), "Filme registado com sucesso!", Toast.LENGTH_LONG).show()
-                binding.nomeFilmeEditText.text.clear()
-                binding.cinemaEditText.text.clear()
-                binding.avaliacaoSlider.progress = 5
-                binding.dataEditText.text=""
-                binding.observacoesEditText.text.clear()
-                imageList.clear()
+                removerCampos()
+
             } else {
                 val errorMessage = getString(R.string.erroRegistoFilme)
-                if(!verificarNomeFilme(nomeFilme)){
+                if(!ObjetoFilme.verificarNomeFilme(nomeFilme)){
                     binding.nomeFilmeEditText.error = errorMessage
                 }
-                if(!verificarNomeCinema(nomeCinema)){
+                if(!ObjetoFilme.verificarNomeCinema(nomeCinema)){
                     binding.cinemaEditText.error = errorMessage
                 }
-                if(!verificarData(data)){
+                if(!ObjetoFilme.verificarData(data)){
                     binding.dataEditText.error = errorMessage
                 }
                 Toast.makeText(requireContext(), "Estão campos por preencher", Toast.LENGTH_LONG).show()
@@ -77,33 +75,47 @@ class RegistFragment : Fragment() {
         }
 
         binding.dataEditText.setOnClickListener {
-            val calendario = Calendar.getInstance()
-            val datePicker = DatePickerDialog.OnDateSetListener { view, year, month, day ->
-                calendario.set(Calendar.YEAR, year)
-                calendario.set(Calendar.MONTH, month)
-                calendario.set(Calendar.DAY_OF_MONTH, day)
-                updateLable(calendario)
+            val datePicker = object : DatePickerDialog.OnDateSetListener {
+                override fun onDateSet(view: DatePicker, year: Int, monthOfYear: Int, dayOfMonth: Int) {
+                    ObjetoFilme.setCalendario(view,year,monthOfYear,dayOfMonth)
+                    updateLable()
+                }
             }
-            DatePickerDialog(requireContext(), datePicker, calendario.get(Calendar.YEAR),
-                calendario.get(Calendar.MONTH),
-                calendario.get(Calendar.DAY_OF_MONTH)
+            DatePickerDialog(requireContext(), datePicker, ObjetoFilme.calendario.get(Calendar.YEAR),
+                ObjetoFilme.calendario.get(Calendar.MONTH),
+                ObjetoFilme.calendario.get(Calendar.DAY_OF_MONTH)
             ).show()
             binding.dataEditText.error = null
         }
 
         binding.avaliacaoSlider.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                binding.avaliacaoValor.text = "$progress"
+                mudarAvaliacao(progress)
             }
             override fun onStartTrackingTouch(seekBar: SeekBar?) {}
             override fun onStopTrackingTouch(seekBar: SeekBar?) {}
         })
     }
 
-    private fun updateLable(calendario: Calendar) {
-        val myFormat = "dd-MM-yyyy"
-        val sd = SimpleDateFormat(myFormat, Locale.UK)
-        binding.dataEditText.text = sd.format(calendario.time)
+    private fun mudarAvaliacao(progress: Int) {
+        ObjetoFilme.alterarAvaliacao(progress)
+        binding.avaliacaoValor.text = ObjetoFilme.avaliacaoFilme
+    }
+
+    private fun removerCampos() {
+        Toast.makeText(requireContext(), "Filme registado com sucesso!", Toast.LENGTH_LONG).show()
+        ObjetoFilme.limparCampos();
+
+        binding.nomeFilmeEditText.setText(ObjetoFilme.nomeFilm)
+        binding.cinemaEditText.setText(ObjetoFilme.cinema)
+        binding.avaliacaoSlider.progress= ObjetoFilme.avaliacaoFilme.toIntOrNull() ?:0
+        binding.dataEditText.text = ObjetoFilme.data
+        binding.observacoesEditText.setText(ObjetoFilme.observacoesFilme)
+        imageList.clear()
+    }
+
+    private fun updateLable() {
+        binding.dataEditText.text = ObjetoFilme.data
     }
 
     @Deprecated("Deprecated in Java")
