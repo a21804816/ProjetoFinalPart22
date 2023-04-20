@@ -2,7 +2,14 @@ package com.example.projetofinalpart1
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.CountDownTimer
+import android.view.Gravity
+import android.view.LayoutInflater
+import android.view.LayoutInflater.*
 import android.view.MenuItem
+import android.view.WindowManager
+import android.widget.PopupWindow
+import android.widget.TextView
 
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
@@ -25,6 +32,9 @@ class MainActivity : AppCompatActivity() {
         super.onStart()
         setSupportActionBar(binding.toolbar)
         setupDrawerMenu()
+        binding.btnToolbar.setOnClickListener {
+            showPopup()
+        }
     }
 
     override fun onBackPressed() {
@@ -97,5 +107,35 @@ class MainActivity : AppCompatActivity() {
     private fun screenRotated(savedInstanceState: Bundle?): Boolean {
         return savedInstanceState != null
     }
+    private fun showPopup() {
+        val inflater = from(this)
+        val popupView = inflater.inflate(R.layout.popup_layout, null)
+
+        val popupWindow = PopupWindow(
+            popupView,
+            WindowManager.LayoutParams.WRAP_CONTENT,
+            WindowManager.LayoutParams.WRAP_CONTENT,
+            true
+        )
+
+        popupWindow.elevation = 10f
+        popupWindow.showAtLocation(binding.root, Gravity.CENTER, 0, 0)
+
+        var count = 9
+        val countDownTimer = object : CountDownTimer(10000, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                popupView.findViewById<TextView>(R.id.popup_countdown).text = count.toString()
+                count--
+            }
+
+            override fun onFinish() {
+                popupWindow.dismiss()
+            }
+        }
+        countDownTimer.start()
+    }
+
+
+
 
 }

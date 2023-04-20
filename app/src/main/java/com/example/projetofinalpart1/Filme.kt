@@ -15,6 +15,7 @@ class Filme(
 
 var listaFilmes = mutableListOf<Filme>()
 
+
 fun registarFilme(
     nomeRegisto: String,
     cinemaRegisto: String,
@@ -59,5 +60,7 @@ fun registarFilme(
         }
         return true
     }
+
+
 
 

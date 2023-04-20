@@ -21,6 +21,7 @@ class ListFragment : Fragment() {
     private lateinit var binding: FragmentListBinding
     private val REQUEST_CODE_SPEECH_INPUT = 100
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
@@ -37,6 +38,7 @@ class ListFragment : Fragment() {
                 putString("avaliacao", filme.avaliacao)
                 putString("dataVisualizacao", filme.dataVisualizacao)
                 putString("observacoes", filme.observacoes)
+                putString("fotogradia", filme.fotografia.toString())
             }
 
             NavigationManager.goToDetalhesFragment(requireActivity().supportFragmentManager, bundle)
@@ -86,6 +88,7 @@ class ListFragment : Fragment() {
                         putString("avaliacao", filme.avaliacao)
                         putString("dataVisualizacao", filme.dataVisualizacao)
                         putString("observacoes", filme.observacoes)
+                        putString("fotogradia", filme.fotografia.toString())
                     }
 
                     NavigationManager.goToDetalhesFragment(requireActivity().supportFragmentManager, bundle)
@@ -109,7 +112,6 @@ class ListFragment : Fragment() {
                 Toast.makeText(context, "Erro ao reconhecer fala.", Toast.LENGTH_SHORT).show()
             }
         }
-
         return binding.root
     }
 
