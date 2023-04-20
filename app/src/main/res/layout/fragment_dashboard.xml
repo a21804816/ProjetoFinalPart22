@@ -20,7 +20,8 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:text="Novidades"
-            android:textSize="24sp"
+            android:textColor="@color/primaryColor"
+            android:textSize="26sp"
             android:textStyle="bold" />
 
         <androidx.recyclerview.widget.RecyclerView
