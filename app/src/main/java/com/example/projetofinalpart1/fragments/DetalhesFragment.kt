@@ -33,8 +33,6 @@ class DetalhesFragment : Fragment() {
         binding.dataVisualizacaoTextView.text = dataVisualizacao
         binding.observacoesTextView.text = observacoes
 
-        (requireActivity() as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
         (binding.voltarButton).setOnClickListener {
             requireActivity().onBackPressed()
         }
