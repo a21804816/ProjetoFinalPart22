@@ -22,8 +22,9 @@
             android:layout_height="80dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginEnd="16dp"
-            android:src="@drawable/placeholder_image" />
+            android:layout_marginStart="17dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="16dp" />
 
         <TextView
             android:id="@+id/nome_filme_edit_text"

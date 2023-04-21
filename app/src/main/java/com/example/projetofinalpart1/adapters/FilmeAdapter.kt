@@ -35,7 +35,7 @@ class FilmeViewHolder(private val binding: FilmeItemBinding, private val onFilme
         binding.avaliacaoValor.text = filme.avaliacao
         binding.dataEditText.text = filme.dataVisualizacao
         binding.observacoesEditText.text = filme.observacoes
-        binding.filmeCardView.addView(filme.fotografia,0)
+        binding.filmeFotografiaImageView.setImageResource(filme.imagemCartaz)
 
         val orientation = itemView.resources.configuration.orientation
 

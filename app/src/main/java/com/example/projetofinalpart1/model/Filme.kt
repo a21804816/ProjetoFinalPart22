@@ -9,7 +9,7 @@ class Filme(
     var dataVisualizacao: String,
     var observacoes: String,
     var fotografia: ArrayList<Bitmap>,
-    var imagemCartaz: String,
+    var imagemCartaz: Int,
     var genero: String,
     var sinopse: String,
     var dataLancamento: String,
