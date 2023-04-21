@@ -41,7 +41,7 @@ class ListFragment : Fragment() {
                 putString("dataVisualizacao", filme.dataVisualizacao)
                 putString("observacoes", filme.observacoes)
                 putString("fotografia", filme.fotografia.toString())
-                putString("imagemCartaz", filme.imagemCartaz)
+                putString("imagemCartaz", filme.imagemCartaz.toString())
                 putString("genero", filme.genero)
                 putString("sinopse", filme.sinopse)
                 putString("dataLancamento", filme.dataLancamento)
