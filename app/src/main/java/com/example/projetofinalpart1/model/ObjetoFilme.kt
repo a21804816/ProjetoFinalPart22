@@ -1,10 +1,11 @@
 package com.example.projetofinalpart1.model
 
 import android.graphics.Bitmap
+import com.example.projetofinalpart1.listaTodosFilmes
 import java.text.SimpleDateFormat
 import java.util.*
 
-var listaFilmes = mutableListOf<Filme>()
+var listaFilmesVistos = mutableListOf<Filme>()
 
 object ObjetoFilme {
 
@@ -34,37 +35,31 @@ object ObjetoFilme {
         if (nomeRegisto.isBlank() || cinemaRegisto.isBlank() || dataRegisto.isBlank()) {
             return false
         }
-        val filme = Filme(
-            nomeRegisto,
-            cinemaRegisto,
-            avaliacaoRegisto,
-            dataRegisto,
-            observacoesRegisto,
-            fotografiaRegisto
-        )
-        listaFilmes.add(filme)
-        return true
+        for (filmeAdicionar in listaTodosFilmes){
+            if(filmeAdicionar.nomeFilme == nomeRegisto){
+                filmeAdicionar.nomeCinema=cinemaRegisto
+                filmeAdicionar.avaliacao=avaliacaoRegisto
+                filmeAdicionar.dataVisualizacao=dataRegisto
+                filmeAdicionar.observacoes=observacoesRegisto
+                filmeAdicionar.fotografia=fotografiaRegisto
+                listaFilmesVistos.add(filmeAdicionar)
+                return true
+            }
+            return false
+        }
+        return false
     }
 
     fun verificarNomeFilme(nome:String): Boolean {
-        if(nome.isBlank()){
-            return false;
-        }
-        return true
+        return nome.isNotBlank()
     }
 
     fun verificarNomeCinema(nome:String): Boolean {
-        if(nome.isBlank()){
-            return false;
-        }
-        return true
+        return nome.isNotBlank()
     }
 
     fun verificarData(data:String): Boolean {
-        if(data.isBlank()){
-            return false;
-        }
-        return true
+        return data.isNotBlank()
     }
 
     fun alterarAvaliacao(progress: Int) {
@@ -80,7 +75,7 @@ object ObjetoFilme {
         fotos=""
     }
 
-    fun setCalendario(view: Any, year: Int, monthOfYear: Int, dayOfMonth: Int) {
+    fun setCalendario(year: Int, monthOfYear: Int, dayOfMonth: Int) {
         calendario.set(Calendar.YEAR, year)
         calendario.set(Calendar.MONTH, monthOfYear)
         calendario.set(Calendar.DAY_OF_MONTH, dayOfMonth)
@@ -92,5 +87,7 @@ object ObjetoFilme {
         val sd = SimpleDateFormat(myFormat, Locale.UK)
         data = sd.format(calendario.time)
     }
+
+
 
 }

@@ -77,7 +77,7 @@ class RegistFragment : Fragment() {
         binding.dataEditText.setOnClickListener {
             val datePicker = object : DatePickerDialog.OnDateSetListener {
                 override fun onDateSet(view: DatePicker, year: Int, monthOfYear: Int, dayOfMonth: Int) {
-                    ObjetoFilme.setCalendario(view,year,monthOfYear,dayOfMonth)
+                    ObjetoFilme.setCalendario(year, monthOfYear, dayOfMonth)
                     updateLable()
                 }
             }

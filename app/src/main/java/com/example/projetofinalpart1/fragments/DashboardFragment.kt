@@ -11,7 +11,7 @@ import com.example.projetofinalpart1.NavigationManager
 import com.example.projetofinalpart1.R
 import com.example.projetofinalpart1.adapters.TendeciasAdapter
 import com.example.projetofinalpart1.databinding.FragmentDashboardBinding
-import com.example.projetofinalpart1.model.listaFilmes
+import com.example.projetofinalpart1.model.listaFilmesVistos
 
 class DashboardFragment : Fragment() {
 
@@ -30,7 +30,7 @@ class DashboardFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = FilmeAdapter(listaFilmes) { filme ->
+        val adapter = FilmeAdapter(listaFilmesVistos) { filme ->
 
             val bundle = Bundle().apply {
                 putString("nomeFilme", filme.nomeFilme)

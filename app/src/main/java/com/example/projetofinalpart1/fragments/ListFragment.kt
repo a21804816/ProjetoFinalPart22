@@ -16,7 +16,7 @@ import com.example.projetofinalpart1.NavigationManager
 import com.example.projetofinalpart1.R
 
 import com.example.projetofinalpart1.databinding.FragmentListBinding
-import com.example.projetofinalpart1.model.listaFilmes
+import com.example.projetofinalpart1.model.listaFilmesVistos
 
 class ListFragment : Fragment() {
 
@@ -32,7 +32,7 @@ class ListFragment : Fragment() {
         )
         binding = FragmentListBinding.bind(view)
 
-        val adapter = FilmeAdapter(listaFilmes) { filme ->
+        val adapter = FilmeAdapter(listaFilmesVistos) { filme ->
 
             val bundle = Bundle().apply {
                 putString("nomeFilme", filme.nomeFilme)
@@ -58,7 +58,7 @@ class ListFragment : Fragment() {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                val filteredList = listaFilmes.filter {
+                val filteredList = listaFilmesVistos.filter {
                     it.nomeFilme.contains(newText ?: "")
                 }
                 val adapter = FilmeAdapter(filteredList) { filme ->

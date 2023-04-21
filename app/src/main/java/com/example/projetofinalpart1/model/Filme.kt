@@ -8,12 +8,12 @@ class Filme(
     var avaliacao: String,
     var dataVisualizacao: String,
     var observacoes: String,
-    var fotografia: ArrayList<Bitmap>
+    var fotografia: ArrayList<Bitmap>,
+    var imagemCartaz: String,
+    var genero: String,
+    var sinopse: String,
+    var dataLancamento: String,
+    var avaliacaoImdb: String,
+    var linkImdb:String,
+    var avaliado:Boolean
 )
-
-
-
-
-
-
-
