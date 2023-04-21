@@ -146,10 +146,10 @@ class MainActivity : AppCompatActivity() {
     private fun introduzirFilmes() {
         val filme1 = Filme(
             "The Shawshank Redemption",
-            "Cinema 1",
-            "9.3",
-            "21/04/2023",
-            "Um clássico drama sobre a vida na prisão",
+            "",
+            "",
+            "",
+            "",
             arrayListOf(),
             "https://www.imdb.com/title/tt0111161/mediaviewer/rm1180561664",
             "Drama",

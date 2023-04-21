@@ -42,10 +42,10 @@ object ObjetoFilme {
                 filmeAdicionar.dataVisualizacao=dataRegisto
                 filmeAdicionar.observacoes=observacoesRegisto
                 filmeAdicionar.fotografia=fotografiaRegisto
+                filmeAdicionar.avaliado=true
                 listaFilmesVistos.add(filmeAdicionar)
                 return true
             }
-            return false
         }
         return false
     }
