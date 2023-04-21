@@ -231,7 +231,7 @@ class MainActivity : AppCompatActivity() {
             "",
             "",
             arrayListOf(),
-            "https://www.imdb.com/title/tt0102926/mediaviewer/rm1268138496",
+            R.drawable.the_silence,
             "Crime, Drama, Thriller",
             "Uma agente do FBI tenta capturar um serial killer com a ajuda de um psicopata preso",
             "14/02/1991",
