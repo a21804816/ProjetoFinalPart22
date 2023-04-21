@@ -4,6 +4,7 @@
     <string name="drawer_close">Fechado</string>
     <string name="regist">Registo</string>
     <string name="list">Lista</string>
+    <string name="map">Mapa</string>
     <string name="dashboard">Página Inicial</string>
 
     <string name="nomeFilme">Nome do Filme*</string>

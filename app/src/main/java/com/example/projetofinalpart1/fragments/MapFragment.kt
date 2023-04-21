@@ -31,27 +31,4 @@ class MapFragment : Fragment() {
     }
 
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Lista"))
-        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Mapa"))
-
-        binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-            override fun onTabSelected(tab: TabLayout.Tab?) {
-                when (tab?.position) {
-                    0 -> {
-                        NavigationManager.goToListFragment(requireActivity().supportFragmentManager)
-                    }
-                    1 -> {
-
-                    }
-                }
-            }
-
-            override fun onTabUnselected(tab: TabLayout.Tab?) {}
-
-            override fun onTabReselected(tab: TabLayout.Tab?) {}
-        })
-    }
 }
