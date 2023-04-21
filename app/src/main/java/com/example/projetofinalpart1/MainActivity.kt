@@ -167,7 +167,7 @@ class MainActivity : AppCompatActivity() {
             "",
             "",
             arrayListOf(),
-            R.drawable.god_father,
+            R.drawable.mapa,
             "Crime, Drama",
             "Um mafioso tenta proteger sua família enquanto enfrenta rivais",
             "24/03/1972",

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.projetofinalpart1.NavigationManager
 import com.example.projetofinalpart1.databinding.FragmentDetalhesBinding
 
 class DetalhesFragment : Fragment() {
@@ -48,7 +49,7 @@ class DetalhesFragment : Fragment() {
 
 
         (binding.voltarButton).setOnClickListener {
-            requireActivity().onBackPressed()
+            NavigationManager.goToListFragment(requireActivity().supportFragmentManager)
         }
     }
 }
