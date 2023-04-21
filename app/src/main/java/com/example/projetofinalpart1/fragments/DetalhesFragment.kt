@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.projetofinalpart1.databinding.FragmentDetalhesBinding
+import com.example.projetofinalpart1.model.Filme
 
 class DetalhesFragment : Fragment() {
 
@@ -25,6 +26,13 @@ class DetalhesFragment : Fragment() {
         val avaliacao = arguments?.getString("avaliacao")
         val dataVisualizacao = arguments?.getString("dataVisualizacao")
         val observacoes = arguments?.getString("observacoes")
+        val fotografia= arguments?.getString("fotografia")
+        val imagemCartaz= arguments?.getString("imagemCartaz")
+        val genero= arguments?.getString("genero")
+        val sinopse= arguments?.getString("sinopse")
+        val dataLancamento= arguments?.getString("dataLancamento")
+        val avaliacaoImdb= arguments?.getString("avaliacaoImdb")
+        val linkImdb= arguments?.getString("linkImdb")
 
 
         binding.nomeFilmeTextView.text = nomeFilme
@@ -32,6 +40,15 @@ class DetalhesFragment : Fragment() {
         binding.avaliacaoTextView.text = avaliacao
         binding.dataVisualizacaoTextView.text = dataVisualizacao
         binding.observacoesTextView.text = observacoes
+        binding.fotografiaTextView.text = fotografia
+        binding.imagemCartazTextView.text = imagemCartaz
+        binding.generoTextView.text = genero
+        binding.sinopseTextView.text = sinopse
+        binding.dataLancamentoTextView.text=dataLancamento
+        binding.avaliacaoImdbTextView.text = avaliacaoImdb
+        binding.linkImdbTextView.text = linkImdb
+
+
 
         (binding.voltarButton).setOnClickListener {
             requireActivity().onBackPressed()

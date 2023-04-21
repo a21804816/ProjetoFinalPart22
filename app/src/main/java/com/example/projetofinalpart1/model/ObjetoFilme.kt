@@ -45,7 +45,6 @@ object ObjetoFilme {
                 listaFilmesVistos.add(filmeAdicionar)
                 return true
             }
-            return false
         }
         return false
     }

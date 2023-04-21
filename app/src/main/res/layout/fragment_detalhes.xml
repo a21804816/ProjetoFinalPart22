@@ -39,8 +39,59 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:textAppearanceMedium"
+        android:textColor="@android:color/black" />
+
+    <TextView
+        android:id="@+id/fotografia_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:textAppearanceMedium"
         android:textColor="@android:color/black"
         android:layout_marginTop="16dp" />
+
+    <TextView
+        android:id="@+id/imagemCartaz_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:textAppearanceMedium"
+        android:textColor="@android:color/black"
+        android:layout_marginTop="16dp" />
+    <TextView
+        android:id="@+id/genero_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:textAppearanceMedium"
+        android:textColor="@android:color/black"
+        android:layout_marginTop="16dp" />
+    <TextView
+        android:id="@+id/sinopse_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:textAppearanceMedium"
+        android:textColor="@android:color/black"
+        android:layout_marginTop="16dp" />
+    <TextView
+        android:id="@+id/dataLancamento_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:textAppearanceMedium"
+        android:textColor="@android:color/black"
+        android:layout_marginTop="16dp" />
+    <TextView
+        android:id="@+id/avaliacaoImdb_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:textAppearanceMedium"
+        android:textColor="@android:color/black"
+        android:layout_marginTop="16dp" />
+    <TextView
+        android:id="@+id/linkImdb_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:textAppearanceMedium"
+        android:textColor="@android:color/black"
+        android:layout_marginTop="16dp" />
+
 
     <Button
         android:id="@+id/voltarButton"

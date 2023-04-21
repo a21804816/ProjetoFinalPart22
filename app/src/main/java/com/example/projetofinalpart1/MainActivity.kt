@@ -223,11 +223,28 @@ class MainActivity : AppCompatActivity() {
             "https://www.imdb.com/title/tt0102926/",
             false
         )
+
+        val filme6 = Filme(
+            "Q",
+            "",
+            "",
+            "",
+            "",
+            arrayListOf(),
+            "https://www.imdb.com/title/tt0102926/mediaviewer/rm1268138496",
+            "Crime, Drama, Thriller",
+            "Uma agente do FBI tenta capturar um serial killer com a ajuda de um psicopata preso",
+            "14/02/1991",
+            "8.6",
+            "https://www.imdb.com/title/tt0102926/",
+            false
+        )
         listaTodosFilmes.add(filme1)
         listaTodosFilmes.add(filme2)
         listaTodosFilmes.add(filme3)
         listaTodosFilmes.add(filme4)
         listaTodosFilmes.add(filme5)
+        listaTodosFilmes.add(filme6)
     }
 
 
