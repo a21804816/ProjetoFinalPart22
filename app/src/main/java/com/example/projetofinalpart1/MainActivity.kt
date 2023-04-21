@@ -231,7 +231,7 @@ class MainActivity : AppCompatActivity() {
             "",
             "",
             arrayListOf(),
-            R.drawable.the_silence,
+            R.drawable.mapa,
             "Crime, Drama, Thriller",
             "Uma agente do FBI tenta capturar um serial killer com a ajuda de um psicopata preso",
             "14/02/1991",

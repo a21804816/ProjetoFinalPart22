@@ -4,10 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.projetofinalpart1.databinding.FragmentDetalhesBinding
-import com.example.projetofinalpart1.model.Filme
 
 class DetalhesFragment : Fragment() {
 
@@ -49,12 +47,9 @@ class DetalhesFragment : Fragment() {
         binding.linkImdbTextView.text = linkImdb
 
 
-
         (binding.voltarButton).setOnClickListener {
             requireActivity().onBackPressed()
         }
-
-
     }
 }
 
