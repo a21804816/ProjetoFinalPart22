@@ -11,7 +11,6 @@ class TendeciasAdapter(val movies: List<Int>): RecyclerView.Adapter<TendeciasAda
 
     inner class MovieViewHolder(binding: TendenciasItemBinding): RecyclerView.ViewHolder(binding.root) {
         val movieImage: ImageView = binding.movieImage
-        val movieImage2: ImageView = binding.movieImage2
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
@@ -22,7 +21,6 @@ class TendeciasAdapter(val movies: List<Int>): RecyclerView.Adapter<TendeciasAda
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         holder.movieImage.setImageResource(movies[position])
-        holder.movieImage2.setImageResource(movies[position]+1)
     }
 
     override fun getItemCount(): Int = movies.size

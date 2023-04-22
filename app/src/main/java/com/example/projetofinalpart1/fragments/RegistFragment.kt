@@ -51,19 +51,25 @@ class RegistFragment : Fragment() {
 
             if (filme) {
                 removerCampos()
-
             } else {
                 val errorMessage = getString(R.string.erroRegistoFilme)
-                if(!ObjetoFilme.verificarNomeFilme(nomeFilme)){
-                    binding.nomeFilmeEditText.error = errorMessage
-                }
                 if(!ObjetoFilme.verificarNomeCinema(nomeCinema)){
                     binding.cinemaEditText.error = errorMessage
                 }
                 if(!ObjetoFilme.verificarData(data)){
                     binding.dataEditText.error = errorMessage
                 }
-                Toast.makeText(requireContext(), "Estão campos por preencher", Toast.LENGTH_LONG).show()
+                if(!ObjetoFilme.verificarNomeFilme(nomeFilme)){
+                    binding.nomeFilmeEditText.error = errorMessage
+                    Toast.makeText(requireContext(), "Estão campos por preencher", Toast.LENGTH_LONG).show()
+                } else if(!ObjetoFilme.percorrerFilmes(nomeFilme)){
+                    binding.nomeFilmeEditText.error = "Filme não existe"
+                    Toast.makeText(requireContext(), "filme não existe", Toast.LENGTH_LONG).show()
+                }else{
+                    Toast.makeText(requireContext(), "Estão campos por preencher", Toast.LENGTH_LONG).show()
+
+                }
+
             }
         }
 

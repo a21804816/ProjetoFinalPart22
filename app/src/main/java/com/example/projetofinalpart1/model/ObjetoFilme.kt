@@ -35,14 +35,14 @@ object ObjetoFilme {
         if (nomeRegisto.isBlank() || cinemaRegisto.isBlank() || dataRegisto.isBlank()) {
             return false
         }
-        for (filmeAdicionar in listaTodosFilmes){
-            if(filmeAdicionar.nomeFilme == nomeRegisto){
-                filmeAdicionar.nomeCinema=cinemaRegisto
-                filmeAdicionar.avaliacao=avaliacaoRegisto
-                filmeAdicionar.dataVisualizacao=dataRegisto
-                filmeAdicionar.observacoes=observacoesRegisto
-                filmeAdicionar.fotografia=fotografiaRegisto
-                filmeAdicionar.avaliado=true
+        for (filmeAdicionar in listaTodosFilmes) {
+            if (percorrerFilmes(nomeRegisto)) {
+                filmeAdicionar.nomeCinema = cinemaRegisto
+                filmeAdicionar.avaliacao = avaliacaoRegisto
+                filmeAdicionar.dataVisualizacao = dataRegisto
+                filmeAdicionar.observacoes = observacoesRegisto
+                filmeAdicionar.fotografia = fotografiaRegisto
+                filmeAdicionar.avaliado = true
                 listaFilmesVistos.add(filmeAdicionar)
                 return true
             }
@@ -50,15 +50,24 @@ object ObjetoFilme {
         return false
     }
 
-    fun verificarNomeFilme(nome:String): Boolean {
+    fun verificarNomeFilme(nome: String): Boolean {
         return nome.isNotBlank()
     }
 
-    fun verificarNomeCinema(nome:String): Boolean {
+    fun percorrerFilmes(nome: String): Boolean {
+        for (filmeAdicionar in listaTodosFilmes) {
+            if (filmeAdicionar.nomeFilme == nome) {
+                return true
+            }
+        }
+        return false
+    }
+
+    fun verificarNomeCinema(nome: String): Boolean {
         return nome.isNotBlank()
     }
 
-    fun verificarData(data:String): Boolean {
+    fun verificarData(data: String): Boolean {
         return data.isNotBlank()
     }
 
@@ -67,12 +76,12 @@ object ObjetoFilme {
     }
 
     fun limparCampos() {
-        nomeFilm= ""
-        cinema= ""
-        avaliacaoFilme= ""
-        data= ""
-        observacoesFilme= ""
-        fotos=""
+        nomeFilm = ""
+        cinema = ""
+        avaliacaoFilme = ""
+        data = ""
+        observacoesFilme = ""
+        fotos = ""
     }
 
     fun setCalendario(year: Int, monthOfYear: Int, dayOfMonth: Int) {
@@ -87,7 +96,6 @@ object ObjetoFilme {
         val sd = SimpleDateFormat(myFormat, Locale.UK)
         data = sd.format(calendario.time)
     }
-
 
 
 }

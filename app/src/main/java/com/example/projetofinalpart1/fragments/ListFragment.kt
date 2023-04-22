@@ -47,10 +47,7 @@ class ListFragment : Fragment() {
                 putString("dataLancamento", filme.dataLancamento)
                 putString("avaliacaoImdb", filme.avaliacaoImdb)
                 putString("linkImdb", filme.linkImdb)
-
-
             }
-
             NavigationManager.goToDetalhesFragment(requireActivity().supportFragmentManager, bundle)
         }
 
