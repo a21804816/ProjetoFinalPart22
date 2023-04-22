@@ -83,6 +83,10 @@ class MainActivity : AppCompatActivity() {
                 NavigationManager.goToListFragment(
                     supportFragmentManager
                 )
+            R.id.nav_map ->
+                NavigationManager.goToMapFragment(
+                    supportFragmentManager
+                )
         }
         binding.drawer.closeDrawer(GravityCompat.START)
         return true
