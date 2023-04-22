@@ -73,7 +73,7 @@
         android:layout_height="wrap_content"
         android:hint="@string/dataVisualizacao"
         android:textSize="20sp"
-        style="@style/EditTextLayout"/>
+        style="@style/EditTextLayout" />
 
     <EditText
         android:id="@+id/observacoes_edit_text"

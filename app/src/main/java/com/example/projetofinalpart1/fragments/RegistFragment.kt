@@ -87,10 +87,15 @@ class RegistFragment : Fragment() {
                     updateLable()
                 }
             }
-            DatePickerDialog(requireContext(), datePicker, ObjetoFilme.calendario.get(Calendar.YEAR),
+            val dialog = DatePickerDialog(
+                requireContext(),
+                datePicker,
+                ObjetoFilme.calendario.get(Calendar.YEAR),
                 ObjetoFilme.calendario.get(Calendar.MONTH),
                 ObjetoFilme.calendario.get(Calendar.DAY_OF_MONTH)
-            ).show()
+            )
+            dialog.datePicker.maxDate = ObjetoFilme.calendario.timeInMillis // set max date to current date
+            dialog.show()
             binding.dataEditText.error = null
         }
 
