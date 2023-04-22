@@ -233,7 +233,7 @@ class MainActivity : AppCompatActivity() {
             arrayListOf(),
             R.drawable.mapa,
             "Crime, Drama, Thriller",
-            "Uma agente do FBI tenta capturar um serial killer com a ajuda de um psicopata preso",
+            "Uma agente do FBI tenta capturar um serial killer com a ajuda de um psicopata preso, Uma agente do FBI tenta capturar um serial killer com a ajuda de um psicopata preso, Uma agente do FBI tenta capturar um serial killer com a ajuda de um psicopata preso, Uma agente do FBI tenta capturar um serial killer com a ajuda de um psicopata preso, Uma agente do FBI tenta capturar um serial killer com a ajuda de um psicopata preso, Uma agente do FBI tenta capturar um serial killer com a ajuda de um psicopata preso, Uma agente do FBI tenta capturar um serial killer com a ajuda de um psicopata preso, Uma agente do FBI tenta capturar um serial killer com a ajuda de um psicopata preso,",
             "14/02/1991",
             "8.6",
             "https://www.imdb.com/title/tt0102926/",

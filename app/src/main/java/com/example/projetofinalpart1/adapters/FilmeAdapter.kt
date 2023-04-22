@@ -1,10 +1,9 @@
 import android.content.res.Configuration
-import android.graphics.Bitmap
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.projetofinalpart1.databinding.DelhatesFilmeBinding
 import com.example.projetofinalpart1.model.Filme
 
 import com.example.projetofinalpart1.databinding.FilmeItemBinding
@@ -51,6 +50,3 @@ class FilmeViewHolder(private val binding: FilmeItemBinding, private val onFilme
     }
 }
 
-private fun CardView.addView(fotografia: ArrayList<Bitmap>, i: Int) {
-
-}

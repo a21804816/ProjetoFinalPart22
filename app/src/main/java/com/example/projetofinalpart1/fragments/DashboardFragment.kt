@@ -38,6 +38,14 @@ class DashboardFragment : Fragment() {
                 putString("avaliacao", filme.avaliacao)
                 putString("dataVisualizacao", filme.dataVisualizacao)
                 putString("observacoes", filme.observacoes)
+                putString("fotografia", filme.fotografia.toString())
+                putString("imagemCartaz", filme.imagemCartaz.toString())
+                putString("genero", filme.genero)
+                putString("sinopse", filme.sinopse)
+                putString("dataLancamento", filme.dataLancamento)
+                putString("avaliacaoImdb", filme.avaliacaoImdb)
+                putString("linkImdb", filme.linkImdb)
+
             }
 
             NavigationManager.goToDetalhesFragment(requireActivity().supportFragmentManager, bundle)
