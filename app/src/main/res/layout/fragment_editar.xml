@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginStart="12dp"
+    android:layout_marginTop="12dp"
+    android:layout_marginEnd="12dp"
+    android:layout_marginBottom="60dp"
+    android:background="#FFFFFF"
+    android:orientation="vertical"
+    tools:context=".fragments.RegistFragment">
+
+    <EditText
+        android:id="@+id/nome_filme_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/nomeFilme"
+        android:textSize="20sp"
+        style="@style/EditTextLayout"/>
+
+    <EditText
+        android:id="@+id/cinema_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/nomeCinema"
+        android:textSize="20sp"
+        style="@style/EditTextLayout"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:text="@string/avaliacao1a10"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/avaliacao_valor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="5"
+            android:textColor="@color/primaryColor"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
+    <SeekBar
+        android:id="@+id/avaliacao_slider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="16dp"
+        android:max="10"
+        android:progress="5"
+        android:progressTintMode="src_in"
+        android:thumbTintMode="src_in" />
+
+    <TextView
+        android:id="@+id/data_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/dataVisualizacao"
+        android:textSize="20sp"
+        style="@style/EditTextLayout" />
+
+    <EditText
+        android:id="@+id/observacoes_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="97dp"
+        android:hint="@string/observacoes200"
+        android:maxLength="200"
+        style="@style/EditTextLayout"
+        android:inputType="textMultiLine" />
+
+    <Button
+        android:id="@+id/tirar_foto_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/tirarFotografias"
+        android:textColor="@color/white"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"/>
+
+    <Button
+        android:id="@+id/registar_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Guardar Filme"
+        android:textColor="@color/white"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"/>
+
+    <Button
+        android:id="@+id/cancelar_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cancelar"
+        android:textColor="@color/white"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"/>
+
+    <ImageView
+        android:id="@+id/fotoImageView"
+        android:layout_width="match_parent"
+        android:layout_height="83dp"
+        android:layout_marginTop="16dp"
+        android:scaleType="centerCrop" />
+</LinearLayout>
