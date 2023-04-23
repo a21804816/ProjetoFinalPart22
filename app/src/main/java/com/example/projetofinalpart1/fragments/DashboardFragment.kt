@@ -1,5 +1,6 @@
 package com.example.projetofinalpart1.fragments
 
+import FilmeAdapter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View

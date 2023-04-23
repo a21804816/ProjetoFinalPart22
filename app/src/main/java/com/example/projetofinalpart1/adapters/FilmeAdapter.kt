@@ -35,6 +35,5 @@ class FilmeAdapter(private val onClick: (String) -> Unit,
         holder.binding.observacoesEditText.visibility = if (orientation == Configuration.ORIENTATION_PORTRAIT) View.GONE else View.VISIBLE
     }
     override fun getItemCount(): Int = items.size
-
 }
 
