@@ -45,7 +45,7 @@ class DetalhesFragment : Fragment() {
 
 
     private fun placeData(ui: Filme) {
-        binding.nomeFilmeTextView.text=ui.nomeFilme
+        binding.nomeFilme.text=ui.nomeFilme
         binding.imagemCartazImageView.setImageResource(ui.imagemCartaz)
         binding.nomeCinemaTextView.text=ui.nomeCinema
     }
