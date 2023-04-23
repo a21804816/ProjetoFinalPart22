@@ -40,7 +40,7 @@ object ObjetoFilme {
                 filmeAdicionar.avaliacao = avaliacaoRegisto
                 filmeAdicionar.dataVisualizacao = dataRegisto
                 filmeAdicionar.observacoes = observacoesRegisto
-                filmeAdicionar.fotografia = fotografiaRegisto
+                filmeAdicionar.substituirFotografias(fotografiaRegisto)
                 filmeAdicionar.avaliado = true
                 listaFilmesVistos.add(filmeAdicionar)
                 return true
@@ -80,7 +80,6 @@ object ObjetoFilme {
         avaliacaoFilme = ""
         data = ""
         observacoesFilme = ""
-        fotos = listOf()
     }
 
     fun setCalendario(year: Int, monthOfYear: Int, dayOfMonth: Int) {

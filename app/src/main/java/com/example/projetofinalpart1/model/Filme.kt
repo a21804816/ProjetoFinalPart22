@@ -9,7 +9,7 @@ class Filme(
     var avaliacao: String,
     var dataVisualizacao: String,
     var observacoes: String,
-    var fotografia: ArrayList<String>,
+    var novasFotografias: List<String>, // replace ArrayList<String> with List<String>
     var imagemCartaz: Int,
     var genero: String,
     var sinopse: String,
@@ -19,4 +19,16 @@ class Filme(
     var avaliado:Boolean,
     val uuid: String = UUID.randomUUID().toString()
 
-)
+){
+    var fotografia: ArrayList<String> = arrayListOf<String>()
+
+    init {
+        fotografia.addAll(novasFotografias)
+    }
+
+    // add a method to replace the fotografia ArrayList
+    fun substituirFotografias(novasFotografias: List<String>) {
+        fotografia.clear()
+        fotografia.addAll(novasFotografias)
+    }
+}
