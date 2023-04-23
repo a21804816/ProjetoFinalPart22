@@ -29,6 +29,5 @@ class FilmeAdapter(private val onClick: (String) -> Unit,
         holder.binding.filmeFotografiaImageView.setImageResource(items[position].imagemCartaz)
     }
     override fun getItemCount(): Int = items.size
-
 }
 

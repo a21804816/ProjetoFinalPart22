@@ -7,8 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.projetofinalpart1.databinding.TendenciasItemBinding
 
 class TendeciasAdapter(val movies: List<Int>): RecyclerView.Adapter<TendeciasAdapter.MovieViewHolder>() {
-    private lateinit var binding: TendenciasItemBinding
-
     inner class MovieViewHolder(binding: TendenciasItemBinding): RecyclerView.ViewHolder(binding.root) {
         val movieImage: ImageView = binding.movieImage
     }
@@ -24,7 +22,5 @@ class TendeciasAdapter(val movies: List<Int>): RecyclerView.Adapter<TendeciasAda
     }
 
     override fun getItemCount(): Int = movies.size
-
-
 }
 
