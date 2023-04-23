@@ -44,6 +44,7 @@ class DashboardFragment : Fragment() {
         val layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.moviesList.layoutManager = layoutManager
         binding.moviesList.adapter = TendeciasAdapter(movies)
+
     }
 
 }

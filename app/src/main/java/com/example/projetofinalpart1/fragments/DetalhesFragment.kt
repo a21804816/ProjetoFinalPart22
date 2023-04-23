@@ -46,8 +46,17 @@ class DetalhesFragment : Fragment() {
 
     private fun placeData(ui: Filme) {
         binding.nomeFilme.text=ui.nomeFilme
+        binding.nomeCinema.text=ui.nomeCinema
+        binding.avaliacao.text=ui.avaliacao
+        binding.dataVisualizacao.text=ui.dataVisualizacao
+        binding.observacoes.text=ui.observacoes
+        binding.genero.text=ui.genero
+        binding.sinopse.text=ui.sinopse
+        binding.dataLancamento.text=ui.dataLancamento
+        binding.avaliacaoImdb.text=ui.avaliacaoImdb
+        binding.linkImdb.text=ui.linkImdb
+
         binding.imagemCartazImageView.setImageResource(ui.imagemCartaz)
-        binding.nomeCinemaTextView.text=ui.nomeCinema
     }
 
     companion object {
