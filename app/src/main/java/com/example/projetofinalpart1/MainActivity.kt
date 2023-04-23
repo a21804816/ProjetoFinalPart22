@@ -243,10 +243,10 @@ class MainActivity : AppCompatActivity() {
             "https://www.imdb.com/title/tt0102926/",
             false
         )
-        listaTodosFilmes.add(filme1)
+        listaTodosFilmes.add(filme4)
         listaTodosFilmes.add(filme2)
         listaTodosFilmes.add(filme3)
-        listaTodosFilmes.add(filme4)
+        listaTodosFilmes.add(filme1)
         listaTodosFilmes.add(filme5)
         listaTodosFilmes.add(filme6)
     }

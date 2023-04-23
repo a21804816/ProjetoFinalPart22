@@ -35,7 +35,7 @@ object ObjetoFilme {
             return false
         }
         for (filmeAdicionar in listaTodosFilmes) {
-            if (percorrerFilmes(nomeRegisto)) {
+            if (filmeAdicionar.nomeFilme == nomeRegisto) {
                 filmeAdicionar.nomeCinema = cinemaRegisto
                 filmeAdicionar.avaliacao = avaliacaoRegisto
                 filmeAdicionar.dataVisualizacao = dataRegisto
