@@ -14,6 +14,7 @@ import android.view.ViewGroup
 import android.widget.DatePicker
 import android.widget.SeekBar
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import com.example.projetofinalpart1.R
 
 import com.example.projetofinalpart1.databinding.FragmentRegistBinding
@@ -23,7 +24,7 @@ import java.util.*
 class RegistFragment : Fragment() {
     private lateinit var binding: FragmentRegistBinding
     private val REQUEST_IMAGE_CAPTURE = 1
-    val imageList = ArrayList<Bitmap>()
+    val imageList = ArrayList<String>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -73,12 +74,31 @@ class RegistFragment : Fragment() {
             }
         }
 
-        binding.tirarFotoButton.setOnClickListener{
-            val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-            if (takePictureIntent.resolveActivity(requireActivity().packageManager) != null) {
-                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
+        binding.tirarFotoButton.setOnClickListener {
+            val options = arrayOf<CharSequence>("Tirar Foto", "Selecionar da Galeria", "Cancelar")
+            val builder = AlertDialog.Builder(requireContext())
+            builder.setTitle("Adicionar Foto")
+
+            builder.setItems(options) { dialog, item ->
+                when {
+                    options[item] == "Tirar Foto" -> {
+                        val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+                        if (takePictureIntent.resolveActivity(requireActivity().packageManager) != null) {
+                            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
+                        }
+                    }
+                    options[item] == "Selecionar da Galeria" -> {
+                        val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+                        startActivityForResult(intent, 2)
+                    }
+                    options[item] == "Cancelar" -> {
+                        dialog.dismiss()
+                    }
+                }
             }
+            builder.show()
         }
+
 
         binding.dataEditText.setOnClickListener {
             val datePicker = object : DatePickerDialog.OnDateSetListener {
@@ -132,12 +152,25 @@ class RegistFragment : Fragment() {
     @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
-            val imageBitmap = data?.extras?.get("data") as Bitmap
-            binding.fotoImageView.setImageBitmap(imageBitmap)
-            imageList.add(imageBitmap)
+
+        if (resultCode == Activity.RESULT_OK) {
+            when (requestCode) {
+                REQUEST_IMAGE_CAPTURE -> {
+                    val imageBitmap = data?.extras?.get("data") as Bitmap
+                    imageList.add(imageBitmap.toString())
+                    binding.fotoImageView.setImageBitmap(imageBitmap)
+
+                }
+                2 -> {
+                    val selectedImage = data?.data
+                    val bitmap = MediaStore.Images.Media.getBitmap(requireActivity().contentResolver, selectedImage)
+                    imageList.add(bitmap.toString())
+                    binding.fotoImageView.setImageBitmap(bitmap)
+                }
+            }
         }
     }
+
 
 }
 

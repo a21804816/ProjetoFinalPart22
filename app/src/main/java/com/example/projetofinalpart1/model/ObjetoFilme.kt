@@ -1,6 +1,5 @@
 package com.example.projetofinalpart1.model
 
-import android.graphics.Bitmap
 import com.example.projetofinalpart1.listaTodosFilmes
 import java.text.SimpleDateFormat
 import java.util.*
@@ -19,7 +18,7 @@ object ObjetoFilme {
         private set
     var observacoesFilme: String = ""
         private set
-    var fotos: String = ""
+    var fotos: List<String> = listOf()
 
     val calendario = Calendar.getInstance()
 
@@ -29,7 +28,7 @@ object ObjetoFilme {
         avaliacaoRegisto: String,
         dataRegisto: String,
         observacoesRegisto: String,
-        fotografiaRegisto: ArrayList<Bitmap>
+        fotografiaRegisto: ArrayList<String>
 
     ): Boolean {
         if (nomeRegisto.isBlank() || cinemaRegisto.isBlank() || dataRegisto.isBlank()) {
@@ -81,7 +80,7 @@ object ObjetoFilme {
         avaliacaoFilme = ""
         data = ""
         observacoesFilme = ""
-        fotos = ""
+        fotos = listOf()
     }
 
     fun setCalendario(year: Int, monthOfYear: Int, dayOfMonth: Int) {
@@ -95,6 +94,10 @@ object ObjetoFilme {
         val myFormat = "dd-MM-yyyy"
         val sd = SimpleDateFormat(myFormat, Locale.UK)
         data = sd.format(calendario.time)
+    }
+
+    fun getOperationById(uuid: String): Filme? {
+        return listaFilmesVistos.find { it.uuid == uuid }
     }
 
 

@@ -1,52 +1,34 @@
-import android.content.res.Configuration
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.projetofinalpart1.databinding.DelhatesFilmeBinding
 import com.example.projetofinalpart1.model.Filme
 
 import com.example.projetofinalpart1.databinding.FilmeItemBinding
 
-class FilmeAdapter(private var filmes: List<Filme>, private val onFilmeItemClick: (Filme) -> Unit) : RecyclerView.Adapter<FilmeViewHolder>() {
+class FilmeAdapter(private val onClick: (String) -> Unit,
+                   private var items: List<Filme> = listOf()
+) : RecyclerView.Adapter<FilmeAdapter.FilmeViewHolder>() {
+
+    class FilmeViewHolder(val binding: FilmeItemBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FilmeViewHolder {
-        val inflater = LayoutInflater.from(parent.context)
-        val binding = FilmeItemBinding.inflate(inflater, parent, false)
-        return FilmeViewHolder(binding, onFilmeItemClick)
+        return FilmeViewHolder(
+            FilmeItemBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent, false
+        ))
     }
 
     override fun onBindViewHolder(holder: FilmeViewHolder, position: Int) {
-        val filme = filmes[position]
-        holder.bind(filme)
+        holder.itemView.setOnClickListener { onClick(items[position].uuid) }
+        holder.binding.nomeFilmeEditText.text = items[position].nomeFilme
+        holder.binding.cinemaEditText.text = items[position].nomeCinema
+        holder.binding.avaliacaoValor.text = items[position].avaliacao
+        holder.binding.dataEditText.text = items[position].dataVisualizacao
+        holder.binding.observacoesEditText.text = items[position].observacoes
+        holder.binding.filmeFotografiaImageView.setImageResource(items[position].imagemCartaz)
     }
+    override fun getItemCount(): Int = items.size
 
-    override fun getItemCount(): Int = filmes.size
-
-
-}
-
-class FilmeViewHolder(private val binding: FilmeItemBinding, private val onFilmeItemClick: (Filme) -> Unit) : RecyclerView.ViewHolder(binding.root) {
-
-    fun bind(filme: Filme) {
-        binding.nomeFilmeEditText.text = filme.nomeFilme
-        binding.cinemaEditText.text = filme.nomeCinema
-        binding.avaliacaoValor.text = filme.avaliacao
-        binding.dataEditText.text = filme.dataVisualizacao
-        binding.observacoesEditText.text = filme.observacoes
-        binding.filmeFotografiaImageView.setImageResource(filme.imagemCartaz)
-
-        val orientation = itemView.resources.configuration.orientation
-
-
-        binding.cinemaEditText.visibility = if (orientation == Configuration.ORIENTATION_PORTRAIT) View.GONE else View.VISIBLE
-        binding.avaliacaoValor.visibility = if (orientation == Configuration.ORIENTATION_PORTRAIT) View.GONE else View.VISIBLE
-        binding.observacoesEditText.visibility = if (orientation == Configuration.ORIENTATION_PORTRAIT) View.GONE else View.VISIBLE
-
-
-        itemView.setOnClickListener {
-            onFilmeItemClick(filme)
-        }
-    }
 }
 

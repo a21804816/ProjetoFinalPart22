@@ -1,6 +1,7 @@
 package com.example.projetofinalpart1.model
 
-import android.graphics.Bitmap
+import java.util.*
+import kotlin.collections.ArrayList
 
 class Filme(
     var nomeFilme: String,
@@ -8,12 +9,14 @@ class Filme(
     var avaliacao: String,
     var dataVisualizacao: String,
     var observacoes: String,
-    var fotografia: ArrayList<Bitmap>,
+    var fotografia: ArrayList<String>,
     var imagemCartaz: Int,
     var genero: String,
     var sinopse: String,
     var dataLancamento: String,
     var avaliacaoImdb: String,
     var linkImdb:String,
-    var avaliado:Boolean
+    var avaliado:Boolean,
+    val uuid: String = UUID.randomUUID().toString()
+
 )
