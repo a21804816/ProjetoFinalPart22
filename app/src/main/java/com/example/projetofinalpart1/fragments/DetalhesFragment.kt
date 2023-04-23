@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.projetofinalpart1.NavigationManager
 import com.example.projetofinalpart1.R
 import com.example.projetofinalpart1.databinding.FragmentDetalhesBinding
 import com.example.projetofinalpart1.model.Filme
@@ -37,7 +38,11 @@ class DetalhesFragment : Fragment() {
             val operation = ObjetoFilme.getOperationById(uuid)
             operation?.let { placeData(it) }
         }
+        (binding.voltarButton).setOnClickListener {
+            NavigationManager.goToListFragment(requireActivity().supportFragmentManager)
+        }
     }
+
 
     private fun placeData(ui: Filme) {
         binding.nomeFilmeTextView.text=ui.nomeFilme
