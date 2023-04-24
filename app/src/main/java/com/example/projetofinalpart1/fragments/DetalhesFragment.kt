@@ -86,6 +86,7 @@ class DetalhesFragment : Fragment() {
 
             binding.editButton.setBackgroundResource(R.drawable.baseline_check_circle_24)
 
+
             binding.editButton.setOnClickListener {
                 val filme = ObjetoFilme.getOperationById(filmeUuid!!)
                 if (filme != null) {
