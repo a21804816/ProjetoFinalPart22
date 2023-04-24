@@ -24,15 +24,13 @@
                 android:backgroundTint="@color/white"
                 android:drawableBottom="@drawable/ic_baseline_close_24"
                 android:drawableTint="@color/primaryColor" />
-
-            <ImageView
-                android:id="@+id/imagemCartaz_image_view"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:layout_gravity="center"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/fotos_lista"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
                 android:layout_marginTop="16dp"
-                android:textAppearance="?android:textAppearanceMedium"
-                android:textColor="@android:color/black" />
+                android:padding="8dp"
+                android:scrollbars="horizontal"/>
 
             <LinearLayout
                 android:layout_width="match_parent"

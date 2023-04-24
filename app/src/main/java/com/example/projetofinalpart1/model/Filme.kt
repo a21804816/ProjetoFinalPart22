@@ -28,7 +28,7 @@ class Filme(
 
     // add a method to replace the fotografia ArrayList
     fun substituirFotografias(novasFotografias: List<String>) {
-        fotografia.clear()
-        fotografia.addAll(novasFotografias)
+        this.fotografia.clear()
+        this.fotografia.addAll(novasFotografias)
     }
 }

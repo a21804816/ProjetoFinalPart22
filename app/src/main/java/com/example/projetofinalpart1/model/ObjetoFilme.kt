@@ -36,13 +36,17 @@ object ObjetoFilme {
         }
         for (filmeAdicionar in listaTodosFilmes) {
             if (filmeAdicionar.nomeFilme == nomeRegisto) {
-                filmeAdicionar.nomeCinema = cinemaRegisto
-                filmeAdicionar.avaliacao = avaliacaoRegisto
-                filmeAdicionar.dataVisualizacao = dataRegisto
-                filmeAdicionar.observacoes = observacoesRegisto
-                filmeAdicionar.substituirFotografias(fotografiaRegisto)
-                filmeAdicionar.avaliado = true
-                listaFilmesVistos.add(filmeAdicionar)
+                return true
+            }
+        }
+        return false
+    }
+
+    fun filmesVistos(
+        nomeRegisto: String
+    ): Boolean {
+        for (filmeAdicionar in listaFilmesVistos) {
+            if (filmeAdicionar.nomeFilme == nomeRegisto) {
                 return true
             }
         }
@@ -77,7 +81,7 @@ object ObjetoFilme {
     fun limparCampos() {
         nomeFilm = ""
         cinema = ""
-        avaliacaoFilme = ""
+        avaliacaoFilme = "5"
         data = ""
         observacoesFilme = ""
     }
@@ -99,5 +103,18 @@ object ObjetoFilme {
         return listaFilmesVistos.find { it.uuid == uuid }
     }
 
+    fun adicionarListaVistos(nomeFilme: String, nomeCinema: String, avaliacao: String, data: String, observacoes: String, fotos: ArrayList<String>) {
+        for (filmeAdicionar in listaTodosFilmes) {
+            if (filmeAdicionar.nomeFilme == nomeFilme) {
+                filmeAdicionar.nomeCinema = nomeCinema
+                filmeAdicionar.avaliacao = avaliacao
+                filmeAdicionar.dataVisualizacao = data
+                filmeAdicionar.observacoes = observacoes
+                filmeAdicionar.fotografia= fotos
+                filmeAdicionar.avaliado = true
+                listaFilmesVistos.add(filmeAdicionar)
+            }
+        }
+    }
 
 }

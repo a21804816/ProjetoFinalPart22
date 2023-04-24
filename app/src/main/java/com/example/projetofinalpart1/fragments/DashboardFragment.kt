@@ -1,19 +1,28 @@
 package com.example.projetofinalpart1.fragments
 
 import FilmeAdapter
+import android.content.Intent
 import android.os.Bundle
+import android.speech.RecognizerIntent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.projetofinalpart1.NavigationManager
 import com.example.projetofinalpart1.R
 import com.example.projetofinalpart1.adapters.TendeciasAdapter
 import com.example.projetofinalpart1.databinding.FragmentDashboardBinding
+import com.example.projetofinalpart1.listaTodosFilmes
 import com.example.projetofinalpart1.model.listaFilmesVistos
 
 class DashboardFragment : Fragment() {
+    val filmesOrdenados = listaTodosFilmes.sortedByDescending { it.avaliacaoImdb.toDouble() }.take(10)
+    private val adapter = TendeciasAdapter(::onOperationClick, listaTodosFilmes)
+    val adapterOrder = TendeciasAdapter(::onOperationClick, filmesOrdenados)
+    private val adapterVistos = FilmeAdapter(::onOperationClick, listaFilmesVistos)
+
 
     private lateinit var binding: FragmentDashboardBinding
 
@@ -27,24 +36,36 @@ class DashboardFragment : Fragment() {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        binding.recyclerView.apply {
+    override fun onStart() {
+        super.onStart()
+        binding.moviesList.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.moviesList.adapter = adapter
+        binding.moviesList.apply {
             this.adapter = adapter
-            layoutManager = LinearLayoutManager(context)
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         }
 
-        val movies = listOf(
-            R.drawable.movie1,
-            R.drawable.movie2,
-            R.drawable.movie3
-        )
+        if (listaFilmesVistos.isEmpty()) {
+            binding.vistosMoviesList.visibility = View.GONE
+            binding.orderMoviesList.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            binding.orderMoviesList.adapter = adapterOrder
+            binding.orderMoviesList.apply {
+                this.adapter = adapter
+                layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            }
+        }else{
+            binding.orderMoviesList.visibility = View.GONE
+            binding.vistosMoviesList.layoutManager = LinearLayoutManager(requireContext())
+            binding.vistosMoviesList.adapter = adapterVistos
+            binding.vistosMoviesList.apply {
+                this.adapter = adapter
+                layoutManager = LinearLayoutManager(context)
+            }
+        }
+    }
 
-        val layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        binding.moviesList.layoutManager = layoutManager
-        binding.moviesList.adapter = TendeciasAdapter(movies)
-
+    private fun onOperationClick(uuid: String) {
+        NavigationManager.goToDetalhesFragment(parentFragmentManager, uuid)
     }
 
 }

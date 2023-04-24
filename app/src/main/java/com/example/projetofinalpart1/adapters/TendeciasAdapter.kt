@@ -4,23 +4,30 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.projetofinalpart1.databinding.FilmeItemBinding
 import com.example.projetofinalpart1.databinding.TendenciasItemBinding
+import com.example.projetofinalpart1.model.Filme
 
-class TendeciasAdapter(val movies: List<Int>): RecyclerView.Adapter<TendeciasAdapter.MovieViewHolder>() {
-    inner class MovieViewHolder(binding: TendenciasItemBinding): RecyclerView.ViewHolder(binding.root) {
+class TendeciasAdapter(private val onClick: (String) -> Unit,
+                       private var items: List<Filme> = listOf()
+): RecyclerView.Adapter<TendeciasAdapter.TodosViewHolder>() {
+    inner class TodosViewHolder(binding: TendenciasItemBinding): RecyclerView.ViewHolder(binding.root) {
         val movieImage: ImageView = binding.movieImage
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
-        val inflater = LayoutInflater.from(parent.context)
-        val binding = TendenciasItemBinding.inflate(inflater, parent, false)
-        return MovieViewHolder(binding)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodosViewHolder {
+        return TodosViewHolder(
+            TendenciasItemBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent, false
+            ))
     }
 
-    override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        holder.movieImage.setImageResource(movies[position])
+    override fun onBindViewHolder(holder: TodosViewHolder, position: Int) {
+        holder.itemView.setOnClickListener { onClick(items[position].uuid) }
+        holder.movieImage.setImageResource(items[position].imagemCartaz)
     }
 
-    override fun getItemCount(): Int = movies.size
+    override fun getItemCount(): Int = items.size
 }
 

@@ -5,8 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.projetofinalpart1.NavigationManager
 import com.example.projetofinalpart1.R
+import com.example.projetofinalpart1.adapters.FotosDetalhesAdapter
 import com.example.projetofinalpart1.databinding.FragmentDetalhesBinding
 import com.example.projetofinalpart1.model.Filme
 import com.example.projetofinalpart1.model.ObjetoFilme
@@ -38,6 +40,7 @@ class DetalhesFragment : Fragment() {
             val operation = ObjetoFilme.getOperationById(uuid)
             operation?.let { placeData(it) }
         }
+
         (binding.voltarButton).setOnClickListener {
             NavigationManager.goToListFragment(requireActivity().supportFragmentManager)
         }
@@ -56,7 +59,12 @@ class DetalhesFragment : Fragment() {
         binding.avaliacaoImdb.text=ui.avaliacaoImdb
         binding.linkImdb.text=ui.linkImdb
 
-        binding.imagemCartazImageView.setImageResource(ui.imagemCartaz)
+        val fotos = ui.fotografia
+
+        val layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.fotosLista.layoutManager = layoutManager
+        binding.fotosLista.adapter = FotosDetalhesAdapter(fotos,ui.imagemCartaz)
+
     }
 
     companion object {

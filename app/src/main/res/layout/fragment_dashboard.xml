@@ -10,7 +10,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <TextView
@@ -32,11 +32,39 @@
             android:padding="8dp"
             android:scrollbars="horizontal" />
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/texto1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="olojdbsxk"
+            android:textColor="@color/primaryColor"
+            android:textSize="26sp"
+            android:textStyle="bold" />
+
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
+            android:id="@+id/order_movies_list"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="50dp"/>
+            android:layout_height="200dp"
+            android:layout_marginTop="16dp"
+            android:padding="8dp"
+            android:scrollbars="horizontal" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/vistos_movies_list"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="16dp"
+            android:padding="8dp"
+            android:scrollbars="horizontal" />
+
     </LinearLayout>
 
 

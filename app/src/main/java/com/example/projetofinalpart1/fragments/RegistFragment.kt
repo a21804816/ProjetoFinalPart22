@@ -3,6 +3,7 @@ package com.example.projetofinalpart1.fragments
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.DatePickerDialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
@@ -58,7 +59,23 @@ class RegistFragment : Fragment() {
             val filme = ObjetoFilme.registarFilme(nomeFilme, nomeCinema, avaliacao, data, observacoes, fotos)
 
             if (filme) {
-                removerCampos()
+                if(ObjetoFilme.filmesVistos(nomeFilme)){
+                    val builder = AlertDialog.Builder(requireContext())
+                    builder.setMessage("O filme $nomeFilme? já foi registado")
+                        .setPositiveButton("Confirmar", DialogInterface.OnClickListener { dialog, which ->
+                        })
+                    builder.create().show()
+                }else{
+                    val builder = AlertDialog.Builder(requireContext())
+                    builder.setMessage("Confirma que o nome do filme é $nomeFilme?")
+                        .setPositiveButton("Confirmar", DialogInterface.OnClickListener { dialog, which ->
+                            ObjetoFilme.adicionarListaVistos(nomeFilme, nomeCinema, avaliacao, data, observacoes, fotos)
+                            removerCampos()
+                        })
+                        .setNegativeButton("Cancelar", null)
+                    builder.create().show()
+                }
+
             } else {
                 val errorMessage = getString(R.string.erroRegistoFilme)
                 if(!ObjetoFilme.verificarNomeCinema(nomeCinema)){
