@@ -30,9 +30,13 @@ class DashboardFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val listaFilmes = listaFilmesVistos // ou outra lista de filmes que você queira exibir
+
+        val adapter = FilmeAdapter(::onOperationClick, listaFilmes)
+
         binding.recyclerView.apply {
-            this.adapter = adapter
             layoutManager = LinearLayoutManager(context)
+            this.adapter = adapter
         }
 
         val movies = listOf(
@@ -47,4 +51,8 @@ class DashboardFragment : Fragment() {
 
     }
 
+    private fun onOperationClick(uuid: String) {
+        NavigationManager.goToDetalhesFragment(parentFragmentManager, uuid)
+    }
 }
+

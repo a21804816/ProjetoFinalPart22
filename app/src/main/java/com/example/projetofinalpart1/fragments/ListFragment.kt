@@ -36,6 +36,12 @@ class ListFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
+
+        if (listaFilmesVistos.isEmpty()) {
+            binding.textEmptyList!!.visibility = View.VISIBLE
+        } else {
+            binding.textEmptyList!!.visibility = View.GONE
+        }
         binding.recyclerView.adapter = adapter
         binding.recyclerView.apply {
             this.adapter = adapter

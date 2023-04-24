@@ -1,19 +1,36 @@
 <resources>
-    <string name="app_name">ProjetoFinalPart1</string>
-    <string name="drawer_open">Aberto</string>
-    <string name="drawer_close">Fechado</string>
-    <string name="regist">Registo</string>
-    <string name="list">Lista</string>
-    <string name="map">Mapa</string>
-    <string name="dashboard">Página Inicial</string>
-
-    <string name="nomeFilme">Nome do Filme*</string>
-    <string name="avaliacao1a10">Pontua o filme de 1 a 10:</string>
-    <string name="nomeCinema">Nome do Cinema*</string>
-    <string name="dataVisualizacao">Data ex: 01–04-2023</string>
-    <string name="tirarFotografias">ttuteytr</string>
-    <string name="observacoes200">Observações (máx. 200 caracteres)</string>
-    <string name="registarFilme">Registar Filme</string>
-    <string name="erroRegistoFilme">Campo não preenchido</string>
-
+    <string name="app_name">FinalProjectPart1</string>
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
+    <string name="regist">Register</string>
+    <string name="list">List</string>
+    <string name="map">Map</string>
+    <string name="dashboard">Home</string>
+    <string name="nomeFilme">Movie Name*</string>
+    <string name="avaliacao1a10">Rate the movie from 1 to 10:</string>
+    <string name="nomeCinema">Cinema Name*</string>
+    <string name="dataVisualizacao">Date ex: 04/01/2023</string>
+    <string name="tirarFotografias">Take Photo</string>
+    <string name="observacoes200">Observations (max. 200 characters)</string>
+    <string name="registarFilme">Register Movie</string>
+    <string name="erroRegistoFilme">Field not filled</string>
+    <string name="nome_do_filme">Movie Name</string>
+    <string name="nome_do_cinema">Cinema Name</string>
+    <string name="avalia_o">Rating</string>
+    <string name="data_de_visualizacao">Viewing Date</string>
+    <string name="observaces">Observations</string>
+    <string name="novidades">News</string>
+    <string name="nome_filme_detalhes">Movie Name:</string>
+    <string name="nome_cinema_detalhes">Cinema Name:</string>
+    <string name="avaliacao_detalhes">Rating:</string>
+    <string name="data_de_visualizacao_detalhes">Viewing Date:</string>
+    <string name="observaces_detalhes">Observations:</string>
+    <string name="genero_detalhes">Genre:</string>
+    <string name="sinopse_detalhes">Synopsis:</string>
+    <string name="data_de_lancamento_detalhes">Release Date:</string>
+    <string name="avaliacao_imdb_detalhes">IMDB Rating:</string>
+    <string name="link_imdb_detalhes">IMDB Link:</string>
+    <string name="cancelar">Cancel</string>
+    <string name="lista_vazia">Empty List</string>
+    <string name="mapa">Map</string>
 </resources>

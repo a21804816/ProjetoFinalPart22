@@ -26,6 +26,10 @@ object NavigationManager {
     fun goToMapFragment(fm: FragmentManager) {
         placeFragment(fm, MapFragment())
     }
+
+    fun goToEditarFragment(fm: FragmentManager) {
+        placeFragment(fm, EditarFragment())
+    }
     
     fun goToDetalhesFragment(fm: FragmentManager, uuid: String) {
         placeFragment(fm, DetalhesFragment.newInstance(uuid))

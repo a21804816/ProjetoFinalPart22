@@ -33,7 +33,7 @@
             android:textColor="@color/white"
             android:layout_alignTop="@id/filme_fotografia_image_view"
             android:layout_toEndOf="@id/filme_fotografia_image_view"
-            android:text="Nome do Filme"
+            android:text="@string/nome_do_filme"
             android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
         <TextView
@@ -43,7 +43,7 @@
             android:textColor="@color/white"
             android:layout_below="@id/nome_filme_edit_text"
             android:layout_toEndOf="@id/filme_fotografia_image_view"
-            android:text="Nome do Cinema"
+            android:text="@string/nome_do_cinema"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:visibility="gone" />
 
@@ -54,7 +54,7 @@
             android:textColor="@color/white"
             android:layout_below="@id/cinema_edit_text"
             android:layout_toEndOf="@id/filme_fotografia_image_view"
-            android:text="Avaliação"
+            android:text="@string/avalia_o"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:visibility="gone" />
 
@@ -65,7 +65,7 @@
             android:textColor="@color/white"
             android:layout_below="@id/avaliacao_valor"
             android:layout_toEndOf="@id/filme_fotografia_image_view"
-            android:text="Data de visualização"
+            android:text="@string/data_de_visualizacao"
             android:textAppearance="@style/TextAppearance.AppCompat.Small" />
 
         <TextView
@@ -75,7 +75,7 @@
             android:textColor="@color/white"
             android:layout_below="@id/data_edit_text"
             android:layout_toEndOf="@id/filme_fotografia_image_view"
-            android:text="Observações"
+            android:text="@string/observaces"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
             android:visibility="gone" />
 

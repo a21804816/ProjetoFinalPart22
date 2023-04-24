@@ -1,19 +1,36 @@
 <resources>
-    <string name="app_name">ProjetoFinalPart1</string>
-    <string name="drawer_open">Aberto</string>
-    <string name="drawer_close">Fechado</string>
-    <string name="regist">Registo</string>
-    <string name="list">Lista</string>
-    <string name="map">Mapa</string>
-    <string name="dashboard">Página Inicial</string>
-
-    <string name="nomeFilme">Nome do Filme*</string>
-    <string name="avaliacao1a10">Pontua o filme de 1 a 10:</string>
-    <string name="nomeCinema">Nome do Cinema*</string>
-    <string name="dataVisualizacao">Data ex: 01–04-2023</string>
-    <string name="tirarFotografias">Tirrtgfo</string>
-    <string name="observacoes200">Observações (máx. 200 caracteres)</string>
-    <string name="registarFilme">Registar Filme</string>
-    <string name="erroRegistoFilme">Campo não preenchido</string>
-
+    <string name="app_name">ProjetFinalPart1</string>
+    <string name="drawer_open">Ouvert</string>
+    <string name="drawer_close">Fermé</string>
+    <string name="regist">Enregistrement</string>
+    <string name="list">Liste</string>
+    <string name="map">Carte</string>
+    <string name="dashboard">Tableau de bord</string>
+    <string name="nomeFilme">Nom du film*</string>
+    <string name="avaliacao1a10">Noter le film de 1 à 10:</string>
+    <string name="nomeCinema">Nom du cinéma*</string>
+    <string name="dataVisualizacao">Date ex: 01-04-2023</string>
+    <string name="tirarFotografias">Prendre une photo</string>
+    <string name="observacoes200">Remarques (max. 200 caractères)</string>
+    <string name="registarFilme">Enregistrer le film</string>
+    <string name="erroRegistoFilme">Champ non rempli</string>
+    <string name="nome_do_filme">Nom du film</string>
+    <string name="nome_do_cinema">Nom du cinéma</string>
+    <string name="avalia_o">Évaluation</string>
+    <string name="data_de_visualizacao">Date de visionnage</string>
+    <string name="observaces">Remarques</string>
+    <string name="novidades">Nouveautés</string>
+    <string name="nome_filme_detalhes">Nom du film:</string>
+    <string name="nome_cinema_detalhes">Nom du cinéma:</string>
+    <string name="avaliacao_detalhes">Évaluation:</string>
+    <string name="data_de_visualizacao_detalhes">Date de visionnage:</string>
+    <string name="observaces_detalhes">Remarques:</string>
+    <string name="genero_detalhes">Genre:</string>
+    <string name="sinopse_detalhes">Synopsis:</string>
+    <string name="data_de_lancamento_detalhes">Date de sortie:</string>
+    <string name="avaliacao_imdb_detalhes">Évaluation IMDB:</string>
+    <string name="link_imdb_detalhes">Lien IMDB:</string>
+    <string name="cancelar">Annuler</string>
+    <string name="lista_vazia">Liste vide</string>
+    <string name="mapa">Carte</string>
 </resources>

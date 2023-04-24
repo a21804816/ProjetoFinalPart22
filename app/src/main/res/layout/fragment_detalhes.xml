@@ -15,15 +15,32 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <Button
-                android:id="@+id/voltarButton"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="top|end"
-                android:elevation="0dp"
-                android:backgroundTint="@color/white"
-                android:drawableBottom="@drawable/ic_baseline_close_24"
-                android:drawableTint="@color/primaryColor" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/editarButton"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="top|end"
+                    android:backgroundTint="@color/white"
+                    android:drawableBottom="@drawable/ic_baseline_edit_24"
+                    android:drawableTint="@color/primaryColor"
+                    android:elevation="0dp" />
+
+                <Button
+                    android:id="@+id/voltarButton"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="top|end"
+                    android:backgroundTint="@color/white"
+                    android:drawableBottom="@drawable/ic_baseline_close_24"
+                    android:drawableTint="@color/primaryColor"
+                    android:elevation="0dp" />
+
+            </LinearLayout>
 
             <ImageView
                 android:id="@+id/imagemCartaz_image_view"
@@ -44,7 +61,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
-                    android:text="Nome Filme:"
+                    android:text="@string/nome_filme_detalhes"
                     android:textAppearance="?android:textAppearanceMedium"
                     android:textColor="@android:color/black" />
 
@@ -67,7 +84,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
-                    android:text="Nome Cinema:"
+                    android:text="@string/nome_cinema_detalhes"
                     android:textAppearance="?android:textAppearanceMedium"
                     android:textColor="@android:color/black" />
 
@@ -90,7 +107,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
-                    android:text="Avaliação:"
+                    android:text="@string/avaliacao_detalhes"
                     android:textAppearance="?android:textAppearanceMedium"
                     android:textColor="@android:color/black" />
 
@@ -113,7 +130,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
-                    android:text="Data de visualização:"
+                    android:text="@string/data_de_visualizacao_detalhes"
                     android:textAppearance="?android:textAppearanceMedium"
                     android:textColor="@android:color/black" />
 
@@ -136,7 +153,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
-                    android:text="Observações:"
+                    android:text="@string/observaces_detalhes"
                     android:textAppearance="?android:textAppearanceMedium"
                     android:textColor="@android:color/black" />
 
@@ -159,7 +176,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
-                    android:text="Género:"
+                    android:text="@string/genero_detalhes"
                     android:textAppearance="?android:textAppearanceMedium"
                     android:textColor="@android:color/black" />
 
@@ -182,7 +199,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
-                    android:text="Sinopse:"
+                    android:text="@string/sinopse_detalhes"
                     android:textAppearance="?android:textAppearanceMedium"
                     android:textColor="@android:color/black" />
 
@@ -205,7 +222,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
-                    android:text="Data de lançamento:"
+                    android:text="@string/data_de_lancamento_detalhes"
                     android:textAppearance="?android:textAppearanceMedium"
                     android:textColor="@android:color/black" />
 
@@ -228,7 +245,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
-                    android:text="Avaliação IMDB:"
+                    android:text="@string/avaliacao_imdb_detalhes"
                     android:textAppearance="?android:textAppearanceMedium"
                     android:textColor="@android:color/black" />
 
@@ -251,7 +268,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
-                    android:text="Link IMDB:"
+                    android:text="@string/link_imdb_detalhes"
                     android:textAppearance="?android:textAppearanceMedium"
                     android:textColor="@android:color/black" />
 

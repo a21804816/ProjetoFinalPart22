@@ -10,7 +10,7 @@
     android:layout_marginBottom="60dp"
     android:background="#FFFFFF"
     android:orientation="vertical"
-    tools:context=".fragments.RegistFragment">
+    tools:context=".fragments.EditarFragment">
 
     <EditText
         android:id="@+id/nome_filme_edit_text"
@@ -108,7 +108,7 @@
         android:id="@+id/cancelar_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Cancelar"
+        android:text="@string/cancelar"
         android:textColor="@color/white"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
