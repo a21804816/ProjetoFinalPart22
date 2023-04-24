@@ -71,12 +71,12 @@ Splashscreen
 ![splashscreen](https://user-images.githubusercontent.com/43844932/234120129-1cfa3920-6faf-47c7-9077-4e60a3b84444.jpg)
 
 	
-Dashboard-Sem existir registo de Filmes
+Dashboard-Sem existir registo de Filmes,é possivel ver duas listas uma de sugestões outra com os filmes ordenados por pontuação
 	
 ![dashboard](https://user-images.githubusercontent.com/43844932/234120255-86dea59d-f91a-4825-933e-30e2df73af11.jpg)
 	
 
-Dashboard-Com registo de Filmes
+Dashboard-Com registo de Filmes, uma lista de sugestões e a lista dos filmes vistos
 
 ![dashfilmes](https://user-images.githubusercontent.com/43844932/234120562-00e51987-6629-4273-a4b2-1001f0b7bff2.jpg)
 
