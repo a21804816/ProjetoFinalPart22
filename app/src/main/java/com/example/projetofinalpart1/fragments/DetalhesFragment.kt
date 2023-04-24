@@ -43,6 +43,13 @@ class DetalhesFragment : Fragment() {
         filmeUuid?.let { uuid ->
             val operation = ObjetoFilme.getOperationById(uuid)
             operation?.let { placeData(it) }
+            if (operation != null) {
+                if (operation.paraVer) {
+                    binding.paraVerButton.setBackgroundResource(R.drawable.baseline_turned_in_24)
+                } else {
+                    binding.paraVerButton.setBackgroundResource(R.drawable.baseline_turned_in_not_24)
+                }
+            }
         }
 
         (binding.voltarButton).setOnClickListener {
