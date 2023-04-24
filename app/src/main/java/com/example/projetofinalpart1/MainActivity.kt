@@ -36,6 +36,7 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
+
     override fun onStart() {
         super.onStart()
         setSupportActionBar(binding.toolbar)
