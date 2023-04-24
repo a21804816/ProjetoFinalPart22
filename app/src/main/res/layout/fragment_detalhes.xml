@@ -3,6 +3,9 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginStart="12dp"
+    android:layout_marginTop="12dp"
+    android:layout_marginEnd="12dp"
     android:layout_marginBottom="60dp">
 
     <LinearLayout
@@ -20,17 +23,17 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_gravity="top|end"
-                android:elevation="0dp"
                 android:backgroundTint="@color/white"
                 android:drawableBottom="@drawable/ic_baseline_close_24"
-                android:drawableTint="@color/primaryColor" />
+                android:drawableTint="@color/primaryColor"
+                android:elevation="0dp" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/fotos_lista"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:layout_marginTop="16dp"
                 android:padding="8dp"
-                android:scrollbars="horizontal"/>
+                android:scrollbars="horizontal" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -39,20 +42,20 @@
 
                 <TextView
                     android:id="@+id/nome_filme_text"
+                    style="@style/TextColorTheme"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
                     android:text="Nome Filme:"
-                    android:textAppearance="?android:textAppearanceMedium"
-                    android:textColor="@android:color/black" />
+                    android:textAppearance="?android:textAppearanceMedium" />
 
                 <TextView
                     android:id="@+id/nome_filme"
+                    style="@style/TextColorTheme"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="16dp"
-                    android:textAppearance="?android:textAppearanceMedium"
-                    android:textColor="@android:color/black" />
+                    android:textAppearance="?android:textAppearanceMedium" />
             </LinearLayout>
 
             <LinearLayout
@@ -62,20 +65,20 @@
 
                 <TextView
                     android:id="@+id/nome_cinema_text"
+                    style="@style/TextColorTheme"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
                     android:text="Nome Cinema:"
-                    android:textAppearance="?android:textAppearanceMedium"
-                    android:textColor="@android:color/black" />
+                    android:textAppearance="?android:textAppearanceMedium" />
 
                 <TextView
                     android:id="@+id/nome_cinema"
+                    style="@style/TextColorTheme"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="16dp"
-                    android:textAppearance="?android:textAppearanceMedium"
-                    android:textColor="@android:color/black" />
+                    android:textAppearance="?android:textAppearanceMedium" />
             </LinearLayout>
 
             <LinearLayout
@@ -85,20 +88,20 @@
 
                 <TextView
                     android:id="@+id/avaliacao_text"
+                    style="@style/TextColorTheme"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
                     android:text="Avaliação:"
-                    android:textAppearance="?android:textAppearanceMedium"
-                    android:textColor="@android:color/black" />
+                    android:textAppearance="?android:textAppearanceMedium" />
 
                 <TextView
                     android:id="@+id/avaliacao"
+                    style="@style/TextColorTheme"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="16dp"
-                    android:textAppearance="?android:textAppearanceMedium"
-                    android:textColor="@android:color/black" />
+                    android:textAppearance="?android:textAppearanceMedium" />
             </LinearLayout>
 
             <LinearLayout
@@ -108,20 +111,20 @@
 
                 <TextView
                     android:id="@+id/data_visualizacao_text"
+                    style="@style/TextColorTheme"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
                     android:text="Data de visualização:"
-                    android:textAppearance="?android:textAppearanceMedium"
-                    android:textColor="@android:color/black" />
+                    android:textAppearance="?android:textAppearanceMedium" />
 
                 <TextView
                     android:id="@+id/data_visualizacao"
+                    style="@style/TextColorTheme"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="16dp"
-                    android:textAppearance="?android:textAppearanceMedium"
-                    android:textColor="@android:color/black" />
+                    android:textAppearance="?android:textAppearanceMedium" />
             </LinearLayout>
 
             <LinearLayout
@@ -131,20 +134,20 @@
 
                 <TextView
                     android:id="@+id/observacoes_text"
+                    style="@style/TextColorTheme"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
                     android:text="Observações:"
-                    android:textAppearance="?android:textAppearanceMedium"
-                    android:textColor="@android:color/black" />
+                    android:textAppearance="?android:textAppearanceMedium" />
 
                 <TextView
                     android:id="@+id/observacoes"
+                    style="@style/TextColorTheme"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="16dp"
-                    android:textAppearance="?android:textAppearanceMedium"
-                    android:textColor="@android:color/black" />
+                    android:textAppearance="?android:textAppearanceMedium" />
             </LinearLayout>
 
             <LinearLayout
@@ -154,20 +157,20 @@
 
                 <TextView
                     android:id="@+id/genero_text"
+                    style="@style/TextColorTheme"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
                     android:text="Género:"
-                    android:textAppearance="?android:textAppearanceMedium"
-                    android:textColor="@android:color/black" />
+                    android:textAppearance="?android:textAppearanceMedium" />
 
                 <TextView
                     android:id="@+id/genero"
+                    style="@style/TextColorTheme"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="16dp"
-                    android:textAppearance="?android:textAppearanceMedium"
-                    android:textColor="@android:color/black" />
+                    android:textAppearance="?android:textAppearanceMedium" />
             </LinearLayout>
 
             <LinearLayout
@@ -177,20 +180,20 @@
 
                 <TextView
                     android:id="@+id/sinopse_text"
+                    style="@style/TextColorTheme"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
                     android:text="Sinopse:"
-                    android:textAppearance="?android:textAppearanceMedium"
-                    android:textColor="@android:color/black" />
+                    android:textAppearance="?android:textAppearanceMedium" />
 
                 <TextView
                     android:id="@+id/sinopse"
+                    style="@style/TextColorTheme"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
-                    android:textAppearance="?android:textAppearanceMedium"
-                    android:textColor="@android:color/black" />
+                    android:textAppearance="?android:textAppearanceMedium" />
             </LinearLayout>
 
             <LinearLayout
@@ -200,20 +203,20 @@
 
                 <TextView
                     android:id="@+id/data_lancamento_text"
+                    style="@style/TextColorTheme"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
                     android:text="Data de lançamento:"
-                    android:textAppearance="?android:textAppearanceMedium"
-                    android:textColor="@android:color/black" />
+                    android:textAppearance="?android:textAppearanceMedium" />
 
                 <TextView
                     android:id="@+id/data_lancamento"
+                    style="@style/TextColorTheme"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="16dp"
-                    android:textAppearance="?android:textAppearanceMedium"
-                    android:textColor="@android:color/black" />
+                    android:textAppearance="?android:textAppearanceMedium" />
             </LinearLayout>
 
             <LinearLayout
@@ -223,20 +226,20 @@
 
                 <TextView
                     android:id="@+id/avaliacao_imdb_text"
+                    style="@style/TextColorTheme"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
                     android:text="Avaliação IMDB:"
-                    android:textAppearance="?android:textAppearanceMedium"
-                    android:textColor="@android:color/black" />
+                    android:textAppearance="?android:textAppearanceMedium" />
 
                 <TextView
                     android:id="@+id/avaliacao_imdb"
+                    style="@style/TextColorTheme"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="16dp"
-                    android:textAppearance="?android:textAppearanceMedium"
-                    android:textColor="@android:color/black" />
+                    android:textAppearance="?android:textAppearanceMedium" />
             </LinearLayout>
 
             <LinearLayout
@@ -246,21 +249,21 @@
 
                 <TextView
                     android:id="@+id/link_imdb_text"
+                    style="@style/TextColorTheme"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
                     android:text="Link IMDB:"
-                    android:textAppearance="?android:textAppearanceMedium"
-                    android:textColor="@android:color/black" />
+                    android:textAppearance="?android:textAppearanceMedium" />
 
                 <TextView
                     android:id="@+id/link_imdb"
+                    style="@style/TextColorTheme"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="16dp"
                     android:autoLink="web"
-                    android:textAppearance="?android:textAppearanceMedium"
-                    android:textColor="@android:color/black" />
+                    android:textAppearance="?android:textAppearanceMedium" />
             </LinearLayout>
 
         </LinearLayout>

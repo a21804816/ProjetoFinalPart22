@@ -8,7 +8,6 @@
     android:layout_marginTop="12dp"
     android:layout_marginEnd="12dp"
     android:layout_marginBottom="60dp"
-    android:background="#FFFFFF"
     android:orientation="vertical"
     tools:context=".fragments.RegistFragment">
 
@@ -18,6 +17,7 @@
         android:layout_height="wrap_content"
         android:hint="@string/nomeFilme"
         android:textSize="20sp"
+        android:textColorHint="@android:color/darker_gray"
         style="@style/EditTextLayout"/>
 
     <EditText
@@ -26,6 +26,7 @@
         android:layout_height="wrap_content"
         android:hint="@string/nomeCinema"
         android:textSize="20sp"
+        android:textColorHint="@android:color/darker_gray"
         style="@style/EditTextLayout"/>
 
     <LinearLayout
@@ -41,7 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:text="@string/avaliacao1a10"
-            android:textColor="@color/black"
+            style="@style/TextColorTheme"
             android:textSize="20sp" />
 
         <TextView
@@ -73,6 +74,7 @@
         android:layout_height="wrap_content"
         android:hint="@string/dataVisualizacao"
         android:textSize="20sp"
+        android:textColorHint="@android:color/darker_gray"
         style="@style/EditTextLayout"/>
 
     <EditText
@@ -81,6 +83,7 @@
         android:layout_height="97dp"
         android:hint="@string/observacoes200"
         android:maxLength="200"
+        android:textColorHint="@android:color/darker_gray"
         style="@style/EditTextLayout"
         android:inputType="textMultiLine" />
 
@@ -103,11 +106,4 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"/>
-
-    <ImageView
-        android:id="@+id/fotoImageView"
-        android:layout_width="match_parent"
-        android:layout_height="83dp"
-        android:layout_marginTop="16dp"
-        android:scaleType="centerCrop" />
 </LinearLayout>

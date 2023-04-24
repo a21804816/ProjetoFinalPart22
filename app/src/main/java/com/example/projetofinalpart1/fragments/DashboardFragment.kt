@@ -1,13 +1,11 @@
 package com.example.projetofinalpart1.fragments
 
 import FilmeAdapter
-import android.content.Intent
+import android.annotation.SuppressLint
 import android.os.Bundle
-import android.speech.RecognizerIntent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.projetofinalpart1.NavigationManager
@@ -36,6 +34,7 @@ class DashboardFragment : Fragment() {
         return binding.root
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onStart() {
         super.onStart()
         binding.moviesList.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
@@ -46,6 +45,7 @@ class DashboardFragment : Fragment() {
         }
 
         if (listaFilmesVistos.isEmpty()) {
+            binding.texto2.text=getString(R.string.topFilmes)
             binding.vistosMoviesList.visibility = View.GONE
             binding.orderMoviesList.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             binding.orderMoviesList.adapter = adapterOrder
@@ -54,6 +54,7 @@ class DashboardFragment : Fragment() {
                 layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             }
         }else{
+            binding.texto2.text=getString(R.string.listaVistos)
             binding.orderMoviesList.visibility = View.GONE
             binding.vistosMoviesList.layoutManager = LinearLayoutManager(requireContext())
             binding.vistosMoviesList.adapter = adapterVistos

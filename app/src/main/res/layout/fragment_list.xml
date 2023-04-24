@@ -22,7 +22,7 @@
         android:layout_marginBottom="16dp"
         android:text="@string/lista_vazia"
         android:textAlignment="center"
-        android:textColor="@color/black"
+        style="@style/TextColorTheme"
         android:textSize="18sp"
         android:visibility="gone" />
 

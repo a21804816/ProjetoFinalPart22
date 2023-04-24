@@ -41,4 +41,7 @@
     <style name="ImageUser" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
         <item name="android:background">@drawable/image_user</item>
     </style>
+    <style name="TextColorTheme" parent="Theme.AppCompat.Light">
+        <item name="android:textColor">@color/black</item>
+    </style>
 </resources>

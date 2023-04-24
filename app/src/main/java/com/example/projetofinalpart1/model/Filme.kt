@@ -9,7 +9,7 @@ class Filme(
     var avaliacao: String,
     var dataVisualizacao: String,
     var observacoes: String,
-    var novasFotografias: List<String>, // replace ArrayList<String> with List<String>
+    var novasFotografias: List<String>,
     var imagemCartaz: Int,
     var genero: String,
     var sinopse: String,
@@ -26,7 +26,6 @@ class Filme(
         fotografia.addAll(novasFotografias)
     }
 
-    // add a method to replace the fotografia ArrayList
     fun substituirFotografias(novasFotografias: List<String>) {
         this.fotografia.clear()
         this.fotografia.addAll(novasFotografias)

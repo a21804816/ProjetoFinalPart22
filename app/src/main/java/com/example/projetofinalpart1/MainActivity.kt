@@ -28,7 +28,11 @@ class MainActivity : AppCompatActivity() {
         if(!screenRotated(savedInstanceState)) {
             NavigationManager.goToDashboardFragment(supportFragmentManager)
         }
+        binding.toolbar.title = "Páginanicial"
         introduzirFilmes()
+        NavigationManager.goToDashboardFragment(
+            supportFragmentManager
+        )
     }
 
     override fun onStart() {
@@ -52,13 +56,16 @@ class MainActivity : AppCompatActivity() {
         val toggle = ActionBarDrawerToggle(this,
             binding.drawer, binding.toolbar,
             R.string.drawer_open, R.string.drawer_close
+
         )
         binding.navDrawer.setNavigationItemSelectedListener{
             onClickNavigationItem(it)
+            binding.toolbar.title = it.title
             true
         }
         binding.bottomNavigation.setOnItemSelectedListener {
             onClickNavigationItemBottom(it)
+            binding.toolbar.title = it.title
             true
         }
 

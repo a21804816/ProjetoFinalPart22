@@ -3,6 +3,7 @@ package com.example.projetofinalpart1.model
 import com.example.projetofinalpart1.listaTodosFilmes
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 var listaFilmesVistos = mutableListOf<Filme>()
 
@@ -100,17 +101,17 @@ object ObjetoFilme {
     }
 
     fun getOperationById(uuid: String): Filme? {
-        return listaFilmesVistos.find { it.uuid == uuid }
+        return listaTodosFilmes.find { it.uuid == uuid }
     }
 
-    fun adicionarListaVistos(nomeFilme: String, nomeCinema: String, avaliacao: String, data: String, observacoes: String, fotos: ArrayList<String>) {
+    fun adicionarListaVistos(nomeFilme: String, nomeCinema: String, avaliacao: String, data: String, observacoes: String, fotos: List<String>) {
         for (filmeAdicionar in listaTodosFilmes) {
             if (filmeAdicionar.nomeFilme == nomeFilme) {
                 filmeAdicionar.nomeCinema = nomeCinema
                 filmeAdicionar.avaliacao = avaliacao
                 filmeAdicionar.dataVisualizacao = data
                 filmeAdicionar.observacoes = observacoes
-                filmeAdicionar.fotografia= fotos
+                filmeAdicionar.substituirFotografias(fotos)
                 filmeAdicionar.avaliado = true
                 listaFilmesVistos.add(filmeAdicionar)
             }

@@ -50,16 +50,26 @@ class DetalhesFragment : Fragment() {
 
     private fun placeData(ui: Filme) {
         binding.nomeFilme.text=ui.nomeFilme
-        binding.nomeCinema.text=ui.nomeCinema
-        binding.avaliacao.text=ui.avaliacao
-        binding.dataVisualizacao.text=ui.dataVisualizacao
-        binding.observacoes.text=ui.observacoes
         binding.genero.text=ui.genero
         binding.sinopse.text=ui.sinopse
         binding.dataLancamento.text=ui.dataLancamento
         binding.avaliacaoImdb.text=ui.avaliacaoImdb
         binding.linkImdb.text=ui.linkImdb
-
+        if(ui.avaliado){
+            binding.nomeCinema.text=ui.nomeCinema
+            binding.avaliacao.text=ui.avaliacao
+            binding.dataVisualizacao.text=ui.dataVisualizacao
+            binding.observacoes.text=ui.observacoes
+        }else{
+            binding.nomeCinemaText.visibility = View.GONE
+            binding.nomeCinema.visibility = View.GONE
+            binding.avaliacao.visibility = View.GONE
+            binding.avaliacaoText.visibility = View.GONE
+            binding.dataVisualizacaoText.visibility = View.GONE
+            binding.dataVisualizacao.visibility = View.GONE
+            binding.observacoesText.visibility = View.GONE
+            binding.observacoes.visibility = View.GONE
+        }
         val fotos = ui.fotografia
 
         val layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)

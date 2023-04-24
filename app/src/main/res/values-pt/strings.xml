@@ -33,5 +33,7 @@
     <string name="cancelar">Cancelar</string>
     <string name="lista_vazia">Lista vazia</string>
     <string name="mapa">Mapa</string>
+    <string name="topFilmes">Top 10 Filmes</string>
+    <string name="listaVistos">Lista de filmes vistos</string>
 
 </resources>

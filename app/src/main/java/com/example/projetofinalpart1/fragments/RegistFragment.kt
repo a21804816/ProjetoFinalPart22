@@ -183,14 +183,12 @@ class RegistFragment : Fragment() {
                     val image = data?.extras?.get("data") as Bitmap
                     val photoFile = saveImage(image)
                     imageList.add(photoFile.absolutePath)
-                    binding.fotoImageView.setImageURI(Uri.parse(imageList.last()))
                 }
                 2 -> {
                     val selectedImage = data?.data
                     val image = MediaStore.Images.Media.getBitmap(requireActivity().contentResolver, selectedImage)
                     val photoFile = saveImage(image)
                     imageList.add(photoFile.absolutePath)
-                    binding.fotoImageView.setImageURI(Uri.parse(imageList.last()))
                 }
             }
         }
