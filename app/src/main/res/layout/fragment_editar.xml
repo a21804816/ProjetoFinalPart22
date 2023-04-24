@@ -95,7 +95,7 @@
         android:textColor="@color/white" />
 
     <Button
-        android:id="@+id/registar_button"
+        android:id="@+id/guardar_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"

@@ -105,6 +105,29 @@ object ObjetoFilme {
         return listaTodosFilmes.find { it.uuid == uuid }
     }
 
+    fun editOperation(
+        uuid: String,
+        nomeFilme: String,
+        nomeCinema: String,
+        avaliacao: String,
+        dataVisualizacao: String,
+        observacoes: String,
+        fotos: List<String>
+    ): Boolean {
+        val filme = listaTodosFilmes.find { it.uuid == uuid }
+        if (filme != null) {
+            filme.nomeFilme = nomeFilme
+            filme.nomeCinema = nomeCinema
+            filme.avaliacao = avaliacao
+            filme.dataVisualizacao = dataVisualizacao
+            filme.observacoes = observacoes
+            filme.substituirFotografias(fotos)
+            return true
+        }
+        return false
+    }
+
+
     fun adicionarListaVistos(
         nomeFilme: String,
         nomeCinema: String,

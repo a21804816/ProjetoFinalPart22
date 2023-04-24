@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.projetofinalpart1.NavigationManager
 import com.example.projetofinalpart1.R
 import com.example.projetofinalpart1.adapters.FotosDetalhesAdapter
 import com.example.projetofinalpart1.databinding.FragmentDetalhesBinding
@@ -48,8 +49,8 @@ class DetalhesFragment : Fragment() {
             requireActivity().onBackPressed()
         }
 
-        (binding.voltarButton).setOnClickListener {
-            requireActivity().onBackPressed()
+        (binding.editarButton).setOnClickListener {
+            NavigationManager.goToEditarFragment(requireActivity().supportFragmentManager)
         }
 
     }
