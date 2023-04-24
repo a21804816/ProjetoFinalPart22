@@ -25,12 +25,23 @@
                 android:orientation="horizontal">
 
                 <Button
+                    android:id="@+id/editButton"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/ic_baseline_edit_24"
+                    android:drawableTint="@color/primaryColor"
+                    android:elevation="0dp"
+                    android:layout_margin="10dp"/>
+
+
+                <Button
                     android:id="@+id/paraVerButton"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:background="@drawable/baseline_turned_in_not_24"
                     android:drawableTint="@color/primaryColor"
-                    android:elevation="0dp" />
+                    android:elevation="0dp"
+                    android:layout_margin="10dp"/>
 
                 <Button
                     android:id="@+id/voltarButton"
@@ -39,7 +50,8 @@
                     android:layout_gravity="center"
                     android:background="@drawable/ic_baseline_close_24"
                     android:drawableTint="@color/primaryColor"
-                    android:elevation="0dp" />
+                    android:elevation="0dp"
+                    android:layout_margin="10dp"/>
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
@@ -63,12 +75,11 @@
                     android:text="Nome Filme:"
                     android:textAppearance="?android:textAppearanceMedium" />
 
-                <TextView
+                <EditText
                     android:id="@+id/nome_filme"
                     style="@style/TextColorTheme"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="16dp"
                     android:textAppearance="?android:textAppearanceMedium" />
             </LinearLayout>
 
@@ -86,12 +97,11 @@
                     android:text="Nome Cinema:"
                     android:textAppearance="?android:textAppearanceMedium" />
 
-                <TextView
+                <EditText
                     android:id="@+id/nome_cinema"
                     style="@style/TextColorTheme"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="16dp"
                     android:textAppearance="?android:textAppearanceMedium" />
             </LinearLayout>
 
@@ -109,12 +119,11 @@
                     android:text="Avaliação:"
                     android:textAppearance="?android:textAppearanceMedium" />
 
-                <TextView
+                <EditText
                     android:id="@+id/avaliacao"
                     style="@style/TextColorTheme"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="16dp"
                     android:textAppearance="?android:textAppearanceMedium" />
             </LinearLayout>
 
@@ -132,12 +141,11 @@
                     android:text="Data de visualização:"
                     android:textAppearance="?android:textAppearanceMedium" />
 
-                <TextView
+                <EditText
                     android:id="@+id/data_visualizacao"
                     style="@style/TextColorTheme"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="16dp"
                     android:textAppearance="?android:textAppearanceMedium" />
             </LinearLayout>
 
@@ -155,12 +163,11 @@
                     android:text="Observações:"
                     android:textAppearance="?android:textAppearanceMedium" />
 
-                <TextView
+                <EditText
                     android:id="@+id/observacoes"
                     style="@style/TextColorTheme"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="16dp"
                     android:textAppearance="?android:textAppearanceMedium" />
             </LinearLayout>
 

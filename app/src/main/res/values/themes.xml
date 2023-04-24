@@ -44,4 +44,7 @@
     <style name="TextColorTheme" parent="Theme.AppCompat.Light">
         <item name="android:textColor">@color/black</item>
     </style>
+    <style name="SeekBarStyle" parent="Widget.AppCompat.SeekBar">
+        <item name="colorAccent">@color/primaryColor</item>
+    </style>
 </resources>

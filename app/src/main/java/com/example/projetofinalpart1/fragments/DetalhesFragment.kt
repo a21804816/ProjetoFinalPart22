@@ -40,6 +40,12 @@ class DetalhesFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
+        binding.nomeFilme.isEnabled = false
+        binding.nomeCinema.isEnabled = false
+        binding.avaliacao.isEnabled = false
+        binding.dataVisualizacao.isEnabled = false
+        binding.observacoes.isEnabled = false
+
         filmeUuid?.let { uuid ->
             val operation = ObjetoFilme.getOperationById(uuid)
             operation?.let { placeData(it) }
@@ -71,21 +77,49 @@ class DetalhesFragment : Fragment() {
             }
         }
 
+        binding.editButton.setOnClickListener {
+            binding.nomeFilme.isEnabled = true
+            binding.nomeCinema.isEnabled = true
+            binding.avaliacao.isEnabled = true
+            binding.dataVisualizacao.isEnabled = true
+            binding.observacoes.isEnabled = true
+
+            binding.editButton.setBackgroundResource(R.drawable.baseline_check_circle_24)
+
+            binding.editButton.setOnClickListener {
+                val filme = ObjetoFilme.getOperationById(filmeUuid!!)
+                if (filme != null) {
+                    filme.nomeFilme = binding.nomeFilme.text.toString()
+                    filme.nomeCinema = binding.nomeCinema.text.toString()
+                    filme.avaliacao = binding.avaliacao.text.toString()
+                    filme.dataVisualizacao = binding.dataVisualizacao.text.toString()
+                    filme.observacoes = binding.observacoes.text.toString()
+                }
+
+                binding.nomeFilme.isEnabled = false
+                binding.nomeCinema.isEnabled = false
+                binding.avaliacao.isEnabled = false
+                binding.dataVisualizacao.isEnabled = false
+
+                binding.editButton.setBackgroundResource(R.drawable.ic_baseline_edit_24)
+            }
+        }
+
     }
 
 
     private fun placeData(ui: Filme) {
-        binding.nomeFilme.text = ui.nomeFilme
+        binding.nomeFilme.setText(ui.nomeFilme)
         binding.genero.text = ui.genero
         binding.sinopse.text = ui.sinopse
         binding.dataLancamento.text = ui.dataLancamento
         binding.avaliacaoImdb.text = ui.avaliacaoImdb
         binding.linkImdb.text = ui.linkImdb
         if (ui.avaliado) {
-            binding.nomeCinema.text = ui.nomeCinema
-            binding.avaliacao.text = ui.avaliacao
-            binding.dataVisualizacao.text = ui.dataVisualizacao
-            binding.observacoes.text = ui.observacoes
+            binding.nomeCinema.setText(ui.nomeCinema)
+            binding.avaliacao.setText(ui.avaliacao)
+            binding.dataVisualizacao.setText(ui.dataVisualizacao)
+            binding.observacoes.setText(ui.observacoes)
         } else {
             binding.nomeCinemaText.visibility = View.GONE
             binding.nomeCinema.visibility = View.GONE

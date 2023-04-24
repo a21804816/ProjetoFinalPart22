@@ -22,7 +22,7 @@ object ObjetoFilme {
         private set
     var fotos: List<String> = listOf()
 
-    val calendario = Calendar.getInstance()
+    var calendario = Calendar.getInstance()
 
     fun registarFilme(
         nomeRegisto: String,

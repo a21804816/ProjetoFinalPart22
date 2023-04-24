@@ -65,8 +65,9 @@
         android:layout_marginEnd="16dp"
         android:max="10"
         android:progress="5"
-        android:progressTintMode="src_in"
-        android:thumbTintMode="src_in" />
+        android:thumbTint="@color/primaryColor"
+        android:progressTint="@color/primaryColor"
+        />
 
     <TextView
         android:id="@+id/data_edit_text"
