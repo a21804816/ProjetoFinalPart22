@@ -101,6 +101,7 @@ class EditarFragment : Fragment() {
         requireActivity().onBackPressed()
     }
 
+
     private fun placeData(ui: Filme) {
         binding.nomeFilmeEditText.setText(ui.nomeFilme)
         binding.cinemaEditText.setText(ui.nomeCinema)
