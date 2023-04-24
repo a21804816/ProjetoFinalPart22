@@ -16,7 +16,8 @@ import com.example.projetofinalpart1.listaTodosFilmes
 import com.example.projetofinalpart1.model.listaFilmesVistos
 
 class DashboardFragment : Fragment() {
-    val filmesOrdenados = listaTodosFilmes.sortedByDescending { it.avaliacaoImdb.toDouble() }.take(10)
+    val filmesOrdenados =
+        listaTodosFilmes.sortedByDescending { it.avaliacaoImdb.toDouble() }.take(10)
     private val adapter = TendeciasAdapter(::onOperationClick, listaTodosFilmes)
     val adapterOrder = TendeciasAdapter(::onOperationClick, filmesOrdenados)
     private val adapterVistos = FilmeAdapter(::onOperationClick, listaFilmesVistos)
@@ -37,7 +38,8 @@ class DashboardFragment : Fragment() {
     @SuppressLint("SetTextI18n")
     override fun onStart() {
         super.onStart()
-        binding.moviesList.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.moviesList.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.moviesList.adapter = adapter
         binding.moviesList.apply {
             this.adapter = adapter
@@ -45,16 +47,17 @@ class DashboardFragment : Fragment() {
         }
 
         if (listaFilmesVistos.isEmpty()) {
-            binding.texto2.text=getString(R.string.topFilmes)
+            binding.texto2.text = getString(R.string.topFilmes)
             binding.vistosMoviesList.visibility = View.GONE
-            binding.orderMoviesList.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            binding.orderMoviesList.layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             binding.orderMoviesList.adapter = adapterOrder
             binding.orderMoviesList.apply {
                 this.adapter = adapter
                 layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             }
-        }else{
-            binding.texto2.text=getString(R.string.listaVistos)
+        } else {
+            binding.texto2.text = getString(R.string.listaVistos)
             binding.orderMoviesList.visibility = View.GONE
             binding.vistosMoviesList.layoutManager = LinearLayoutManager(requireContext())
             binding.vistosMoviesList.adapter = adapterVistos

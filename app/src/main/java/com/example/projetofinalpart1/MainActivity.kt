@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        if(!screenRotated(savedInstanceState)) {
+        if (!screenRotated(savedInstanceState)) {
             NavigationManager.goToDashboardFragment(supportFragmentManager)
         }
         binding.toolbar.title = "Páginanicial"
@@ -53,12 +53,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupDrawerMenu() {
-        val toggle = ActionBarDrawerToggle(this,
+        val toggle = ActionBarDrawerToggle(
+            this,
             binding.drawer, binding.toolbar,
             R.string.drawer_open, R.string.drawer_close
 
         )
-        binding.navDrawer.setNavigationItemSelectedListener{
+        binding.navDrawer.setNavigationItemSelectedListener {
             onClickNavigationItem(it)
             binding.toolbar.title = it.title
             true
@@ -74,7 +75,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun onClickNavigationItem(item: MenuItem): Boolean {
-        when(item.itemId) {
+        when (item.itemId) {
             R.id.nav_dashboard ->
 
                 NavigationManager.goToDashboardFragment(
@@ -98,7 +99,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun onClickNavigationItemBottom(item: MenuItem): Boolean {
-        when(item.itemId) {
+        when (item.itemId) {
             R.id.bottom_dashboard ->
                 NavigationManager.goToDashboardFragment(
                     supportFragmentManager
@@ -123,6 +124,7 @@ class MainActivity : AppCompatActivity() {
     private fun screenRotated(savedInstanceState: Bundle?): Boolean {
         return savedInstanceState != null
     }
+
     @SuppressLint("InflateParams")
     private fun showPopup() {
         val inflater = from(this)
@@ -255,8 +257,6 @@ class MainActivity : AppCompatActivity() {
         listaTodosFilmes.add(filme5)
         listaTodosFilmes.add(filme6)
     }
-
-
 
 
 }

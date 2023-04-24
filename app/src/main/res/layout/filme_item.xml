@@ -30,53 +30,53 @@
             android:id="@+id/nome_filme_edit_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
             android:layout_alignTop="@id/filme_fotografia_image_view"
             android:layout_toEndOf="@id/filme_fotografia_image_view"
             android:text="@string/nome_do_filme"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/cinema_edit_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
             android:layout_below="@id/nome_filme_edit_text"
             android:layout_toEndOf="@id/filme_fotografia_image_view"
             android:text="@string/nome_do_cinema"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/white"
             android:visibility="gone" />
 
         <TextView
             android:id="@+id/avaliacao_valor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
             android:layout_below="@id/cinema_edit_text"
             android:layout_toEndOf="@id/filme_fotografia_image_view"
             android:text="@string/avalia_o"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/white"
             android:visibility="gone" />
 
         <TextView
             android:id="@+id/data_edit_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
             android:layout_below="@id/avaliacao_valor"
             android:layout_toEndOf="@id/filme_fotografia_image_view"
             android:text="@string/data_de_visualizacao"
-            android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/observacoes_edit_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
             android:layout_below="@id/data_edit_text"
             android:layout_toEndOf="@id/filme_fotografia_image_view"
             android:text="@string/observaces"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/white"
             android:visibility="gone" />
 
     </RelativeLayout>

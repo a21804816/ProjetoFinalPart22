@@ -57,6 +57,7 @@
             android:layout_marginTop="16dp"
             android:padding="8dp"
             android:scrollbars="horizontal" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/vistos_movies_list"
             android:layout_width="match_parent"

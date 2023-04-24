@@ -15,11 +15,11 @@ class Filme(
     var sinopse: String,
     var dataLancamento: String,
     var avaliacaoImdb: String,
-    var linkImdb:String,
-    var avaliado:Boolean,
+    var linkImdb: String,
+    var avaliado: Boolean,
     val uuid: String = UUID.randomUUID().toString()
 
-){
+) {
     var fotografia: ArrayList<String> = arrayListOf<String>()
 
     init {

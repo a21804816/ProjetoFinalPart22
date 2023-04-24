@@ -104,7 +104,14 @@ object ObjetoFilme {
         return listaTodosFilmes.find { it.uuid == uuid }
     }
 
-    fun adicionarListaVistos(nomeFilme: String, nomeCinema: String, avaliacao: String, data: String, observacoes: String, fotos: List<String>) {
+    fun adicionarListaVistos(
+        nomeFilme: String,
+        nomeCinema: String,
+        avaliacao: String,
+        data: String,
+        observacoes: String,
+        fotos: List<String>
+    ) {
         for (filmeAdicionar in listaTodosFilmes) {
             if (filmeAdicionar.nomeFilme == nomeFilme) {
                 filmeAdicionar.nomeCinema = nomeCinema

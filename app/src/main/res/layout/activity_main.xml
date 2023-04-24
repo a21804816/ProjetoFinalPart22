@@ -32,8 +32,8 @@
                 android:id="@+id/btn_toolbar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableBottom="@drawable/ic_baseline_mic_24"
-                android:layout_gravity="end"/>
+                android:layout_gravity="end"
+                android:drawableBottom="@drawable/ic_baseline_mic_24" />
 
         </androidx.appcompat.widget.Toolbar>
 

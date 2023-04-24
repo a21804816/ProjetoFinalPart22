@@ -7,8 +7,9 @@ import com.example.projetofinalpart1.model.Filme
 
 import com.example.projetofinalpart1.databinding.FilmeItemBinding
 
-class FilmeAdapter(private val onClick: (String) -> Unit,
-                   private var items: List<Filme> = listOf()
+class FilmeAdapter(
+    private val onClick: (String) -> Unit,
+    private var items: List<Filme> = listOf()
 ) : RecyclerView.Adapter<FilmeAdapter.FilmeViewHolder>() {
 
     class FilmeViewHolder(val binding: FilmeItemBinding) : RecyclerView.ViewHolder(binding.root)
@@ -16,9 +17,10 @@ class FilmeAdapter(private val onClick: (String) -> Unit,
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FilmeViewHolder {
         return FilmeViewHolder(
             FilmeItemBinding.inflate(
-            LayoutInflater.from(parent.context),
-            parent, false
-        ))
+                LayoutInflater.from(parent.context),
+                parent, false
+            )
+        )
     }
 
     override fun onBindViewHolder(holder: FilmeViewHolder, position: Int) {
@@ -30,10 +32,14 @@ class FilmeAdapter(private val onClick: (String) -> Unit,
         holder.binding.dataEditText.text = items[position].dataVisualizacao
         holder.binding.observacoesEditText.text = items[position].observacoes
         holder.binding.filmeFotografiaImageView.setImageResource(items[position].imagemCartaz)
-        holder.binding.cinemaEditText.visibility = if (orientation == Configuration.ORIENTATION_PORTRAIT) View.GONE else View.VISIBLE
-        holder.binding.avaliacaoValor.visibility = if (orientation == Configuration.ORIENTATION_PORTRAIT) View.GONE else View.VISIBLE
-        holder.binding.observacoesEditText.visibility = if (orientation == Configuration.ORIENTATION_PORTRAIT) View.GONE else View.VISIBLE
+        holder.binding.cinemaEditText.visibility =
+            if (orientation == Configuration.ORIENTATION_PORTRAIT) View.GONE else View.VISIBLE
+        holder.binding.avaliacaoValor.visibility =
+            if (orientation == Configuration.ORIENTATION_PORTRAIT) View.GONE else View.VISIBLE
+        holder.binding.observacoesEditText.visibility =
+            if (orientation == Configuration.ORIENTATION_PORTRAIT) View.GONE else View.VISIBLE
     }
+
     override fun getItemCount(): Int = items.size
 }
 

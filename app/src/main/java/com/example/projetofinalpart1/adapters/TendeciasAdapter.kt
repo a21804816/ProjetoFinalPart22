@@ -8,10 +8,12 @@ import com.example.projetofinalpart1.databinding.FilmeItemBinding
 import com.example.projetofinalpart1.databinding.TendenciasItemBinding
 import com.example.projetofinalpart1.model.Filme
 
-class TendeciasAdapter(private val onClick: (String) -> Unit,
-                       private var items: List<Filme> = listOf()
-): RecyclerView.Adapter<TendeciasAdapter.TodosViewHolder>() {
-    inner class TodosViewHolder(binding: TendenciasItemBinding): RecyclerView.ViewHolder(binding.root) {
+class TendeciasAdapter(
+    private val onClick: (String) -> Unit,
+    private var items: List<Filme> = listOf()
+) : RecyclerView.Adapter<TendeciasAdapter.TodosViewHolder>() {
+    inner class TodosViewHolder(binding: TendenciasItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         val movieImage: ImageView = binding.movieImage
     }
 
@@ -20,7 +22,8 @@ class TendeciasAdapter(private val onClick: (String) -> Unit,
             TendenciasItemBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent, false
-            ))
+            )
+        )
     }
 
     override fun onBindViewHolder(holder: TodosViewHolder, position: Int) {

@@ -54,44 +54,70 @@ class RegistFragment : Fragment() {
             val avaliacao = binding.avaliacaoSlider.progress.toString()
             val data = binding.dataEditText.text.toString()
             val observacoes = binding.observacoesEditText.text.toString()
-            val fotos= imageList
+            val fotos = imageList
 
-            val filme = ObjetoFilme.registarFilme(nomeFilme, nomeCinema, avaliacao, data, observacoes, fotos)
+            val filme = ObjetoFilme.registarFilme(
+                nomeFilme,
+                nomeCinema,
+                avaliacao,
+                data,
+                observacoes,
+                fotos
+            )
 
             if (filme) {
-                if(ObjetoFilme.filmesVistos(nomeFilme)){
+                if (ObjetoFilme.filmesVistos(nomeFilme)) {
                     val builder = AlertDialog.Builder(requireContext())
                     builder.setMessage("O filme $nomeFilme? já foi registado")
-                        .setPositiveButton("Confirmar", DialogInterface.OnClickListener { dialog, which ->
-                        })
+                        .setPositiveButton(
+                            "Confirmar",
+                            DialogInterface.OnClickListener { dialog, which ->
+                            })
                     builder.create().show()
-                }else{
+                } else {
                     val builder = AlertDialog.Builder(requireContext())
                     builder.setMessage("Confirma que o nome do filme é $nomeFilme?")
-                        .setPositiveButton("Confirmar", DialogInterface.OnClickListener { dialog, which ->
-                            ObjetoFilme.adicionarListaVistos(nomeFilme, nomeCinema, avaliacao, data, observacoes, fotos)
-                            removerCampos()
-                        })
+                        .setPositiveButton(
+                            "Confirmar",
+                            DialogInterface.OnClickListener { dialog, which ->
+                                ObjetoFilme.adicionarListaVistos(
+                                    nomeFilme,
+                                    nomeCinema,
+                                    avaliacao,
+                                    data,
+                                    observacoes,
+                                    fotos
+                                )
+                                removerCampos()
+                            })
                         .setNegativeButton("Cancelar", null)
                     builder.create().show()
                 }
 
             } else {
                 val errorMessage = getString(R.string.erroRegistoFilme)
-                if(!ObjetoFilme.verificarNomeCinema(nomeCinema)){
+                if (!ObjetoFilme.verificarNomeCinema(nomeCinema)) {
                     binding.cinemaEditText.error = errorMessage
                 }
-                if(!ObjetoFilme.verificarData(data)){
+                if (!ObjetoFilme.verificarData(data)) {
                     binding.dataEditText.error = errorMessage
                 }
-                if(!ObjetoFilme.verificarNomeFilme(nomeFilme)){
+                if (!ObjetoFilme.verificarNomeFilme(nomeFilme)) {
                     binding.nomeFilmeEditText.error = errorMessage
-                    Toast.makeText(requireContext(), "Estão campos por preencher", Toast.LENGTH_LONG).show()
-                } else if(!ObjetoFilme.percorrerFilmes(nomeFilme)){
+                    Toast.makeText(
+                        requireContext(),
+                        "Estão campos por preencher",
+                        Toast.LENGTH_LONG
+                    ).show()
+                } else if (!ObjetoFilme.percorrerFilmes(nomeFilme)) {
                     binding.nomeFilmeEditText.error = "Filme não existe"
                     Toast.makeText(requireContext(), "filme não existe", Toast.LENGTH_LONG).show()
-                }else{
-                    Toast.makeText(requireContext(), "Estão campos por preencher", Toast.LENGTH_LONG).show()
+                } else {
+                    Toast.makeText(
+                        requireContext(),
+                        "Estão campos por preencher",
+                        Toast.LENGTH_LONG
+                    ).show()
 
                 }
             }
@@ -111,7 +137,8 @@ class RegistFragment : Fragment() {
                         }
                     }
                     options[item] == "Selecionar da Galeria" -> {
-                        val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+                        val intent =
+                            Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
                         startActivityForResult(intent, 2)
                     }
                     options[item] == "Cancelar" -> {
@@ -124,9 +151,14 @@ class RegistFragment : Fragment() {
 
 
         binding.dataEditText.setOnClickListener {
-            var hoje= Calendar.getInstance()
+            var hoje = Calendar.getInstance()
             val datePicker = object : DatePickerDialog.OnDateSetListener {
-                override fun onDateSet(view: DatePicker, year: Int, monthOfYear: Int, dayOfMonth: Int) {
+                override fun onDateSet(
+                    view: DatePicker,
+                    year: Int,
+                    monthOfYear: Int,
+                    dayOfMonth: Int
+                ) {
                     ObjetoFilme.setCalendario(year, monthOfYear, dayOfMonth)
                     updateLable()
                 }
@@ -143,10 +175,12 @@ class RegistFragment : Fragment() {
             binding.dataEditText.error = null
         }
 
-        binding.avaliacaoSlider.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+        binding.avaliacaoSlider.setOnSeekBarChangeListener(object :
+            SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 mudarAvaliacao(progress)
             }
+
             override fun onStartTrackingTouch(seekBar: SeekBar?) {}
             override fun onStopTrackingTouch(seekBar: SeekBar?) {}
         })
@@ -163,7 +197,7 @@ class RegistFragment : Fragment() {
 
         binding.nomeFilmeEditText.setText(ObjetoFilme.nomeFilm)
         binding.cinemaEditText.setText(ObjetoFilme.cinema)
-        binding.avaliacaoSlider.progress= ObjetoFilme.avaliacaoFilme.toIntOrNull() ?:0
+        binding.avaliacaoSlider.progress = ObjetoFilme.avaliacaoFilme.toIntOrNull() ?: 0
         binding.dataEditText.text = ObjetoFilme.data
         binding.observacoesEditText.setText(ObjetoFilme.observacoesFilme)
         imageList.clear()
@@ -186,7 +220,10 @@ class RegistFragment : Fragment() {
                 }
                 2 -> {
                     val selectedImage = data?.data
-                    val image = MediaStore.Images.Media.getBitmap(requireActivity().contentResolver, selectedImage)
+                    val image = MediaStore.Images.Media.getBitmap(
+                        requireActivity().contentResolver,
+                        selectedImage
+                    )
                     val photoFile = saveImage(image)
                     imageList.add(photoFile.absolutePath)
                 }

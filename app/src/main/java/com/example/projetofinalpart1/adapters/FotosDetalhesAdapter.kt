@@ -7,8 +7,10 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.projetofinalpart1.databinding.FotosDetalhesItemBinding
 
-class FotosDetalhesAdapter(val fotos: List<String>, val imagemCartaz: Int): RecyclerView.Adapter<FotosDetalhesAdapter.FotosViewHolder>() {
-    inner class FotosViewHolder(binding: FotosDetalhesItemBinding): RecyclerView.ViewHolder(binding.root) {
+class FotosDetalhesAdapter(val fotos: List<String>, val imagemCartaz: Int) :
+    RecyclerView.Adapter<FotosDetalhesAdapter.FotosViewHolder>() {
+    inner class FotosViewHolder(binding: FotosDetalhesItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         val images: ImageView = binding.fotos
     }
 
@@ -25,6 +27,7 @@ class FotosDetalhesAdapter(val fotos: List<String>, val imagemCartaz: Int): Recy
             holder.images.setImageURI(Uri.parse(fotos[position - 1]))
         }
     }
+
     override fun getItemCount(): Int = fotos.size + 1
 }
 

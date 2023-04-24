@@ -28,7 +28,11 @@ class DetalhesFragment : Fragment() {
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         val view = inflater.inflate(R.layout.fragment_detalhes, container, false)
         binding = FragmentDetalhesBinding.bind(view)
         return binding.root
@@ -49,18 +53,18 @@ class DetalhesFragment : Fragment() {
 
 
     private fun placeData(ui: Filme) {
-        binding.nomeFilme.text=ui.nomeFilme
-        binding.genero.text=ui.genero
-        binding.sinopse.text=ui.sinopse
-        binding.dataLancamento.text=ui.dataLancamento
-        binding.avaliacaoImdb.text=ui.avaliacaoImdb
-        binding.linkImdb.text=ui.linkImdb
-        if(ui.avaliado){
-            binding.nomeCinema.text=ui.nomeCinema
-            binding.avaliacao.text=ui.avaliacao
-            binding.dataVisualizacao.text=ui.dataVisualizacao
-            binding.observacoes.text=ui.observacoes
-        }else{
+        binding.nomeFilme.text = ui.nomeFilme
+        binding.genero.text = ui.genero
+        binding.sinopse.text = ui.sinopse
+        binding.dataLancamento.text = ui.dataLancamento
+        binding.avaliacaoImdb.text = ui.avaliacaoImdb
+        binding.linkImdb.text = ui.linkImdb
+        if (ui.avaliado) {
+            binding.nomeCinema.text = ui.nomeCinema
+            binding.avaliacao.text = ui.avaliacao
+            binding.dataVisualizacao.text = ui.dataVisualizacao
+            binding.observacoes.text = ui.observacoes
+        } else {
             binding.nomeCinemaText.visibility = View.GONE
             binding.nomeCinema.visibility = View.GONE
             binding.avaliacao.visibility = View.GONE
@@ -72,9 +76,10 @@ class DetalhesFragment : Fragment() {
         }
         val fotos = ui.fotografia
 
-        val layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        val layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.fotosLista.layoutManager = layoutManager
-        binding.fotosLista.adapter = FotosDetalhesAdapter(fotos,ui.imagemCartaz)
+        binding.fotosLista.adapter = FotosDetalhesAdapter(fotos, ui.imagemCartaz)
 
     }
 

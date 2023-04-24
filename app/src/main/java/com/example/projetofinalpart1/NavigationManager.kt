@@ -23,6 +23,7 @@ object NavigationManager {
     fun goToListFragment(fm: FragmentManager) {
         placeFragment(fm, ListFragment())
     }
+
     fun goToMapFragment(fm: FragmentManager) {
         placeFragment(fm, MapFragment())
     }
@@ -30,12 +31,10 @@ object NavigationManager {
     fun goToEditarFragment(fm: FragmentManager) {
         placeFragment(fm, EditarFragment())
     }
-    
+
     fun goToDetalhesFragment(fm: FragmentManager, uuid: String) {
         placeFragment(fm, DetalhesFragment.newInstance(uuid))
     }
-
-
 
 
 }
