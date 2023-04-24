@@ -47,4 +47,6 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1"
     implementation 'net.objecthunter:exp4j:0.4.4'
     implementation 'androidx.databinding:baseLibrary:3.2.0-alpha11'
+    implementation 'androidx.test:monitor:1.5.0'
+    androidTestImplementation 'junit:junit:4.12'
 }
