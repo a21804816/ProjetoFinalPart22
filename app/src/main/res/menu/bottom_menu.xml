@@ -17,6 +17,9 @@
         android:id="@+id/bottom_map"
         android:icon="@drawable/ic_baseline_map_24"
         android:title="@string/map" />
-
+    <item
+        android:id="@+id/bottom_paraVer"
+        android:icon="@drawable/baseline_turned_in_24"
+        android:title="@string/paraVer" />
 
 </menu>
