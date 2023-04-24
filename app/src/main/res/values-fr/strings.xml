@@ -35,5 +35,6 @@
     <string name="mapa">Carte</string>
     <string name="topFilmes">Les 10 meilleurs films</string>
     <string name="listaVistos">Liste des films vus</string>
+    <string name="paraVer">Para Ver</string>
 
 </resources>

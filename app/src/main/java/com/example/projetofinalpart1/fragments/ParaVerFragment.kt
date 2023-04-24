@@ -14,10 +14,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.projetofinalpart1.NavigationManager
 import com.example.projetofinalpart1.R
 import com.example.projetofinalpart1.databinding.FragmentListBinding
-import com.example.projetofinalpart1.model.listaFilmesVistos
+import com.example.projetofinalpart1.model.listaFilmesParaVer
 
 class ParaVerFragment : Fragment() {
-    private val adapter = FilmeAdapter(::onOperationClick, listaFilmesVistos)
+    private val adapter = FilmeAdapter(::onOperationClick, listaFilmesParaVer)
     private lateinit var binding: FragmentListBinding
     private val REQUEST_CODE_SPEECH_INPUT = 100
 
@@ -34,7 +34,7 @@ class ParaVerFragment : Fragment() {
         super.onStart()
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        if (listaFilmesVistos.isEmpty()) {
+        if (listaFilmesParaVer.isEmpty()) {
             binding.textEmptyList!!.visibility = View.VISIBLE
         } else {
             binding.textEmptyList!!.visibility = View.GONE

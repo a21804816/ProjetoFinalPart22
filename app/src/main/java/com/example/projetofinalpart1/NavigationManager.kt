@@ -28,6 +28,10 @@ object NavigationManager {
         placeFragment(fm, MapFragment())
     }
 
+    fun goToParaVerFragment(fm: FragmentManager) {
+        placeFragment(fm, ParaVerFragment())
+    }
+
     fun goToEditarFragment(fm: FragmentManager) {
         placeFragment(fm, EditarFragment())
     }

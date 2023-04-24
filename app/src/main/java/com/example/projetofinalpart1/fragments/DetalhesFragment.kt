@@ -6,12 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.projetofinalpart1.NavigationManager
 import com.example.projetofinalpart1.R
 import com.example.projetofinalpart1.adapters.FotosDetalhesAdapter
 import com.example.projetofinalpart1.databinding.FragmentDetalhesBinding
 import com.example.projetofinalpart1.model.Filme
 import com.example.projetofinalpart1.model.ObjetoFilme
+import com.example.projetofinalpart1.model.listaFilmesParaVer
 
 private const val ARG_FILME_UUID = "ARG_FILME_UUID"
 
@@ -49,8 +49,19 @@ class DetalhesFragment : Fragment() {
             requireActivity().onBackPressed()
         }
 
-        (binding.editarButton).setOnClickListener {
-            NavigationManager.goToEditarFragment(requireActivity().supportFragmentManager)
+        (binding.paraVerButton).setOnClickListener {
+            val filme = ObjetoFilme.getOperationById(filmeUuid!!)
+            if (filme != null) {
+                if (filme.paraVer) {
+                    listaFilmesParaVer.remove(filme)
+                    binding.paraVerButton.setBackgroundResource(R.drawable.baseline_turned_in_not_24)
+                    filme.paraVer = false
+                } else {
+                    listaFilmesParaVer.add(filme)
+                    binding.paraVerButton.setBackgroundResource(R.drawable.baseline_turned_in_24)
+                    filme.paraVer = true
+                }
+            }
         }
 
     }

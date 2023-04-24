@@ -35,5 +35,6 @@
     <string name="mapa">Map</string>
     <string name="topFilmes">Top 10 Movies</string>
     <string name="listaVistos">List of films seen</string>
+    <string name="paraVer">Para Ver</string>
 
 </resources>
