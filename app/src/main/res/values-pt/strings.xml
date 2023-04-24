@@ -10,7 +10,7 @@
     <string name="avaliacao1a10">Pontua o filme de 1 a 10:</string>
     <string name="nomeCinema">Nome do Cinema*</string>
     <string name="dataVisualizacao">Data ex: 01–04-2023</string>
-    <string name="tirarFotografias">Tirar Foto</string>
+    <string name="tirarFotografias">Adicionar Fotografia</string>
     <string name="observacoes200">Observações (máx. 200 caracteres)</string>
     <string name="registarFilme">Registar Filme</string>
     <string name="erroRegistoFilme">Campo não preenchido</string>
@@ -19,7 +19,7 @@
     <string name="avalia_o">Avaliação</string>
     <string name="data_de_visualizacao">Data de visualização</string>
     <string name="observaces">Observações</string>
-    <string name="novidades">Novidades</string>
+    <string name="novidades">Sugestões</string>
     <string name="nome_filme_detalhes">Nome Filme:</string>
     <string name="nome_cinema_detalhes">Nome Cinema:</string>
     <string name="avaliacao_detalhes">Avaliação:</string>
@@ -36,5 +36,16 @@
     <string name="topFilmes">Top 10 Filmes</string>
     <string name="listaVistos">Lista de filmes vistos</string>
     <string name="paraVer">Para Ver</string>
+    <string name="sucesso_registo_filme">Filme registado com sucesso!</string>
+    <string name="camposPorPreencher">Existem campos que precisam ser preenchidos</string>
+    <string name="filmeNaoExiste">Filme não existe</string>
+    <string name="adicionarFoto">Adicionar Foto</string>
+    <string name="tirarFoto">Tirar Foto</string>
+    <string name="selecionarGaleria">Selecionar da Galeria</string>
+    <string name="mensagemRegistado">O filme %1$s já foi registado</string>
+    <string name="confirmar">Confirmar</string>
+    <string name="mensagemConfirma">Confirma que o nome do filme é %1$s</string>
+    <string name="pesquisarFilmeVoz">Indique o filme que quer pesquisar</string>
+    <string name="erroVoz">Erro ao reconhecer fala.</string>
 
 </resources>

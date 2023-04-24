@@ -19,7 +19,7 @@
     <string name="avalia_o">Rating</string>
     <string name="data_de_visualizacao">Viewing Date</string>
     <string name="observaces">Observations</string>
-    <string name="novidades">News</string>
+    <string name="novidades">Suggestions</string>
     <string name="nome_filme_detalhes">Movie Name:</string>
     <string name="nome_cinema_detalhes">Cinema Name:</string>
     <string name="avaliacao_detalhes">Rating:</string>
@@ -30,11 +30,22 @@
     <string name="data_de_lancamento_detalhes">Release Date:</string>
     <string name="avaliacao_imdb_detalhes">IMDB Rating:</string>
     <string name="link_imdb_detalhes">IMDB Link:</string>
-    <string name="cancelar">Cancel</string>
     <string name="lista_vazia">Empty List</string>
     <string name="mapa">Map</string>
     <string name="topFilmes">Top 10 Movies</string>
     <string name="listaVistos">List of films seen</string>
     <string name="paraVer">Para Ver</string>
+    <string name="sucesso_registo_filme">Movie successfully registered!</string>
+    <string name="camposPorPreencher">There are fields that need to be filled in</string>
+    <string name="filmeNaoExiste">Movie does not exist</string>
+    <string name="cancelar">Cancel</string>
+    <string name="adicionarFoto">Add Photo</string>
+    <string name="tirarFoto">Take Photo</string>
+    <string name="selecionarGaleria">Select from Gallery</string>
+    <string name="mensagemRegistado">The film %1$s has already been registered</string>
+    <string name="confirmar">Confirm</string>
+    <string name="mensagemConfirma">Confirm that the name of the film is %1$s</string>
+    <string name="pesquisarFilmeVoz">Indique o filme que quer pesquisar</string>
+    <string name="erroVoz">Erro ao reconhecer fala.</string>
 
 </resources>

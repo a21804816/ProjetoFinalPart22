@@ -107,7 +107,6 @@ class DetalhesFragment : Fragment() {
 
     }
 
-
     private fun placeData(ui: Filme) {
         binding.nomeFilme.setText(ui.nomeFilme)
         binding.genero.text = ui.genero
@@ -140,7 +139,6 @@ class DetalhesFragment : Fragment() {
     }
 
     companion object {
-
         @JvmStatic
         fun newInstance(uuid: String) =
             DetalhesFragment().apply {
@@ -149,8 +147,6 @@ class DetalhesFragment : Fragment() {
                 }
             }
     }
-
-
 }
 
 

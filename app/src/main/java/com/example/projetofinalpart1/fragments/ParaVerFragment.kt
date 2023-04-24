@@ -26,7 +26,6 @@ class ParaVerFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_list, container, false)
         binding = FragmentListBinding.bind(view)
         return binding.root
@@ -66,15 +65,16 @@ class ParaVerFragment : Fragment() {
         })
 
         binding.fabMicrophone.setOnClickListener {
-            val speechRecognizerIntent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
-            speechRecognizerIntent.putExtra(
-                RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
+            val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
+            intent.putExtra(
+                RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
             )
-
+            intent.putExtra(RecognizerIntent.EXTRA_PROMPT, getString(R.string.pesquisarFilmeVoz))
             try {
-                startActivityForResult(speechRecognizerIntent, REQUEST_CODE_SPEECH_INPUT)
+                startActivityForResult(intent, REQUEST_CODE_SPEECH_INPUT)
             } catch (e: Exception) {
-                Toast.makeText(context, "Erro ao reconhecer fala.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, getString(R.string.erroVoz), Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -85,10 +85,9 @@ class ParaVerFragment : Fragment() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-
         if (requestCode == REQUEST_CODE_SPEECH_INPUT && resultCode == Activity.RESULT_OK) {
-            val result = data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)?.get(0)
-            binding.searchView.setQuery(result, true)
+            val result = data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
+            binding.searchView.setQuery(result.toString(), true)
         }
     }
 }

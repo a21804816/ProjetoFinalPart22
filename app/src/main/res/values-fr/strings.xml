@@ -19,7 +19,7 @@
     <string name="avalia_o">Évaluation</string>
     <string name="data_de_visualizacao">Date de visionnage</string>
     <string name="observaces">Remarques</string>
-    <string name="novidades">Nouveautés</string>
+    <string name="novidades">Suggestions</string>
     <string name="nome_filme_detalhes">Nom du film:</string>
     <string name="nome_cinema_detalhes">Nom du cinéma:</string>
     <string name="avaliacao_detalhes">Évaluation:</string>
@@ -30,11 +30,22 @@
     <string name="data_de_lancamento_detalhes">Date de sortie:</string>
     <string name="avaliacao_imdb_detalhes">Évaluation IMDB:</string>
     <string name="link_imdb_detalhes">Lien IMDB:</string>
-    <string name="cancelar">Annuler</string>
     <string name="lista_vazia">Liste vide</string>
     <string name="mapa">Carte</string>
     <string name="topFilmes">Les 10 meilleurs films</string>
     <string name="listaVistos">Liste des films vus</string>
     <string name="paraVer">Para Ver</string>
+    <string name="sucesso_registo_filme">Film enregistré avec succès!</string>
+    <string name="camposPorPreencher">Il y a des champs qui doivent être remplis</string>
+    <string name="filmeNaoExiste">Film inexistant</string>
+    <string name="cancelar">Annuler</string>
+    <string name="adicionarFoto">Ajouter une photo</string>
+    <string name="tirarFoto">Prendre une photo</string>
+    <string name="selecionarGaleria">Sélectionner depuis la galerie</string>
+    <string name="mensagemRegistado">Le film %1$s a déjà été enregistré</string>
+    <string name="confirmar">Confirmer</string>
+    <string name="mensagemConfirma">Confirmer que le nom du film est %1$s</string>
+    <string name="pesquisarFilmeVoz">Indique o filme que quer pesquisar</string>
+    <string name="erroVoz">Erro ao reconhecer fala.</string>
 
 </resources>

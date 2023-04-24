@@ -1,20 +1,17 @@
 package com.example.projetofinalpart1
 
-import android.annotation.SuppressLint
+import android.app.Dialog
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.view.Gravity
-import android.view.LayoutInflater.*
+import android.speech.RecognizerIntent
 import android.view.MenuItem
-import android.view.WindowManager
-import android.widget.PopupWindow
-import android.widget.TextView
-
+import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import com.example.projetofinalpart1.databinding.ActivityMainBinding
+import com.example.projetofinalpart1.databinding.DialogLayoutBinding
 import com.example.projetofinalpart1.model.Filme
 
 val listaTodosFilmes = ArrayList<Filme>()
@@ -41,9 +38,26 @@ class MainActivity : AppCompatActivity() {
         super.onStart()
         setSupportActionBar(binding.toolbar)
         setupDrawerMenu()
-        binding.btnToolbar.setOnClickListener {
-            showPopup()
+
+        binding.fabMicrophone.setOnClickListener {
+            var binding1 = DialogLayoutBinding.inflate(layoutInflater)
+            val dialog = Dialog(this)
+            dialog.setContentView(binding1.root)
+            dialog.setCancelable(false)
+
+            object : CountDownTimer(10000, 1000) {
+                override fun onTick(millisUntilFinished: Long) {
+                    binding1.counterTextView.text = (millisUntilFinished / 1000).toString()
+                }
+
+                override fun onFinish() {
+                    dialog.dismiss()
+                }
+            }.start()
+
+            dialog.show()
         }
+
     }
 
     override fun onBackPressed() {
@@ -104,6 +118,15 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        val REQUEST_CODE_SPEECH_INPUT = 100
+        if (requestCode == REQUEST_CODE_SPEECH_INPUT && resultCode == RESULT_OK) {
+            val result = data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
+            // handle the speech recognition result here
+        }
+    }
+
     private fun onClickNavigationItemBottom(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.bottom_dashboard ->
@@ -135,35 +158,6 @@ class MainActivity : AppCompatActivity() {
         return savedInstanceState != null
     }
 
-    @SuppressLint("InflateParams")
-    private fun showPopup() {
-        val inflater = from(this)
-        val popupView = inflater.inflate(R.layout.popup_layout, null)
-
-        val popupWindow = PopupWindow(
-            popupView,
-            WindowManager.LayoutParams.WRAP_CONTENT,
-            WindowManager.LayoutParams.WRAP_CONTENT,
-            true
-        )
-
-        popupWindow.elevation = 10f
-        popupWindow.showAtLocation(binding.root, Gravity.CENTER, 0, 0)
-
-        var count = 9
-        val countDownTimer = object : CountDownTimer(10000, 1000) {
-            override fun onTick(millisUntilFinished: Long) {
-                popupView.findViewById<TextView>(R.id.popup_countdown).text = count.toString()
-                count--
-            }
-
-            override fun onFinish() {
-                popupWindow.dismiss()
-            }
-        }
-        countDownTimer.start()
-    }
-
     private fun introduzirFilmes() {
         val filme1 = Filme(
             "The Shawshank Redemption",
@@ -174,7 +168,7 @@ class MainActivity : AppCompatActivity() {
             arrayListOf(),
             R.drawable.redemption,
             "Drama",
-            "Dois homens presos em uma prisão em 1940s se tornam amigos",
+            "Dois homens presos numa prisão em 1940s se tornam amigos",
             "23/09/1994",
             "9.3",
             "https://www.imdb.com/title/tt0111161/",
