@@ -8,6 +8,7 @@ import android.speech.RecognizerIntent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -46,6 +47,23 @@ class ListFragment : Fragment() {
             layoutManager = LinearLayoutManager(context)
         }
 
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
+            androidx.appcompat.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                val filteredFilmesVistos = listaFilmesVistos.filter { filme ->
+                    filme.nomeFilme.contains(newText ?: "", true)
+
+                }
+                adapter.setData(filteredFilmesVistos)
+
+                return true
+
+            }
+        })
 
         binding.fabMicrophone.setOnClickListener {
             val speechRecognizerIntent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)

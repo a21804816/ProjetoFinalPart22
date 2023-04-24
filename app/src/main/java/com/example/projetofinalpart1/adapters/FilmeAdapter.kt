@@ -40,5 +40,10 @@ class FilmeAdapter(
     }
 
     override fun getItemCount(): Int = items.size
+
+    fun setData(newItems: List<Filme>) {
+        items = newItems
+        notifyDataSetChanged()
+    }
 }
 
