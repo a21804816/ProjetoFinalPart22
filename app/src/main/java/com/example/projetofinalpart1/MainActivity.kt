@@ -93,6 +93,10 @@ class MainActivity : AppCompatActivity() {
                 NavigationManager.goToMapFragment(
                     supportFragmentManager
                 )
+            R.id.para_ver ->
+                NavigationManager.goToParaVerFragment(
+                    supportFragmentManager
+                )
         }
         binding.drawer.closeDrawer(GravityCompat.START)
         return true

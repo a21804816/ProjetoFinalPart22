@@ -37,5 +37,6 @@
     <string name="listaVistos">Lista de filmes vistos</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="paraVer">Para Ver</string>
 
 </resources>

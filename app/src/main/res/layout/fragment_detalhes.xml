@@ -25,22 +25,19 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/voltarButton"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:background="#00000000"
-                    android:drawableBottom="@drawable/baseline_turned_in_not_24"
+                    android:id="@+id/paraVerButton"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/baseline_turned_in_not_24"
                     android:drawableTint="@color/primaryColor"
                     android:elevation="0dp" />
 
                 <Button
-                    android:id="@+id/paraVerButton"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:id="@+id/voltarButton"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_gravity="center"
-
-                    android:background="#00000000"
-                    android:drawableBottom="@drawable/ic_baseline_close_24"
+                    android:background="@drawable/ic_baseline_close_24"
                     android:drawableTint="@color/primaryColor"
                     android:elevation="0dp" />
             </LinearLayout>
