@@ -85,6 +85,7 @@ class DetalhesFragment : Fragment() {
             binding.observacoes.isEnabled = true
 
 
+
             binding.editButton.setBackgroundResource(R.drawable.baseline_check_circle_24)
 
             binding.editButton.setOnClickListener {
