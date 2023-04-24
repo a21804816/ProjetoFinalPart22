@@ -3,9 +3,12 @@ package com.example.projetofinalpart1.fragments
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.DatePickerDialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
 import android.provider.MediaStore
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -15,10 +18,15 @@ import android.widget.DatePicker
 import android.widget.SeekBar
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.projetofinalpart1.R
+import com.example.projetofinalpart1.adapters.TendeciasAdapter
 
 import com.example.projetofinalpart1.databinding.FragmentRegistBinding
 import com.example.projetofinalpart1.model.ObjetoFilme
+import java.io.File
+import java.io.FileOutputStream
+import java.text.SimpleDateFormat
 import java.util.*
 
 class RegistFragment : Fragment() {
@@ -51,7 +59,23 @@ class RegistFragment : Fragment() {
             val filme = ObjetoFilme.registarFilme(nomeFilme, nomeCinema, avaliacao, data, observacoes, fotos)
 
             if (filme) {
-                removerCampos()
+                if(ObjetoFilme.filmesVistos(nomeFilme)){
+                    val builder = AlertDialog.Builder(requireContext())
+                    builder.setMessage("O filme $nomeFilme? já foi registado")
+                        .setPositiveButton("Confirmar", DialogInterface.OnClickListener { dialog, which ->
+                        })
+                    builder.create().show()
+                }else{
+                    val builder = AlertDialog.Builder(requireContext())
+                    builder.setMessage("Confirma que o nome do filme é $nomeFilme?")
+                        .setPositiveButton("Confirmar", DialogInterface.OnClickListener { dialog, which ->
+                            ObjetoFilme.adicionarListaVistos(nomeFilme, nomeCinema, avaliacao, data, observacoes, fotos)
+                            removerCampos()
+                        })
+                        .setNegativeButton("Cancelar", null)
+                    builder.create().show()
+                }
+
             } else {
                 val errorMessage = getString(R.string.erroRegistoFilme)
                 if(!ObjetoFilme.verificarNomeCinema(nomeCinema)){
@@ -70,7 +94,6 @@ class RegistFragment : Fragment() {
                     Toast.makeText(requireContext(), "Estão campos por preencher", Toast.LENGTH_LONG).show()
 
                 }
-
             }
         }
 
@@ -101,6 +124,7 @@ class RegistFragment : Fragment() {
 
 
         binding.dataEditText.setOnClickListener {
+            var hoje= Calendar.getInstance()
             val datePicker = object : DatePickerDialog.OnDateSetListener {
                 override fun onDateSet(view: DatePicker, year: Int, monthOfYear: Int, dayOfMonth: Int) {
                     ObjetoFilme.setCalendario(year, monthOfYear, dayOfMonth)
@@ -114,7 +138,7 @@ class RegistFragment : Fragment() {
                 ObjetoFilme.calendario.get(Calendar.MONTH),
                 ObjetoFilme.calendario.get(Calendar.DAY_OF_MONTH)
             )
-            dialog.datePicker.maxDate = ObjetoFilme.calendario.timeInMillis // set max date to current date
+            dialog.datePicker.maxDate = hoje.timeInMillis
             dialog.show()
             binding.dataEditText.error = null
         }
@@ -156,19 +180,31 @@ class RegistFragment : Fragment() {
         if (resultCode == Activity.RESULT_OK) {
             when (requestCode) {
                 REQUEST_IMAGE_CAPTURE -> {
-                    val imageBitmap = data?.extras?.get("data") as Bitmap
-                    imageList.add(imageBitmap.toString())
-                    binding.fotoImageView.setImageBitmap(imageBitmap)
-
+                    val image = data?.extras?.get("data") as Bitmap
+                    val photoFile = saveImage(image)
+                    imageList.add(photoFile.absolutePath)
+                    binding.fotoImageView.setImageURI(Uri.parse(imageList.last()))
                 }
                 2 -> {
                     val selectedImage = data?.data
-                    val bitmap = MediaStore.Images.Media.getBitmap(requireActivity().contentResolver, selectedImage)
-                    imageList.add(bitmap.toString())
-                    binding.fotoImageView.setImageBitmap(bitmap)
+                    val image = MediaStore.Images.Media.getBitmap(requireActivity().contentResolver, selectedImage)
+                    val photoFile = saveImage(image)
+                    imageList.add(photoFile.absolutePath)
+                    binding.fotoImageView.setImageURI(Uri.parse(imageList.last()))
                 }
             }
         }
+    }
+
+    private fun saveImage(bitmap: Bitmap): File {
+        val timeStamp = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())
+        val imageName = "IMG_$timeStamp.jpg"
+        val directory = requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+        val imageFile = File(directory, imageName)
+        FileOutputStream(imageFile).use { out ->
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out)
+        }
+        return imageFile
     }
 
 
