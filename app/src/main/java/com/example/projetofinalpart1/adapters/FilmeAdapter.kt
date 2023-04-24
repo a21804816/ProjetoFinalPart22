@@ -3,9 +3,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.projetofinalpart1.model.Filme
-
 import com.example.projetofinalpart1.databinding.FilmeItemBinding
+import com.example.projetofinalpart1.model.Filme
 
 class FilmeAdapter(
     private val onClick: (String) -> Unit,

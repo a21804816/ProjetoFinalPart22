@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.projetofinalpart1.databinding.FilmeItemBinding
 import com.example.projetofinalpart1.databinding.TendenciasItemBinding
 import com.example.projetofinalpart1.model.Filme
 

@@ -6,6 +6,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 var listaFilmesVistos = mutableListOf<Filme>()
+var listaFilmesParaVer = mutableListOf<Filme>()
 
 object ObjetoFilme {
 

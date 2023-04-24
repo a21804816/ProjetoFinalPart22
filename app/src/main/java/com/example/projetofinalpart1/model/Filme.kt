@@ -1,7 +1,6 @@
 package com.example.projetofinalpart1.model
 
 import java.util.*
-import kotlin.collections.ArrayList
 
 class Filme(
     var nomeFilme: String,
@@ -17,7 +16,8 @@ class Filme(
     var avaliacaoImdb: String,
     var linkImdb: String,
     var avaliado: Boolean,
-    val uuid: String = UUID.randomUUID().toString()
+    val uuid: String = UUID.randomUUID().toString(),
+    var paraVer: Boolean = false
 
 ) {
     var fotografia: ArrayList<String> = arrayListOf<String>()

@@ -35,5 +35,7 @@
     <string name="mapa">Mapa</string>
     <string name="topFilmes">Top 10 Filmes</string>
     <string name="listaVistos">Lista de filmes vistos</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
