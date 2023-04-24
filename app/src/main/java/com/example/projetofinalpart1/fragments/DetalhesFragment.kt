@@ -42,8 +42,9 @@ class DetalhesFragment : Fragment() {
         }
 
         (binding.voltarButton).setOnClickListener {
-            NavigationManager.goToListFragment(requireActivity().supportFragmentManager)
+            requireActivity().onBackPressed()
         }
+
     }
 
 
