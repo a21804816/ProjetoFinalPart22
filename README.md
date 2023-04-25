@@ -112,6 +112,14 @@ Detalhes Filmes Vistos
 
 
 
+Peço desculpa este print ficou por enviar então mostro apenas hoje apesar de já estar feito na app que enviei no prazo ao professor simplesmente é apenas para mostrar a funcionalidade no readme que ficou esquecido
+
+Aqui esta o detalhe de um filme que tenha sido registado com fotografias
+
+![detalhe com fotos](https://user-images.githubusercontent.com/43844932/234307754-aff860cf-6c84-4aba-86fe-e3923cd5e88c.jpg)
+
+
+
 
 
 	
