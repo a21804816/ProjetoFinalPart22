@@ -25,12 +25,11 @@ class FilmeAdapter(
     override fun onBindViewHolder(holder: FilmeViewHolder, position: Int) {
         val orientation = holder.itemView.context.resources.configuration.orientation
         holder.itemView.setOnClickListener { onClick(items[position].uuid) }
-        holder.binding.nomeFilmeEditText.text = items[position].nomeFilme
-        holder.binding.cinemaEditText.text = items[position].nomeCinema
-        holder.binding.avaliacaoValor.text = items[position].avaliacao
-        holder.binding.dataEditText.text = items[position].dataVisualizacao
-        holder.binding.observacoesEditText.text = items[position].observacoes
-        holder.binding.filmeFotografiaImageView.setImageResource(items[position].imagemCartaz)
+        holder.binding.nomeFilmeEditText.text = items[position].title
+        holder.binding.cinemaEditText.text = items[position].userCinema
+        holder.binding.avaliacaoValor.text = items[position].userRating
+        holder.binding.dataEditText.text = items[position].userDate
+        holder.binding.observacoesEditText.text = items[position].userObservations
         holder.binding.cinemaEditText.visibility =
             if (orientation == Configuration.ORIENTATION_PORTRAIT) View.GONE else View.VISIBLE
         holder.binding.avaliacaoValor.visibility =

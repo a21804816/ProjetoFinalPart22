@@ -18,8 +18,16 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import com.example.projetofinalpart1.R
+import com.example.projetofinalpart1.data.FilmeRepository
+import com.example.projetofinalpart1.data.FilmeRoom
+import com.example.projetofinalpart1.data.MovieDatabase
 import com.example.projetofinalpart1.databinding.FragmentRegistBinding
+import com.example.projetofinalpart1.model.Filme
 import com.example.projetofinalpart1.model.ObjetoFilme
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.io.File
 import java.io.FileOutputStream
 import java.text.SimpleDateFormat
@@ -29,6 +37,8 @@ class RegistFragment : Fragment() {
     private lateinit var binding: FragmentRegistBinding
     private val REQUEST_IMAGE_CAPTURE = 1
     val imageList = ArrayList<String>()
+    private lateinit var objetoFilme: FilmeRoom
+    val repository: ObjetoFilme = FilmeRepository.getInstance()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -43,6 +53,7 @@ class RegistFragment : Fragment() {
     @SuppressLint("QueryPermissionsNeeded")
     override fun onStart() {
         super.onStart()
+        objetoFilme = FilmeRoom(MovieDatabase.getInstance(requireContext()).movieDao())
         binding.nomeFilmeEditText
         binding.registarButton.setOnClickListener {
             val nomeFilme = binding.nomeFilmeEditText.text.toString()
@@ -51,76 +62,29 @@ class RegistFragment : Fragment() {
             val data = binding.dataEditText.text.toString()
             val observacoes = binding.observacoesEditText.text.toString()
             val fotos = imageList
+            val builder = AlertDialog.Builder(requireContext())
 
-            val filme = ObjetoFilme.registarFilme(
-                nomeFilme,
-                nomeCinema,
-                avaliacao,
-                data,
-                observacoes,
-                fotos
-            )
 
-            if (filme) {
-                if (ObjetoFilme.filmesVistos(nomeFilme)) {
-                    val builder = AlertDialog.Builder(requireContext())
-                    builder.setMessage(getString(R.string.mensagemRegistado, nomeFilme))
-                        .setPositiveButton(
-                            getString(R.string.confirmar),
-                            DialogInterface.OnClickListener { dialog, which ->
-                            })
-                    builder.create().show()
-                } else {
-                    val builder = AlertDialog.Builder(requireContext())
-                    builder.setMessage(getString(R.string.mensagemConfirma, nomeFilme))
-                        .setPositiveButton(
-                            getString(R.string.confirmar),
-                            DialogInterface.OnClickListener { dialog, which ->
-                                ObjetoFilme.adicionarListaVistos(
-                                    nomeFilme,
-                                    nomeCinema,
-                                    avaliacao,
-                                    data,
-                                    observacoes,
-                                    fotos
-                                )
+
+                    DialogInterface.OnClickListener { dialog, which ->
+                        CoroutineScope(Dispatchers.IO).launch {
+                            repository.adicionarListaVistos(
+                                nomeFilme,
+                                nomeCinema,
+                                avaliacao,
+                                data,
+                                observacoes,
+                                fotos,
+                                onFinished = {}
+                            )
+                            withContext(Dispatchers.Main) {
                                 removerCampos()
-                            })
-                        .setNegativeButton(getString(R.string.cancelar), null)
-                    builder.create().show()
-                }
+                                // Perform any additional tasks or UI updates here
+                            }
+                        }
+                    }
 
-            } else {
-                val errorMessage = getString(R.string.erroRegistoFilme)
-                if (!ObjetoFilme.verificarNomeCinema(nomeCinema)) {
-                    binding.cinemaEditText.error = errorMessage
-                }
-                if (!ObjetoFilme.verificarData(data)) {
-                    binding.dataEditText.error = errorMessage
-                }
-                if (!ObjetoFilme.verificarNomeFilme(nomeFilme)) {
-                    binding.nomeFilmeEditText.error = errorMessage
-                    Toast.makeText(
-                        requireContext(),
-                        getString(R.string.camposPorPreencher),
-                        Toast.LENGTH_LONG
-                    ).show()
-                } else if (!ObjetoFilme.percorrerFilmes(nomeFilme)) {
-                    binding.nomeFilmeEditText.error = getString(R.string.filmeNaoExiste)
-                    Toast.makeText(
-                        requireContext(),
-                        getString(R.string.filmeNaoExiste),
-                        Toast.LENGTH_LONG
-                    ).show()
-                } else {
-                    Toast.makeText(
-                        requireContext(),
-                        getString(R.string.camposPorPreencher),
-                        Toast.LENGTH_LONG
-                    ).show()
 
-                }
-            }
         }
 
         binding.tirarFotoButton.setOnClickListener {
@@ -163,16 +127,16 @@ class RegistFragment : Fragment() {
                     monthOfYear: Int,
                     dayOfMonth: Int
                 ) {
-                    ObjetoFilme.setCalendario(year, monthOfYear, dayOfMonth)
+                    objetoFilme.setCalendario(year, monthOfYear, dayOfMonth)
                     updateLable()
                 }
             }
             val dialog = DatePickerDialog(
                 requireContext(),
                 datePicker,
-                ObjetoFilme.calendario.get(Calendar.YEAR),
-                ObjetoFilme.calendario.get(Calendar.MONTH),
-                ObjetoFilme.calendario.get(Calendar.DAY_OF_MONTH)
+                objetoFilme.calendario.get(Calendar.YEAR),
+                objetoFilme.calendario.get(Calendar.MONTH),
+                objetoFilme.calendario.get(Calendar.DAY_OF_MONTH)
             )
             dialog.datePicker.maxDate = hoje.timeInMillis
             dialog.show()
@@ -191,8 +155,8 @@ class RegistFragment : Fragment() {
     }
 
     private fun mudarAvaliacao(progress: Int) {
-        ObjetoFilme.alterarAvaliacao(progress)
-        binding.avaliacaoValor.text = ObjetoFilme.avaliacaoFilme
+        objetoFilme.alterarAvaliacao(progress)
+        binding.avaliacaoValor.text = objetoFilme.avaliacaoFilme
     }
 
     private fun removerCampos() {
@@ -201,18 +165,18 @@ class RegistFragment : Fragment() {
             getString(R.string.sucesso_registo_filme),
             Toast.LENGTH_LONG
         ).show()
-        ObjetoFilme.limparCampos();
+        objetoFilme.limparCampos();
 
-        binding.nomeFilmeEditText.setText(ObjetoFilme.nomeFilm)
-        binding.cinemaEditText.setText(ObjetoFilme.cinema)
-        binding.avaliacaoSlider.progress = ObjetoFilme.avaliacaoFilme.toIntOrNull() ?: 0
-        binding.dataEditText.text = ObjetoFilme.data
-        binding.observacoesEditText.setText(ObjetoFilme.observacoesFilme)
+        binding.nomeFilmeEditText.setText(objetoFilme.nomeFilm)
+        binding.cinemaEditText.setText(objetoFilme.cinema)
+        binding.avaliacaoSlider.progress = objetoFilme.avaliacaoFilme.toIntOrNull() ?: 0
+        binding.dataEditText.text = objetoFilme.data
+        binding.observacoesEditText.setText(objetoFilme.observacoesFilme)
         imageList.clear()
     }
 
     private fun updateLable() {
-        binding.dataEditText.text = ObjetoFilme.data
+        binding.dataEditText.text = objetoFilme.data
     }
 
     @Deprecated("Deprecated in Java")

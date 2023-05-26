@@ -54,7 +54,7 @@ class ParaVerFragment : Fragment() {
 
             override fun onQueryTextChange(newText: String?): Boolean {
                 val filteredFilmesVistos = listaFilmesVistos.filter { filme ->
-                    filme.nomeFilme.contains(newText ?: "", true)
+                    filme.title.contains(newText ?: "", true)
 
                 }
                 adapter.setData(filteredFilmesVistos)

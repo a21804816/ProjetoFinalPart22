@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.projetofinalpart1.R
 import com.example.projetofinalpart1.adapters.FotosDetalhesAdapter
+import com.example.projetofinalpart1.data.FilmeRoom
+import com.example.projetofinalpart1.data.MovieDatabase
 import com.example.projetofinalpart1.databinding.FragmentDetalhesBinding
 import com.example.projetofinalpart1.model.Filme
 import com.example.projetofinalpart1.model.ObjetoFilme
@@ -20,6 +22,7 @@ class DetalhesFragment : Fragment() {
     private lateinit var binding: FragmentDetalhesBinding
 
     private var filmeUuid: String? = null
+    private lateinit var objetoFilme: FilmeRoom
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +43,7 @@ class DetalhesFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
+        objetoFilme = FilmeRoom(MovieDatabase.getInstance(requireContext()).movieDao())
         binding.nomeFilme.isEnabled = false
         binding.nomeCinema.isEnabled = false
         binding.avaliacao.isEnabled = false
@@ -47,10 +51,10 @@ class DetalhesFragment : Fragment() {
         binding.observacoes.isEnabled = false
 
         filmeUuid?.let { uuid ->
-            val operation = ObjetoFilme.getOperationById(uuid)
+            val operation = objetoFilme.getOperationById(uuid)
             operation?.let { placeData(it) }
             if (operation != null) {
-                if (operation.paraVer) {
+                if (operation.userToSee) {
                     binding.paraVerButton.setBackgroundResource(R.drawable.baseline_turned_in_24)
                 } else {
                     binding.paraVerButton.setBackgroundResource(R.drawable.baseline_turned_in_not_24)
@@ -63,16 +67,16 @@ class DetalhesFragment : Fragment() {
         }
 
         (binding.paraVerButton).setOnClickListener {
-            val filme = ObjetoFilme.getOperationById(filmeUuid!!)
+            val filme = objetoFilme.getOperationById(filmeUuid!!)
             if (filme != null) {
-                if (filme.paraVer) {
+                if (filme.userToSee) {
                     listaFilmesParaVer.remove(filme)
                     binding.paraVerButton.setBackgroundResource(R.drawable.baseline_turned_in_not_24)
-                    filme.paraVer = false
+                    filme.userToSee = false
                 } else {
                     listaFilmesParaVer.add(filme)
                     binding.paraVerButton.setBackgroundResource(R.drawable.baseline_turned_in_24)
-                    filme.paraVer = true
+                    filme.userToSee = true
                 }
             }
         }
@@ -87,13 +91,13 @@ class DetalhesFragment : Fragment() {
             binding.editButton.setBackgroundResource(R.drawable.baseline_check_circle_24)
 
             binding.editButton.setOnClickListener {
-                val filme = ObjetoFilme.getOperationById(filmeUuid!!)
+                val filme = objetoFilme.getOperationById(filmeUuid!!)
                 if (filme != null) {
-                    filme.nomeFilme = binding.nomeFilme.text.toString()
-                    filme.nomeCinema = binding.nomeCinema.text.toString()
-                    filme.avaliacao = binding.avaliacao.text.toString()
-                    filme.dataVisualizacao = binding.dataVisualizacao.text.toString()
-                    filme.observacoes = binding.observacoes.text.toString()
+                    filme.title = binding.nomeFilme.text.toString()
+                    filme.userCinema = binding.nomeCinema.text.toString()
+                    filme.userRating = binding.avaliacao.text.toString()
+                    filme.userDate = binding.dataVisualizacao.text.toString()
+                    filme.userObservations = binding.observacoes.text.toString()
                 }
 
                 binding.nomeFilme.isEnabled = false
@@ -108,17 +112,17 @@ class DetalhesFragment : Fragment() {
     }
 
     private fun placeData(ui: Filme) {
-        binding.nomeFilme.setText(ui.nomeFilme)
-        binding.genero.text = ui.genero
-        binding.sinopse.text = ui.sinopse
-        binding.dataLancamento.text = ui.dataLancamento
-        binding.avaliacaoImdb.text = ui.avaliacaoImdb
-        binding.linkImdb.text = ui.linkImdb
-        if (ui.avaliado) {
-            binding.nomeCinema.setText(ui.nomeCinema)
-            binding.avaliacao.setText(ui.avaliacao)
-            binding.dataVisualizacao.setText(ui.dataVisualizacao)
-            binding.observacoes.setText(ui.observacoes)
+        binding.nomeFilme.setText(ui.title)
+        binding.genero.text = ui.genre
+        binding.sinopse.text = ui.plot
+        binding.dataLancamento.text = ui.released
+        binding.avaliacaoImdb.text = ui.imdbRating
+        binding.linkImdb.text = ui.imdbID
+        if (ui.userAvaliated) {
+            binding.nomeCinema.setText(ui.userCinema)
+            binding.avaliacao.setText(ui.userRating)
+            binding.dataVisualizacao.setText(ui.userDate)
+            binding.observacoes.setText(ui.userObservations)
         } else {
             binding.nomeCinemaText.visibility = View.GONE
             binding.nomeCinema.visibility = View.GONE
@@ -134,7 +138,7 @@ class DetalhesFragment : Fragment() {
         val layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.fotosLista.layoutManager = layoutManager
-        binding.fotosLista.adapter = FotosDetalhesAdapter(fotos, ui.imagemCartaz)
+        binding.fotosLista.adapter = FotosDetalhesAdapter(fotos, ui.poster)
 
     }
 

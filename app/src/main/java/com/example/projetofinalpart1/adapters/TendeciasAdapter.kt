@@ -27,7 +27,6 @@ class TendeciasAdapter(
 
     override fun onBindViewHolder(holder: TodosViewHolder, position: Int) {
         holder.itemView.setOnClickListener { onClick(items[position].uuid) }
-        holder.movieImage.setImageResource(items[position].imagemCartaz)
     }
 
     override fun getItemCount(): Int = items.size

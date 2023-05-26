@@ -1,33 +1,37 @@
 package com.example.projetofinalpart1.model
 
+import com.example.projetofinalpart1.data.MovieDao
 import java.util.*
 
 class Filme(
-    var nomeFilme: String,
-    var nomeCinema: String,
-    var avaliacao: String,
-    var dataVisualizacao: String,
-    var observacoes: String,
-    var novasFotografias: List<String>,
-    var imagemCartaz: Int,
-    var genero: String,
-    var sinopse: String,
-    var dataLancamento: String,
-    var avaliacaoImdb: String,
-    var linkImdb: String,
-    var avaliado: Boolean,
+    var title: String,
+    var released: String,
+    var runtime: String,
+    var genre: String,
+    var actors: String,
+    var plot: String,
+    var poster: Int,
+    var imdbRating: String,
+    var imdbVotes: String,
+    var imdbID: String,
+    var type: String,
+    var userAvaliated: Boolean,
+    var userPhotos: List<String>,
+    var userObservations:String,
+    var userCinema:String,
+    var userRating:String,
+    var userDate:String,
     val uuid: String = UUID.randomUUID().toString(),
-    var paraVer: Boolean = false
-
+    var userToSee: Boolean = false
 ) {
     var fotografia: ArrayList<String> = arrayListOf<String>()
 
     init {
-        fotografia.addAll(novasFotografias)
+        fotografia.addAll(userPhotos)
     }
 
-    fun substituirFotografias(novasFotografias: List<String>) {
+    fun substituirFotografias(userPhotos: List<String>) {
         this.fotografia.clear()
-        this.fotografia.addAll(novasFotografias)
+        this.fotografia.addAll(userPhotos)
     }
 }

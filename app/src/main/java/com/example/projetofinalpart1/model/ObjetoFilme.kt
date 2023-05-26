@@ -1,6 +1,12 @@
 package com.example.projetofinalpart1.model
 
+import androidx.core.content.ContentProviderCompat.requireContext
+import com.example.projetofinalpart1.data.MovieRoom
 import com.example.projetofinalpart1.listaTodosFilmes
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -8,7 +14,7 @@ import kotlin.collections.ArrayList
 var listaFilmesVistos = mutableListOf<Filme>()
 var listaFilmesParaVer = mutableListOf<Filme>()
 
-object ObjetoFilme {
+abstract class ObjetoFilme {
 
     var nomeFilm: String = ""
         private set
@@ -37,43 +43,11 @@ object ObjetoFilme {
             return false
         }
         for (filmeAdicionar in listaTodosFilmes) {
-            if (filmeAdicionar.nomeFilme == nomeRegisto) {
+            if (filmeAdicionar.title == nomeRegisto) {
                 return true
             }
         }
         return false
-    }
-
-    fun filmesVistos(
-        nomeRegisto: String
-    ): Boolean {
-        for (filmeAdicionar in listaFilmesVistos) {
-            if (filmeAdicionar.nomeFilme == nomeRegisto) {
-                return true
-            }
-        }
-        return false
-    }
-
-    fun verificarNomeFilme(nome: String): Boolean {
-        return nome.isNotBlank()
-    }
-
-    fun percorrerFilmes(nome: String): Boolean {
-        for (filmeAdicionar in listaTodosFilmes) {
-            if (filmeAdicionar.nomeFilme == nome) {
-                return true
-            }
-        }
-        return false
-    }
-
-    fun verificarNomeCinema(nome: String): Boolean {
-        return nome.isNotBlank()
-    }
-
-    fun verificarData(data: String): Boolean {
-        return data.isNotBlank()
     }
 
     fun alterarAvaliacao(progress: Int) {
@@ -105,47 +79,29 @@ object ObjetoFilme {
         return listaTodosFilmes.find { it.uuid == uuid }
     }
 
-    fun editOperation(
-        uuid: String,
-        nomeFilme: String,
-        nomeCinema: String,
-        avaliacao: String,
-        dataVisualizacao: String,
-        observacoes: String,
-        fotos: List<String>
-    ): Boolean {
-        val filme = listaTodosFilmes.find { it.uuid == uuid }
-        if (filme != null) {
-            filme.nomeFilme = nomeFilme
-            filme.nomeCinema = nomeCinema
-            filme.avaliacao = avaliacao
-            filme.dataVisualizacao = dataVisualizacao
-            filme.observacoes = observacoes
-            filme.substituirFotografias(fotos)
-            return true
-        }
-        return false
-    }
-
-
-    fun adicionarListaVistos(
+    open suspend fun adicionarListaVistos(
         nomeFilme: String,
         nomeCinema: String,
         avaliacao: String,
         data: String,
         observacoes: String,
-        fotos: List<String>
+        fotos: List<String>,
+        onFinished: () -> Unit
     ) {
-        for (filmeAdicionar in listaTodosFilmes) {
-            if (filmeAdicionar.nomeFilme == nomeFilme) {
-                filmeAdicionar.nomeCinema = nomeCinema
-                filmeAdicionar.avaliacao = avaliacao
-                filmeAdicionar.dataVisualizacao = data
-                filmeAdicionar.observacoes = observacoes
-                filmeAdicionar.substituirFotografias(fotos)
-                filmeAdicionar.avaliado = true
-                listaFilmesVistos.add(filmeAdicionar)
+        CoroutineScope(Dispatchers.IO).launch {
+            for (filmeAdicionar in listaTodosFilmes) {
+                if (filmeAdicionar.title == nomeFilme) {
+                    filmeAdicionar.userRating = avaliacao
+                    filmeAdicionar.userDate = data
+                    filmeAdicionar.userObservations = observacoes
+                    filmeAdicionar.substituirFotografias(fotos)
+                    filmeAdicionar.userAvaliated = true
+                    listaFilmesVistos.add(filmeAdicionar)
+                    break
+                }
             }
+            // Notify that the operation is finished
+            onFinished()
         }
     }
 

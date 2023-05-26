@@ -17,7 +17,7 @@ import com.example.projetofinalpart1.model.listaFilmesVistos
 
 class DashboardFragment : Fragment() {
     val filmesOrdenados =
-        listaTodosFilmes.sortedByDescending { it.avaliacaoImdb.toDouble() }.take(10)
+        listaTodosFilmes.sortedByDescending { it.imdbRating.toDouble() }.take(10)
     private val adapter = TendeciasAdapter(::onOperationClick, listaTodosFilmes)
     val adapterOrder = TendeciasAdapter(::onOperationClick, filmesOrdenados)
     private val adapterVistos = FilmeAdapter(::onOperationClick, listaFilmesVistos)
