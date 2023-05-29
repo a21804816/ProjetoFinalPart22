@@ -1,5 +1,6 @@
 package com.example.projetofinalpart1.data
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.util.Log
 import com.example.projetofinalpart1.model.ObjetoFilme
@@ -14,7 +15,7 @@ class FilmeRepository(
     private val remote: Search
 ) : ObjetoFilme() {
 
-    override suspend fun adicionarListaVistos(
+    suspend fun addMovies(
         nomeFilme: String,
         nomeCinema: String,
         avaliacao: String,
@@ -23,35 +24,33 @@ class FilmeRepository(
         fotos: List<String>,
         onFinished: () -> Unit
     ) {
-        if (ConnectivityUtil.isOnline(context)) {
-            Log.i("APP", "App is online. Getting characters from the server...")
-            remote.searchMovies(nomeFilme) { movies, error ->
-                if (error != null) {
+        Log.i("APP", "A adicionar Filme...")
+        CoroutineScope(Dispatchers.IO).launch {
+            local.addMovies(
+                nomeFilme,
+                nomeCinema,
+                avaliacao,
+                data,
+                observacoes,
+                fotos,
+                onFinished = onFinished
+            )
+        }
+    }
 
-                } else {
-
-                }
-            }
-        } else {
-            Log.i("APP", "App is offline. Getting characters from the database...")
-            CoroutineScope(Dispatchers.IO).launch {
-                local.adicionarListaVistos(
-                    nomeFilme,
-                    nomeCinema,
-                    avaliacao,
-                    data,
-                    observacoes,
-                    fotos,
-                    onFinished = onFinished
-                )
-                withContext(Dispatchers.Main) {
-                    // Perform any additional tasks or UI updates here
-                }
-            }
+    suspend fun checkIfFilmExist(nomeFilme: String) {
+        var filmExistDb = false
+        CoroutineScope(Dispatchers.IO).launch {
+            filmExistDb = local.checkIfFilmExist(nomeFilme)
+        }
+        if (ConnectivityUtil.isOnline(context) && !filmExistDb ) {
+            Log.i("APP", "App online...")
+            remote.checkIfFilmExist(nomeFilme) { movies, error -> }
         }
     }
 
     companion object {
+        @SuppressLint("StaticFieldLeak")
         private var instance: FilmeRepository? = null
         fun init(local: FilmeRoom, remote: Search, context: Context) {
             synchronized(this) {

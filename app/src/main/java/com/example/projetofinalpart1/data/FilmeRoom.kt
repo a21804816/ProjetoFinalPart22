@@ -6,7 +6,8 @@ import com.example.projetofinalpart1.model.listaFilmesVistos
 import java.util.*
 
 class FilmeRoom(private val dao: MovieDao) : ObjetoFilme() {
-     override suspend fun adicionarListaVistos(
+
+    suspend fun addMovies(
          nomeFilme: String,
          nomeCinema: String,
          avaliacao: String,
@@ -15,8 +16,13 @@ class FilmeRoom(private val dao: MovieDao) : ObjetoFilme() {
          fotos: List<String>,
          onFinished: () -> Unit
      ) {
-         super.adicionarListaVistos(nomeFilme, nomeCinema, avaliacao, data, observacoes, fotos,onFinished = {})
          val film = MovieRoom(titulo = nomeFilme, cinema = nomeCinema, timestamp = data)
          dao.insert(film)
     }
+
+    suspend fun checkIfFilmExist(nomeFilme: String): Boolean {
+        val movies = dao.countMoviesWithTitle(nomeFilme)
+        return movies > 0
+    }
+
 }

@@ -15,7 +15,7 @@ class Search(
     private val client: OkHttpClient
 ) {
 
-    fun searchMovies(query: String, callback: (List<Movie>?, Throwable?) -> Unit) {
+    fun checkIfFilmExist(query: String, callback: (Movie?, Throwable?) -> Unit) {
         val url = "$baseUrl/?apikey=$apiKey&s=$query"
 
         val request = Request.Builder()
@@ -32,11 +32,10 @@ class Search(
                     callback(null, IOException("Unexpected code ${response.code}"))
                 } else {
                     val body = response.body?.string()
+                    var movie=Movie("","","","")
                     if (body != null) {
                         val jsonObject = JSONObject(body)
                         val searchResult = jsonObject.optJSONArray("Search")
-                        val movies = mutableListOf<Movie>()
-
                         searchResult?.let { jsonArray ->
                             for (i in 0 until jsonArray.length()) {
                                 val movieObject = jsonArray.getJSONObject(i)
@@ -45,11 +44,10 @@ class Search(
                                 val imdbId = movieObject.optString("imdbID")
                                 val posterUrl = movieObject.optString("Poster")
 
-                                val movie = Movie(title, year, imdbId, posterUrl)
-                                movies.add(movie)
+                                movie = Movie(title, year, imdbId, posterUrl)
                             }
                         }
-                        callback(movies, null)
+                        callback(movie, null)
                     } else {
                         callback(null, IOException("Empty response body"))
                     }

@@ -79,30 +79,5 @@ abstract class ObjetoFilme {
         return listaTodosFilmes.find { it.uuid == uuid }
     }
 
-    open suspend fun adicionarListaVistos(
-        nomeFilme: String,
-        nomeCinema: String,
-        avaliacao: String,
-        data: String,
-        observacoes: String,
-        fotos: List<String>,
-        onFinished: () -> Unit
-    ) {
-        CoroutineScope(Dispatchers.IO).launch {
-            for (filmeAdicionar in listaTodosFilmes) {
-                if (filmeAdicionar.title == nomeFilme) {
-                    filmeAdicionar.userRating = avaliacao
-                    filmeAdicionar.userDate = data
-                    filmeAdicionar.userObservations = observacoes
-                    filmeAdicionar.substituirFotografias(fotos)
-                    filmeAdicionar.userAvaliated = true
-                    listaFilmesVistos.add(filmeAdicionar)
-                    break
-                }
-            }
-            // Notify that the operation is finished
-            onFinished()
-        }
-    }
 
 }

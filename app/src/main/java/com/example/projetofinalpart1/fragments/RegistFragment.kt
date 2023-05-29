@@ -22,8 +22,6 @@ import com.example.projetofinalpart1.data.FilmeRepository
 import com.example.projetofinalpart1.data.FilmeRoom
 import com.example.projetofinalpart1.data.MovieDatabase
 import com.example.projetofinalpart1.databinding.FragmentRegistBinding
-import com.example.projetofinalpart1.model.Filme
-import com.example.projetofinalpart1.model.ObjetoFilme
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -38,7 +36,7 @@ class RegistFragment : Fragment() {
     private val REQUEST_IMAGE_CAPTURE = 1
     val imageList = ArrayList<String>()
     private lateinit var objetoFilme: FilmeRoom
-    val repository: ObjetoFilme = FilmeRepository.getInstance()
+    val repository = FilmeRepository.getInstance()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -62,27 +60,26 @@ class RegistFragment : Fragment() {
             val data = binding.dataEditText.text.toString()
             val observacoes = binding.observacoesEditText.text.toString()
             val fotos = imageList
-            val builder = AlertDialog.Builder(requireContext())
 
+            DialogInterface.OnClickListener { dialog, which ->
+                CoroutineScope(Dispatchers.IO).launch {
+                    repository.checkIfFilmExist(nomeFilme);
+                }
+            }
 
-
-                    DialogInterface.OnClickListener { dialog, which ->
-                        CoroutineScope(Dispatchers.IO).launch {
-                            repository.adicionarListaVistos(
-                                nomeFilme,
-                                nomeCinema,
-                                avaliacao,
-                                data,
-                                observacoes,
-                                fotos,
-                                onFinished = {}
-                            )
-                            withContext(Dispatchers.Main) {
-                                removerCampos()
-                                // Perform any additional tasks or UI updates here
-                            }
-                        }
-                    }
+            DialogInterface.OnClickListener { dialog, which ->
+                CoroutineScope(Dispatchers.IO).launch {
+                    repository.addMovies(
+                        nomeFilme,
+                        nomeCinema,
+                        avaliacao,
+                        data,
+                        observacoes,
+                        fotos,
+                        onFinished = {}
+                    )
+                }
+            }
 
 
         }
