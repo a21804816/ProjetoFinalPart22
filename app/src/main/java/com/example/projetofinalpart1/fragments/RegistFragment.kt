@@ -50,7 +50,7 @@ class RegistFragment : Fragment() {
         return binding.root
     }
 
-    @SuppressLint("QueryPermissionsNeeded")
+    @SuppressLint("QueryPermissionsNeeded", "SuspiciousIndentation")
     override fun onStart() {
         super.onStart()
         objetoFilme = FilmeRoom(MovieDatabase.getInstance(requireContext()).movieDao())
