@@ -3,7 +3,6 @@ package com.example.projetofinalpart1.fragments
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.DatePickerDialog
-import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
@@ -25,7 +24,6 @@ import com.example.projetofinalpart1.databinding.FragmentRegistBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import java.io.File
 import java.io.FileOutputStream
 import java.text.SimpleDateFormat
@@ -61,32 +59,21 @@ class RegistFragment : Fragment() {
             val observacoes = binding.observacoesEditText.text.toString()
             val fotos = imageList
 
-            val checkIfFilmExistDialog = DialogInterface.OnClickListener { dialog, which ->
-                CoroutineScope(Dispatchers.IO).launch {
-                    repository.checkIfFilmExist(nomeFilme);
-                }
-            }
-            AlertDialog.Builder(requireContext())
-                .setTitle("Check If Film Exist")
-                .setMessage("Are you sure you want to check if the film exists?")
-                .setPositiveButton("Yes", checkIfFilmExistDialog)
-                .setNegativeButton("No", null)
-                .show()
-
-            DialogInterface.OnClickListener { dialog, which ->
-                CoroutineScope(Dispatchers.IO).launch {
-                    repository.addMovies(
-                        nomeFilme,
-                        nomeCinema,
-                        avaliacao,
-                        data,
-                        observacoes,
-                        fotos,
-                        onFinished = {}
-                    )
-                }
+            CoroutineScope(Dispatchers.IO).launch {
+                repository.checkIfFilmExist(nomeFilme)
             }
 
+            CoroutineScope(Dispatchers.IO).launch {
+                repository.addMovies(
+                    nomeFilme,
+                    nomeCinema,
+                    avaliacao,
+                    data,
+                    observacoes,
+                    fotos,
+                    onFinished = {}
+                )
+            }
 
         }
 
