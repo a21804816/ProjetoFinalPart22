@@ -24,6 +24,7 @@ import com.example.projetofinalpart1.databinding.FragmentRegistBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import org.json.JSONObject
 import java.io.File
 import java.io.FileOutputStream
 import java.text.SimpleDateFormat
@@ -74,6 +75,11 @@ class RegistFragment : Fragment() {
                     onFinished = {}
                 )
             }
+            val errorMessage = getString(R.string.erroRegistoFilme)
+            if (!verificarNomeCinema(nomeCinema)) {
+            binding.cinemaEditText.error = errorMessage
+            Toast.makeText(requireContext(), "Nome de cinema inválido", Toast.LENGTH_SHORT).show()
+        }
 
         }
 
@@ -202,6 +208,36 @@ class RegistFragment : Fragment() {
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out)
         }
         return imageFile
+    }
+    private fun readCinemasFromJson(): List<String> {
+        val cinemas = mutableListOf<String>()
+
+        try {
+            val inputStream = requireContext().assets.open("cinemas.json")
+            val size = inputStream.available()
+            val buffer = ByteArray(size)
+            inputStream.read(buffer)
+            inputStream.close()
+
+            val json = String(buffer, Charsets.UTF_8)
+            val jsonObject = JSONObject(json)
+            val cinemasArray = jsonObject.getJSONArray("cinemas")
+
+            for (i in 0 until cinemasArray.length()) {
+                val cinemaObject = cinemasArray.getJSONObject(i)
+                val cinemaName = cinemaObject.getString("cinema_name")
+                cinemas.add(cinemaName)
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+        return cinemas
+    }
+
+    fun verificarNomeCinema(nome: String): Boolean {
+        val cinemas = readCinemasFromJson()
+        return cinemas.contains(nome)
     }
 
 
