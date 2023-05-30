@@ -38,16 +38,22 @@ class FilmeRepository(
         }
     }
 
-    fun checkIfFilmExist(nomeFilme: String) {
+    suspend fun checkIfFilmExist(nomeFilme: String) {
         var filmExistDb = false
         Log.i("APP", "ESTOU AQUI")
-        CoroutineScope(Dispatchers.IO).launch {
+        withContext(Dispatchers.IO) {
             filmExistDb = local.checkIfFilmExist(nomeFilme)
+        }
+        if (filmExistDb){
+
+            Log.i("APP", "EXISTE NA BD")
         }
         if (ConnectivityUtil.isOnline(context) && !filmExistDb ) {
             Log.i("APP", "App online...")
             remote.checkIfFilmExist(nomeFilme) { movies, error -> }
         }
+
+
     }
 
     companion object {

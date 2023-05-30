@@ -1,5 +1,6 @@
 package com.example.projetofinalpart1.data
 
+import android.util.Log
 import com.example.projetofinalpart1.model.Movie
 import okhttp3.Call
 import okhttp3.Callback
@@ -24,12 +25,15 @@ class Search(
 
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
+                Log.i("APP", "null on failure")
                 callback(null, e)
             }
 
             override fun onResponse(call: Call, response: Response) {
                 if (!response.isSuccessful) {
+                    Log.i("APP", " null exception")
                     callback(null, IOException("Unexpected code ${response.code}"))
+
                 } else {
                     val body = response.body?.string()
                     var movie=Movie("","","","")
@@ -43,12 +47,16 @@ class Search(
                                 val year = movieObject.optString("Year")
                                 val imdbId = movieObject.optString("imdbID")
                                 val posterUrl = movieObject.optString("Poster")
-
-                                movie = Movie(title, year, imdbId, posterUrl)
+                                if (title.equals(query, ignoreCase = true)) {
+                                    movie = Movie(title, year, imdbId, posterUrl)
+                                    Log.i("APP", " $movie")
+                                    callback(movie, null)
+                                    break
+                                }
                             }
                         }
-                        callback(movie, null)
                     } else {
+                        Log.i("APP", " empty")
                         callback(null, IOException("Empty response body"))
                     }
                 }
