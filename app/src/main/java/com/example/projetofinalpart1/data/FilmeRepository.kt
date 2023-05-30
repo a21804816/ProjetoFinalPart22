@@ -38,8 +38,9 @@ class FilmeRepository(
         }
     }
 
-    suspend fun checkIfFilmExist(nomeFilme: String) {
+    fun checkIfFilmExist(nomeFilme: String) {
         var filmExistDb = false
+        Log.i("APP", "ESTOU AQUI")
         CoroutineScope(Dispatchers.IO).launch {
             filmExistDb = local.checkIfFilmExist(nomeFilme)
         }

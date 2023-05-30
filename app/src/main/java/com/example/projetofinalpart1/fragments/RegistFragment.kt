@@ -61,11 +61,17 @@ class RegistFragment : Fragment() {
             val observacoes = binding.observacoesEditText.text.toString()
             val fotos = imageList
 
-            DialogInterface.OnClickListener { dialog, which ->
+            val checkIfFilmExistDialog = DialogInterface.OnClickListener { dialog, which ->
                 CoroutineScope(Dispatchers.IO).launch {
                     repository.checkIfFilmExist(nomeFilme);
                 }
             }
+            AlertDialog.Builder(requireContext())
+                .setTitle("Check If Film Exist")
+                .setMessage("Are you sure you want to check if the film exists?")
+                .setPositiveButton("Yes", checkIfFilmExistDialog)
+                .setNegativeButton("No", null)
+                .show()
 
             DialogInterface.OnClickListener { dialog, which ->
                 CoroutineScope(Dispatchers.IO).launch {
