@@ -1,12 +1,6 @@
 package com.example.projetofinalpart1.model
 
-import androidx.core.content.ContentProviderCompat.requireContext
-import com.example.projetofinalpart1.data.MovieRoom
 import com.example.projetofinalpart1.listaTodosFilmes
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList

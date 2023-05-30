@@ -9,10 +9,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.projetofinalpart1.R
 import com.example.projetofinalpart1.adapters.FotosDetalhesAdapter
 import com.example.projetofinalpart1.data.FilmeRoom
-import com.example.projetofinalpart1.data.MovieDatabase
+import com.example.projetofinalpart1.data.FilmsDatabase
 import com.example.projetofinalpart1.databinding.FragmentDetalhesBinding
 import com.example.projetofinalpart1.model.Filme
-import com.example.projetofinalpart1.model.ObjetoFilme
 import com.example.projetofinalpart1.model.listaFilmesParaVer
 
 private const val ARG_FILME_UUID = "ARG_FILME_UUID"
@@ -43,7 +42,7 @@ class DetalhesFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        objetoFilme = FilmeRoom(MovieDatabase.getInstance(requireContext()).movieDao())
+        objetoFilme = FilmeRoom(FilmsDatabase.getInstance(requireContext()).filmDao())
         binding.nomeFilme.isEnabled = false
         binding.nomeCinema.isEnabled = false
         binding.avaliacao.isEnabled = false

@@ -6,12 +6,12 @@ import androidx.room.Insert
 import androidx.room.Query
 
 @Dao
-interface MovieDao {
+interface FilmDao {
 
     @Insert
-    fun insert(filme: MovieRoom)
+    fun insert(filme: TableRoom)
 
-    @Query("SELECT COUNT(*) FROM FilmesVistos WHERE titulo = :movieTitle")
+    @Query("SELECT COUNT(*) FROM WatchedFilms WHERE title = :movieTitle")
     fun countMoviesWithTitle(movieTitle: String): Int
 
 }

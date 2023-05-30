@@ -7,7 +7,7 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.projetofinalpart1.databinding.FotosDetalhesItemBinding
 
-class FotosDetalhesAdapter(val fotos: List<String>, val imagemCartaz: Int) :
+class FotosDetalhesAdapter(val fotos: List<String>, val imagemCartaz: String) :
     RecyclerView.Adapter<FotosDetalhesAdapter.FotosViewHolder>() {
     inner class FotosViewHolder(binding: FotosDetalhesItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -22,7 +22,6 @@ class FotosDetalhesAdapter(val fotos: List<String>, val imagemCartaz: Int) :
 
     override fun onBindViewHolder(holder: FotosViewHolder, position: Int) {
         if (position == 0) {
-            holder.images.setImageResource(imagemCartaz)
         } else {
             holder.images.setImageURI(Uri.parse(fotos[position - 1]))
         }

@@ -19,7 +19,7 @@ import androidx.fragment.app.Fragment
 import com.example.projetofinalpart1.R
 import com.example.projetofinalpart1.data.FilmeRepository
 import com.example.projetofinalpart1.data.FilmeRoom
-import com.example.projetofinalpart1.data.MovieDatabase
+import com.example.projetofinalpart1.data.FilmsDatabase
 import com.example.projetofinalpart1.databinding.FragmentRegistBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -50,7 +50,7 @@ class RegistFragment : Fragment() {
     @SuppressLint("QueryPermissionsNeeded", "SuspiciousIndentation")
     override fun onStart() {
         super.onStart()
-        objetoFilme = FilmeRoom(MovieDatabase.getInstance(requireContext()).movieDao())
+        objetoFilme = FilmeRoom(FilmsDatabase.getInstance(requireContext()).filmDao())
         binding.nomeFilmeEditText
         binding.registarButton.setOnClickListener {
             val nomeFilme = binding.nomeFilmeEditText.text.toString()
@@ -61,20 +61,9 @@ class RegistFragment : Fragment() {
             val fotos = imageList
 
             CoroutineScope(Dispatchers.IO).launch {
-                repository.checkIfFilmExist(nomeFilme)
+                repository.checkIfFilmExist(nomeFilme,nomeCinema,avaliacao,data,observacoes,fotos)
             }
 
-            CoroutineScope(Dispatchers.IO).launch {
-                repository.addMovies(
-                    nomeFilme,
-                    nomeCinema,
-                    avaliacao,
-                    data,
-                    observacoes,
-                    fotos,
-                    onFinished = {}
-                )
-            }
             val errorMessage = getString(R.string.erroRegistoFilme)
             if (!verificarNomeCinema(nomeCinema)) {
             binding.cinemaEditText.error = errorMessage

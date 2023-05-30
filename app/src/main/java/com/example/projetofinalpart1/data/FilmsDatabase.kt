@@ -4,30 +4,28 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.projetofinalpart1.data.MovieDao
-import com.example.projetofinalpart1.data.MovieRoom
 
-@Database(entities = [MovieRoom::class], version = 2)
-abstract class MovieDatabase : RoomDatabase() {
+@Database(entities = [TableRoom::class], version = 1)
+abstract class FilmsDatabase : RoomDatabase() {
 
-    abstract fun movieDao(): MovieDao
+    abstract fun filmDao(): FilmDao
 
     companion object {
 
-        private var instance: MovieDatabase? = null
+        private var instance: FilmsDatabase? = null
 
-        fun getInstance(context: Context): MovieDatabase {
+        fun getInstance(context: Context): FilmsDatabase {
             synchronized(this) {
                 if (instance == null) {
                     instance = Room.databaseBuilder(
                         context,
-                        MovieDatabase::class.java,
-                        "teste"
+                        FilmsDatabase::class.java,
+                        "db_films"
                     )
                         .fallbackToDestructiveMigration()
                         .build()
                 }
-                return instance as MovieDatabase
+                return instance as FilmsDatabase
             }
         }
     }
