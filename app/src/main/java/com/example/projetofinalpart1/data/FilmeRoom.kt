@@ -23,7 +23,6 @@ class FilmeRoom(private val dao: FilmDao) : ObjetoFilme() {
         userRating: String,
         userDate: String,
         userToSee: Boolean,
-        onFinished: () -> Unit,
     ) {
         val film = TableRoom(
             title = title, released = released, runtime = runtime,
@@ -35,9 +34,9 @@ class FilmeRoom(private val dao: FilmDao) : ObjetoFilme() {
         dao.insert(film)
     }
 
-    suspend fun checkIfFilmExist(nomeFilme: String): Boolean {
+    suspend fun checkIfFilmExist(nomeFilme: String, onFinished: (Boolean) -> Unit) {
         val movies = dao.countMoviesWithTitle(nomeFilme)
-        return movies > 0
+        onFinished(movies > 0)
     }
 
 }

@@ -3,6 +3,7 @@ package com.example.projetofinalpart1.fragments
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.DatePickerDialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
@@ -24,7 +25,6 @@ import com.example.projetofinalpart1.databinding.FragmentRegistBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import org.json.JSONObject
 import java.io.File
 import java.io.FileOutputStream
 import java.text.SimpleDateFormat
@@ -60,15 +60,57 @@ class RegistFragment : Fragment() {
             val observacoes = binding.observacoesEditText.text.toString()
             val fotos = imageList
 
-            CoroutineScope(Dispatchers.IO).launch {
-                repository.checkIfFilmExist(nomeFilme,nomeCinema,avaliacao,data,observacoes,fotos)
-            }
+            val filme = objetoFilme.verificarCampos(nomeFilme, nomeCinema, data)
 
-            val errorMessage = getString(R.string.erroRegistoFilme)
-            if (!verificarNomeCinema(nomeCinema)) {
-            binding.cinemaEditText.error = errorMessage
-            Toast.makeText(requireContext(), "Nome de cinema inválido", Toast.LENGTH_SHORT).show()
-        }
+            if (filme) {
+                val errorMessage = getString(R.string.erroRegistoFilme)
+                if (objetoFilme.verificarNomeCinemaVazio(nomeCinema)) {
+                    binding.cinemaEditText.error = errorMessage
+                }
+                if (objetoFilme.verificarDataVazio(data)) {
+                    binding.dataEditText.error = errorMessage
+                }
+                if (objetoFilme.verificarNomeFilmeVazio(nomeFilme)) {
+                    binding.nomeFilmeEditText.error = errorMessage
+                }
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.camposPorPreencher),
+                    Toast.LENGTH_LONG
+                ).show()
+            } else {
+                val errorMessage = "cinema não existe"
+                if (!objetoFilme.verificarCinemaExiste(nomeCinema, context)) {
+                    binding.cinemaEditText.error = errorMessage
+                } else {
+                    AlertDialog.Builder(requireContext())
+                        .setTitle("Confirm Film Addition")
+                        .setMessage("Are you sure you want to add $nomeFilme?")
+                        .setPositiveButton("Yes") { dialog, _ ->
+                            CoroutineScope(Dispatchers.IO).launch {
+                                repository.checkIfFilmExist(nomeFilme, nomeCinema, avaliacao, data, observacoes, fotos, onFinished = {
+                                    added, msg ->
+                                    if(added){
+                                        Toast.makeText(
+                                            requireContext(),
+                                            msg,
+                                            Toast.LENGTH_LONG
+                                        ).show()
+                                    }else{
+                                        Toast.makeText(
+                                            requireContext(),
+                                            msg,
+                                            Toast.LENGTH_LONG
+                                        ).show()
+                                    }
+                                })
+                            }
+                            dialog.dismiss()
+                        }
+                        .setNegativeButton("No", null)
+                        .show()
+                }
+            }
 
         }
 
@@ -197,36 +239,6 @@ class RegistFragment : Fragment() {
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out)
         }
         return imageFile
-    }
-    private fun readCinemasFromJson(): List<String> {
-        val cinemas = mutableListOf<String>()
-
-        try {
-            val inputStream = requireContext().assets.open("cinemas.json")
-            val size = inputStream.available()
-            val buffer = ByteArray(size)
-            inputStream.read(buffer)
-            inputStream.close()
-
-            val json = String(buffer, Charsets.UTF_8)
-            val jsonObject = JSONObject(json)
-            val cinemasArray = jsonObject.getJSONArray("cinemas")
-
-            for (i in 0 until cinemasArray.length()) {
-                val cinemaObject = cinemasArray.getJSONObject(i)
-                val cinemaName = cinemaObject.getString("cinema_name")
-                cinemas.add(cinemaName)
-            }
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-
-        return cinemas
-    }
-
-    fun verificarNomeCinema(nome: String): Boolean {
-        val cinemas = readCinemasFromJson()
-        return cinemas.contains(nome)
     }
 
 

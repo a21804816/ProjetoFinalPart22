@@ -1,6 +1,7 @@
 package com.example.projetofinalpart1.fragments
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -21,11 +22,12 @@ import com.google.android.gms.maps.LocationSource.OnLocationChangedListener
 
 
 
-class MapFragment : Fragment(){
+class MapFragment : Fragment() {
 
     private lateinit var binding: FragmentMapBinding
     private var map: GoogleMap? = null
 
+    private val LOCATION_PERMISSION_REQUEST_CODE = 100
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -36,12 +38,24 @@ class MapFragment : Fragment(){
         binding.map.getMapAsync { googleMap ->
             map = googleMap
 
+            if (ContextCompat.checkSelfPermission(
+                    requireContext(),
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                ) == PackageManager.PERMISSION_GRANTED
+            ) {
                 map?.isMyLocationEnabled = true
                 map?.addMarker(
                     MarkerOptions()
                         .position(LatLng(38.75814, -9.15179))
                         .title("ULHT")
                 )
+            } else {
+                ActivityCompat.requestPermissions(
+                    requireActivity(),
+                    arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                    LOCATION_PERMISSION_REQUEST_CODE
+                )
+            }
         }
         return binding.root
     }
@@ -49,5 +63,21 @@ class MapFragment : Fragment(){
     override fun onResume() {
         super.onResume()
         binding.map.onResume()
+    }
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        if (requestCode == LOCATION_PERMISSION_REQUEST_CODE) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                map?.isMyLocationEnabled = true
+                map?.addMarker(
+                    MarkerOptions()
+                        .position(LatLng(38.75814, -9.15179))
+                        .title("ULHT")
+                )
+            }
+        }
     }
 }

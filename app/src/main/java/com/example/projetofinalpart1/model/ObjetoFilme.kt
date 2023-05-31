@@ -1,9 +1,10 @@
 package com.example.projetofinalpart1.model
 
+import android.content.Context
 import com.example.projetofinalpart1.listaTodosFilmes
+import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 
 var listaFilmesVistos = mutableListOf<Filme>()
 var listaFilmesParaVer = mutableListOf<Filme>()
@@ -24,28 +25,62 @@ abstract class ObjetoFilme {
 
     var calendario = Calendar.getInstance()
 
-    fun registarFilme(
+    fun verificarCampos(
         nomeRegisto: String,
         cinemaRegisto: String,
-        avaliacaoRegisto: String,
-        dataRegisto: String,
-        observacoesRegisto: String,
-        fotografiaRegisto: ArrayList<String>
-
+        dataRegisto: String
     ): Boolean {
         if (nomeRegisto.isBlank() || cinemaRegisto.isBlank() || dataRegisto.isBlank()) {
-            return false
-        }
-        for (filmeAdicionar in listaTodosFilmes) {
-            if (filmeAdicionar.title == nomeRegisto) {
-                return true
-            }
+            return true
         }
         return false
     }
 
+    fun verificarNomeFilmeVazio(nome: String): Boolean {
+        return nome.isBlank()
+    }
+
+    fun verificarNomeCinemaVazio(nome: String): Boolean {
+        return nome.isBlank()
+    }
+
+    fun verificarDataVazio(data: String): Boolean {
+        return data.isBlank()
+    }
+
     fun alterarAvaliacao(progress: Int) {
         avaliacaoFilme = progress.toString()
+    }
+
+    private fun readCinemasFromJson(context: Context?): List<String> {
+        val cinemas = mutableListOf<String>()
+
+        try {
+            val inputStream = context?.assets?.open("cinemas.json")
+            val size = inputStream?.available()
+            val buffer = ByteArray(size!!)
+            inputStream.read(buffer)
+            inputStream.close()
+
+            val json = String(buffer, Charsets.UTF_8)
+            val jsonObject = JSONObject(json)
+            val cinemasArray = jsonObject.getJSONArray("cinemas")
+
+            for (i in 0 until cinemasArray.length()) {
+                val cinemaObject = cinemasArray.getJSONObject(i)
+                val cinemaName = cinemaObject.getString("cinema_name")
+                cinemas.add(cinemaName)
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+        return cinemas
+    }
+
+    fun verificarCinemaExiste(nome: String, context: Context?): Boolean {
+        val cinemas = readCinemasFromJson(context)
+        return cinemas.contains(nome)
     }
 
     fun limparCampos() {
@@ -72,6 +107,5 @@ abstract class ObjetoFilme {
     fun getOperationById(uuid: String): Filme? {
         return listaTodosFilmes.find { it.uuid == uuid }
     }
-
 
 }
