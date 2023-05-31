@@ -73,7 +73,7 @@ class FilmeRepository(
     ) {
         withContext(Dispatchers.IO) {
              local.checkIfFilmExist(nomeFilme) {
-                if (!it){
+                if (it){
                     Log.i("APP", "Existe na DB")
                     onFinished(false,"Filme existe na bd")
                 }else if (ConnectivityUtil.isOnline(context)) {

@@ -89,18 +89,8 @@ class RegistFragment : Fragment() {
                             CoroutineScope(Dispatchers.IO).launch {
                                 repository.checkIfFilmExist(nomeFilme, nomeCinema, avaliacao, data, observacoes, fotos, onFinished = {
                                     added, msg ->
-                                    if(added){
-                                        Toast.makeText(
-                                            requireContext(),
-                                            msg,
-                                            Toast.LENGTH_LONG
-                                        ).show()
-                                    }else{
-                                        Toast.makeText(
-                                            requireContext(),
-                                            msg,
-                                            Toast.LENGTH_LONG
-                                        ).show()
+                                    requireActivity().runOnUiThread {
+                                        Toast.makeText(requireContext(), msg, Toast.LENGTH_LONG).show()
                                     }
                                 })
                             }
