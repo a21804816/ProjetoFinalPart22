@@ -14,14 +14,19 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.projetofinalpart1.NavigationManager
 import com.example.projetofinalpart1.R
+import com.example.projetofinalpart1.data.FilmeRepository
 import com.example.projetofinalpart1.databinding.FragmentListBinding
 import com.example.projetofinalpart1.model.listaFilmesParaVer
 import com.example.projetofinalpart1.model.listaFilmesVistos
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class ParaVerFragment : Fragment() {
     private val adapter = FilmeAdapter(::onOperationClick, listaFilmesParaVer)
     private lateinit var binding: FragmentListBinding
     private val REQUEST_CODE_SPEECH_INPUT = 100
+    val repository = FilmeRepository.getInstance()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -34,16 +39,16 @@ class ParaVerFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
-
-        if (listaFilmesParaVer.isEmpty()) {
-            binding.textEmptyList!!.visibility = View.VISIBLE
-        } else {
-            binding.textEmptyList!!.visibility = View.GONE
-        }
         binding.recyclerView.adapter = adapter
-        binding.recyclerView.apply {
-            this.adapter = adapter
-            layoutManager = LinearLayoutManager(context)
+
+        CoroutineScope(Dispatchers.IO).launch {
+            repository.getFilmToSeeList { result ->
+                if(result.isSuccess) {
+                    CoroutineScope(Dispatchers.Main).launch {
+                        adapter.setData(result.getOrDefault(mutableListOf()))
+                    }
+                }
+            }
         }
 
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener,

@@ -11,17 +11,19 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.projetofinalpart1.NavigationManager
 import com.example.projetofinalpart1.R
 import com.example.projetofinalpart1.adapters.TendeciasAdapter
+import com.example.projetofinalpart1.data.FilmeRepository
 import com.example.projetofinalpart1.databinding.FragmentDashboardBinding
 import com.example.projetofinalpart1.listaTodosFilmes
 import com.example.projetofinalpart1.model.listaFilmesVistos
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class DashboardFragment : Fragment() {
-    val filmesOrdenados =
-        listaTodosFilmes.sortedByDescending { it.imdbRating.toDouble() }.take(10)
+    val filmesOrdenados = listaTodosFilmes.sortedByDescending { it.imdbRating.toDouble() }.take(10)
     private val adapter = TendeciasAdapter(::onOperationClick, listaTodosFilmes)
     val adapterOrder = TendeciasAdapter(::onOperationClick, filmesOrdenados)
-    private val adapterVistos = FilmeAdapter(::onOperationClick, listaFilmesVistos)
-
+    val repository = FilmeRepository.getInstance()
 
     private lateinit var binding: FragmentDashboardBinding
 
@@ -38,34 +40,41 @@ class DashboardFragment : Fragment() {
     @SuppressLint("SetTextI18n")
     override fun onStart() {
         super.onStart()
-        binding.moviesList.layoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        binding.moviesList.adapter = adapter
-        binding.moviesList.apply {
-            this.adapter = adapter
-            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+
+        CoroutineScope(Dispatchers.IO).launch {
+            repository.getFilmList { result ->
+                if(result.isSuccess) {
+                    CoroutineScope(Dispatchers.Main).launch {
+                        adapter.setData(result.getOrDefault(mutableListOf()))
+                        binding.moviesList.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+                        binding.moviesList.adapter = adapter
+                        binding.moviesList.apply {
+                            this.adapter = adapter
+                            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+                        }
+                    }
+                }
+            }
         }
 
-        if (listaFilmesVistos.isEmpty()) {
-            binding.texto2.text = getString(R.string.topFilmes)
-            binding.vistosMoviesList.visibility = View.GONE
-            binding.orderMoviesList.layoutManager =
-                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-            binding.orderMoviesList.adapter = adapterOrder
-            binding.orderMoviesList.apply {
-                this.adapter = adapter
-                layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-            }
-        } else {
-            binding.texto2.text = getString(R.string.listaVistos)
-            binding.orderMoviesList.visibility = View.GONE
-            binding.vistosMoviesList.layoutManager = LinearLayoutManager(requireContext())
-            binding.vistosMoviesList.adapter = adapterVistos
-            binding.vistosMoviesList.apply {
-                this.adapter = adapter
-                layoutManager = LinearLayoutManager(context)
+        CoroutineScope(Dispatchers.IO).launch {
+            repository.getFilmListOrder { result ->
+                if(result.isSuccess) {
+                    CoroutineScope(Dispatchers.Main).launch {
+                        adapterOrder.setData(result.getOrDefault(mutableListOf()))
+                        binding.texto2.text = getString(R.string.topFilmes)
+                        binding.vistosMoviesList.visibility = View.GONE
+                        binding.orderMoviesList.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+                        binding.orderMoviesList.adapter = adapterOrder
+                        binding.orderMoviesList.apply {
+                            this.adapter = adapter
+                            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+                        }
+                    }
+                }
             }
         }
+
     }
 
     private fun onOperationClick(uuid: String) {

@@ -15,7 +15,7 @@ class Filme(
     var imdbID: String,
     var type: String,
     var userAvaliated: Boolean,
-    var userPhotos: List<String>,
+    var userPhotos: String,
     var userObservations:String,
     var userCinema:String,
     var userRating:String,
@@ -23,14 +23,4 @@ class Filme(
     val uuid: String = UUID.randomUUID().toString(),
     var userToSee: Boolean = false
 ) {
-    var fotografia: ArrayList<String> = arrayListOf<String>()
-
-    init {
-        fotografia.addAll(userPhotos)
-    }
-
-    fun substituirFotografias(userPhotos: List<String>) {
-        this.fotografia.clear()
-        this.fotografia.addAll(userPhotos)
-    }
 }

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.util.Log
 import com.example.projetofinalpart1.model.Filme
+import com.example.projetofinalpart1.model.FilmeApi
 import com.example.projetofinalpart1.model.ObjetoFilme
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -16,6 +17,37 @@ class FilmeRepository(
     private val local: FilmeRoom,
     private val remote: FilmeOkHttp
 ) : ObjetoFilme() {
+
+    suspend fun getFilmList(onFinished: (Result<List<Filme>>) -> Unit) {
+        local.getFilmList { result ->
+            onFinished(result)
+        }
+    }
+    suspend fun getFilmToSeeList(onFinished: (Result<List<Filme>>) -> Unit) {
+        local.getFilmToSeeList { result ->
+            onFinished(result)
+        }
+    }
+
+    suspend fun getFilmListOrder(onFinished: (Result<List<Filme>>) -> Unit) {
+        local.getFilmListOrder { result ->
+            onFinished(result)
+        }
+    }
+
+    private fun refreshHistory(onFinished: () -> Unit) {
+        if (ConnectivityUtil.isOnline(context)) {
+            remote.getFilmList() { result ->
+                if (result.isSuccess) {
+                    local.insertFilms(result.getOrDefault(mutableListOf())) {
+                        onFinished()
+                    }
+                } else {
+                    onFinished()
+                }
+            }
+        }
+    }
 
     suspend fun addMovies(
         title: String,
@@ -136,5 +168,9 @@ class FilmeRepository(
             return instance as FilmeRepository
         }
     }
+
+    override fun insertFilms(films: List<FilmeApi>, onFinished: () -> Unit) {}
+
+
 }
 

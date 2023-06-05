@@ -16,4 +16,5 @@ class FilmeApi (
     override fun toString(): String {
         return "FilmeApi(title='$title', released='$released', runtime='$runtime', genre='$genre', actors='$actors', plot='$plot', poster='$poster', imdbRating='$imdbRating', imdbVotes='$imdbVotes', imdbID='$imdbID', type='$type')"
     }
+
 }

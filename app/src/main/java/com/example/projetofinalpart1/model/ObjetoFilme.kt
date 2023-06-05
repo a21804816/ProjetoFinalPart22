@@ -108,4 +108,6 @@ abstract class ObjetoFilme {
         return listaTodosFilmes.find { it.uuid == uuid }
     }
 
+    abstract fun insertFilms(films: List<FilmeApi>, onFinished: () -> Unit)
+
 }

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.projetofinalpart1.R
@@ -12,14 +13,13 @@ import com.example.projetofinalpart1.data.FilmeRoom
 import com.example.projetofinalpart1.data.FilmsDatabase
 import com.example.projetofinalpart1.databinding.FragmentDetalhesBinding
 import com.example.projetofinalpart1.model.Filme
-import com.example.projetofinalpart1.model.listaFilmesParaVer
+import kotlinx.coroutines.*
 
 private const val ARG_FILME_UUID = "ARG_FILME_UUID"
 
 class DetalhesFragment : Fragment() {
 
     private lateinit var binding: FragmentDetalhesBinding
-
     private var filmeUuid: String? = null
     private lateinit var objetoFilme: FilmeRoom
 
@@ -40,6 +40,7 @@ class DetalhesFragment : Fragment() {
         return binding.root
     }
 
+    @OptIn(DelicateCoroutinesApi::class)
     override fun onStart() {
         super.onStart()
         objetoFilme = FilmeRoom(FilmsDatabase.getInstance(requireContext()).filmDao())
@@ -49,14 +50,19 @@ class DetalhesFragment : Fragment() {
         binding.dataVisualizacao.isEnabled = false
         binding.observacoes.isEnabled = false
 
-        filmeUuid?.let { uuid ->
-            val operation = objetoFilme.getOperationById(uuid)
-            operation?.let { placeData(it) }
-            if (operation != null) {
-                if (operation.userToSee) {
-                    binding.paraVerButton.setBackgroundResource(R.drawable.baseline_turned_in_24)
-                } else {
-                    binding.paraVerButton.setBackgroundResource(R.drawable.baseline_turned_in_not_24)
+        CoroutineScope(Dispatchers.Main).launch {
+            filmeUuid?.let {
+                objetoFilme.getFilmByUUID(it) { film ->
+                    if (film != null) {
+                        requireActivity().runOnUiThread {
+                            placeData(film)
+                            if (film.userToSee) {
+                                binding.paraVerButton.setBackgroundResource(R.drawable.baseline_turned_in_24)
+                            } else {
+                                binding.paraVerButton.setBackgroundResource(R.drawable.baseline_turned_in_not_24)
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -66,43 +72,57 @@ class DetalhesFragment : Fragment() {
         }
 
         (binding.paraVerButton).setOnClickListener {
-            val filme = objetoFilme.getOperationById(filmeUuid!!)
-            if (filme != null) {
-                if (filme.userToSee) {
-                    listaFilmesParaVer.remove(filme)
-                    binding.paraVerButton.setBackgroundResource(R.drawable.baseline_turned_in_not_24)
-                    filme.userToSee = false
-                } else {
-                    listaFilmesParaVer.add(filme)
-                    binding.paraVerButton.setBackgroundResource(R.drawable.baseline_turned_in_24)
-                    filme.userToSee = true
+            CoroutineScope(Dispatchers.Main).launch {
+                filmeUuid?.let {
+                    objetoFilme.getFilmByUUID(it) { film ->
+                        if (film != null) {
+                            if (!film.userToSee) {
+                                objetoFilme.updateFilmToSee(filmeUuid!!,true)
+                                binding.paraVerButton.setBackgroundResource(R.drawable.baseline_turned_in_24)
+                                GlobalScope.launch(Dispatchers.Main) {
+                                    Toast.makeText(
+                                        requireContext(),
+                                        "Filme adicionado à lista para ver",
+                                        Toast.LENGTH_LONG
+                                    ).show()
+
+                                }
+                            } else {
+                                objetoFilme.updateFilmToSee(filmeUuid!!,false)
+                                binding.paraVerButton.setBackgroundResource(R.drawable.baseline_turned_in_not_24)
+                                GlobalScope.launch(Dispatchers.Main) {
+
+                                    Toast.makeText(
+                                        requireContext(),
+                                        "Filme removido da lista para ver",
+                                        Toast.LENGTH_LONG
+                                    ).show()
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
 
         binding.editButton.setOnClickListener {
-            binding.nomeFilme.isEnabled = true
-            binding.nomeCinema.isEnabled = true
             binding.avaliacao.isEnabled = true
-            binding.dataVisualizacao.isEnabled = true
             binding.observacoes.isEnabled = true
 
             binding.editButton.setBackgroundResource(R.drawable.baseline_check_circle_24)
 
             binding.editButton.setOnClickListener {
-                val filme = objetoFilme.getOperationById(filmeUuid!!)
-                if (filme != null) {
-                    filme.title = binding.nomeFilme.text.toString()
-                    filme.userCinema = binding.nomeCinema.text.toString()
-                    filme.userRating = binding.avaliacao.text.toString()
-                    filme.userDate = binding.dataVisualizacao.text.toString()
-                    filme.userObservations = binding.observacoes.text.toString()
+                CoroutineScope(Dispatchers.IO).launch {
+                    objetoFilme.updateFilm(filmeUuid!!,binding.avaliacao.text.toString(),binding.observacoes.text.toString())
                 }
 
-                binding.nomeFilme.isEnabled = false
-                binding.nomeCinema.isEnabled = false
                 binding.avaliacao.isEnabled = false
                 binding.dataVisualizacao.isEnabled = false
+                Toast.makeText(
+                    requireContext(),
+                    "Filme editado",
+                    Toast.LENGTH_LONG
+                ).show()
 
                 binding.editButton.setBackgroundResource(R.drawable.ic_baseline_edit_24)
             }
@@ -117,6 +137,7 @@ class DetalhesFragment : Fragment() {
         binding.dataLancamento.text = ui.released
         binding.avaliacaoImdb.text = ui.imdbRating
         binding.linkImdb.text = ui.imdbID
+
         if (ui.userAvaliated) {
             binding.nomeCinema.setText(ui.userCinema)
             binding.avaliacao.setText(ui.userRating)
@@ -132,12 +153,12 @@ class DetalhesFragment : Fragment() {
             binding.observacoesText.visibility = View.GONE
             binding.observacoes.visibility = View.GONE
         }
-        val fotos = ui.fotografia
+        val fotos = ui.userPhotos
 
         val layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.fotosLista.layoutManager = layoutManager
-        binding.fotosLista.adapter = FotosDetalhesAdapter(fotos, ui.poster)
+        binding.fotosLista.adapter = FotosDetalhesAdapter(fotos.toList(), ui.poster)
 
     }
 
