@@ -11,6 +11,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.projetofinalpart1.R
+import com.example.projetofinalpart1.data.FilmeRepository
 import com.example.projetofinalpart1.databinding.FragmentMapBinding
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -21,11 +22,12 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.LocationSource.OnLocationChangedListener
 
 
-
 class MapFragment : Fragment() {
 
     private lateinit var binding: FragmentMapBinding
     private var map: GoogleMap? = null
+    val repository = FilmeRepository.getInstance()
+
 
     private val LOCATION_PERMISSION_REQUEST_CODE = 100
 
@@ -47,8 +49,10 @@ class MapFragment : Fragment() {
                 map?.addMarker(
                     MarkerOptions()
                         .position(LatLng(38.75814, -9.15179))
-                        .title("ULHT")
+                        .title("ULHT 1")
                 )
+                addMarkerOnMap(39.75815, -9.15178, "Cinema do Parque")
+
             } else {
                 ActivityCompat.requestPermissions(
                     requireActivity(),
@@ -72,12 +76,18 @@ class MapFragment : Fragment() {
         if (requestCode == LOCATION_PERMISSION_REQUEST_CODE) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 map?.isMyLocationEnabled = true
-                map?.addMarker(
-                    MarkerOptions()
-                        .position(LatLng(38.75814, -9.15179))
-                        .title("ULHT")
-                )
+                addMarkerOnMap(38.75814, -9.15179, "ULHT")
             }
         }
     }
+
+    fun addMarkerOnMap(latitude: Double, longitude: Double, nomeCinema: String) {
+        val cinemaLocation = LatLng(latitude, longitude)
+        val markerOptions = MarkerOptions().position(cinemaLocation).title(nomeCinema)
+        map?.addMarker(markerOptions)
+        map?.moveCamera(CameraUpdateFactory.newLatLngZoom(cinemaLocation, 0f))
+    }
+
+
 }
+

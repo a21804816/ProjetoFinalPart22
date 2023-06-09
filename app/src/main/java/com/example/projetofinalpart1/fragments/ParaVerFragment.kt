@@ -16,6 +16,7 @@ import com.example.projetofinalpart1.NavigationManager
 import com.example.projetofinalpart1.R
 import com.example.projetofinalpart1.data.FilmeRepository
 import com.example.projetofinalpart1.databinding.FragmentListBinding
+import com.example.projetofinalpart1.model.Filme
 import com.example.projetofinalpart1.model.listaFilmesParaVer
 import com.example.projetofinalpart1.model.listaFilmesVistos
 import kotlinx.coroutines.CoroutineScope
@@ -27,6 +28,8 @@ class ParaVerFragment : Fragment() {
     private lateinit var binding: FragmentListBinding
     private val REQUEST_CODE_SPEECH_INPUT = 100
     val repository = FilmeRepository.getInstance()
+    private val filmList = mutableListOf<Filme>()
+    private val filteredFilmList = mutableListOf<Filme>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -43,29 +46,35 @@ class ParaVerFragment : Fragment() {
 
         CoroutineScope(Dispatchers.IO).launch {
             repository.getFilmToSeeList { result ->
-                if(result.isSuccess) {
+                if (result.isSuccess) {
                     CoroutineScope(Dispatchers.Main).launch {
-                        adapter.setData(result.getOrDefault(mutableListOf()))
+                        filmList.clear()
+                        filmList.addAll(result.getOrDefault(emptyList()))
+                        filteredFilmList.clear()
+                        filteredFilmList.addAll(filmList)
+                        adapter.setData(filteredFilmList)
                     }
                 }
             }
         }
 
-        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
-            androidx.appcompat.widget.SearchView.OnQueryTextListener {
+        binding.searchView.setOnQueryTextListener(object :
+            SearchView.OnQueryTextListener, androidx.appcompat.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return false
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                val filteredFilmesVistos = listaFilmesVistos.filter { filme ->
-                    filme.title.contains(newText ?: "", true)
-
+                filteredFilmList.clear()
+                if (!newText.isNullOrEmpty()) {
+                    filteredFilmList.addAll(filmList.filter { filme ->
+                        filme.title.contains(newText, ignoreCase = true)
+                    })
+                } else {
+                    filteredFilmList.addAll(filmList)
                 }
-                adapter.setData(filteredFilmesVistos)
-
+                adapter.setData(filteredFilmList)
                 return true
-
             }
         })
 

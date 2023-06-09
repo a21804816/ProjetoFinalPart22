@@ -79,30 +79,37 @@ class RegistFragment : Fragment() {
                     Toast.LENGTH_LONG
                 ).show()
             } else {
-                val errorMessage = "cinema não existe"
-                if (!objetoFilme.verificarCinemaExiste(nomeCinema, context)) {
-                    binding.cinemaEditText.error = errorMessage
-                } else {
-                    AlertDialog.Builder(requireContext())
-                        .setTitle("Confirm Film Addition")
-                        .setMessage("Are you sure you want to add $nomeFilme?")
-                        .setPositiveButton("Yes") { dialog, _ ->
-                            CoroutineScope(Dispatchers.IO).launch {
-                                repository.checkIfFilmExist(nomeFilme, nomeCinema, avaliacao, data, observacoes, fotos, onFinished = {
-                                    added, msg ->
-                                    requireActivity().runOnUiThread {
-                                        Toast.makeText(requireContext(), msg, Toast.LENGTH_LONG).show()
+            val errorMessage = "cinema não existe"
+            val (existe, cinema) = objetoFilme.verificarCinemaExiste(nomeCinema, context)
+            if (!existe) {
+                binding.cinemaEditText.error = errorMessage
+            } else {
+                AlertDialog.Builder(requireContext())
+                    .setTitle("Confirm Film Addition")
+                    .setMessage("Are you sure you want to add $nomeFilme?")
+                    .setPositiveButton("Yes") { dialog, _ ->
+                        CoroutineScope(Dispatchers.IO).launch {
+                            cinema?.name?.let { it1 ->
+                                repository.checkIfFilmExist(
+                                    nomeFilme, it1, avaliacao, data, observacoes, fotos,
+                                    onFinished = { added, msg ->
+                                        requireActivity().runOnUiThread {
+                                            Toast.makeText(requireContext(), msg, Toast.LENGTH_LONG).show()
+                                            MapFragment().addMarkerOnMap(cinema.latitude, cinema.longitude, cinema.name)
+                                        }
                                     }
-                                })
+                                )
                             }
-                            dialog.dismiss()
                         }
-                        .setNegativeButton("No", null)
-                        .show()
-                }
+                        dialog.dismiss()
+                    }
+                    .setNegativeButton("No", null)
+                    .show()
             }
-
         }
+
+
+    }
 
         binding.tirarFotoButton.setOnClickListener {
             val options = arrayOf<CharSequence>(

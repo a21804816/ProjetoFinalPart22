@@ -1,25 +1,30 @@
+<!-- dialog_layout.xml -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="16dp">
-
-    <TextView
-        android:id="@+id/messageTextView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:text="@string/pesquisarFilmeVoz"/>
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/counterTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:gravity="center_horizontal" />
+
+    <TextView
+        android:id="@+id/spokenTextView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textSize="36sp"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:text="10"/>
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:gravity="center_horizontal"
+        android:padding="16dp" />
+
+    <Button
+        android:id="@+id/cancelButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cancel"
+        android:layout_gravity="center_horizontal"
+        android:padding="16dp" />
 
 </LinearLayout>

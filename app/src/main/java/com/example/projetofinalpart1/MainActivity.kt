@@ -37,26 +37,6 @@ class MainActivity : AppCompatActivity() {
         super.onStart()
         setSupportActionBar(binding.toolbar)
         setupDrawerMenu()
-
-        binding.fabMicrophone.setOnClickListener {
-            var binding1 = DialogLayoutBinding.inflate(layoutInflater)
-            val dialog = Dialog(this)
-            dialog.setContentView(binding1.root)
-            dialog.setCancelable(false)
-
-            object : CountDownTimer(10000, 1000) {
-                override fun onTick(millisUntilFinished: Long) {
-                    binding1.counterTextView.text = (millisUntilFinished / 1000).toString()
-                }
-
-                override fun onFinish() {
-                    dialog.dismiss()
-                }
-            }.start()
-
-            dialog.show()
-        }
-
     }
 
     override fun onBackPressed() {

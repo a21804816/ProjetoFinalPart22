@@ -60,14 +60,14 @@ class DashboardFragment : Fragment() {
         CoroutineScope(Dispatchers.IO).launch {
             repository.getFilmListOrder { result ->
                 if(result.isSuccess) {
+                    val top10Films = result.getOrDefault(mutableListOf()).take(10)
                     CoroutineScope(Dispatchers.Main).launch {
-                        adapterOrder.setData(result.getOrDefault(mutableListOf()))
+                        adapterOrder.setData(top10Films)
                         binding.texto2.text = getString(R.string.topFilmes)
-                        binding.vistosMoviesList.visibility = View.GONE
                         binding.orderMoviesList.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
                         binding.orderMoviesList.adapter = adapterOrder
                         binding.orderMoviesList.apply {
-                            this.adapter = adapter
+                            this.adapter = adapterOrder
                             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
                         }
                     }

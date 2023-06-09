@@ -52,8 +52,8 @@ abstract class ObjetoFilme {
         avaliacaoFilme = progress.toString()
     }
 
-    private fun readCinemasFromJson(context: Context?): List<String> {
-        val cinemas = mutableListOf<String>()
+    private fun readCinemasFromJson(context: Context?): List<Cinema> {
+        val cinemas = mutableListOf<Cinema>()
 
         try {
             val inputStream = context?.assets?.open("cinemas.json")
@@ -69,7 +69,10 @@ abstract class ObjetoFilme {
             for (i in 0 until cinemasArray.length()) {
                 val cinemaObject = cinemasArray.getJSONObject(i)
                 val cinemaName = cinemaObject.getString("cinema_name")
-                cinemas.add(cinemaName)
+                val cinemaLat = cinemaObject.getDouble("latitude")
+                val cinemaLong = cinemaObject.getDouble("longitude")
+                val cinema = Cinema(cinemaName, cinemaLat, cinemaLong)
+                cinemas.add(cinema)
             }
         } catch (e: Exception) {
             e.printStackTrace()
@@ -78,10 +81,16 @@ abstract class ObjetoFilme {
         return cinemas
     }
 
-    fun verificarCinemaExiste(nome: String, context: Context?): Boolean {
+    data class Cinema(val name: String, val latitude: Double, val longitude: Double)
+
+
+    fun verificarCinemaExiste(nome: String, context: Context?): Pair<Boolean, Cinema?> {
         val cinemas = readCinemasFromJson(context)
-        return cinemas.contains(nome)
+        val cinema = cinemas.find { it.name == nome }
+        val existe = cinema != null
+        return Pair(existe, cinema)
     }
+
 
     fun limparCampos() {
         nomeFilm = ""
