@@ -1,5 +1,6 @@
 package com.example.projetofinalpart1
 
+import android.app.Activity
 import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
@@ -19,6 +20,8 @@ val listaTodosFilmes = ArrayList<Filme>()
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
+    private val REQUEST_CODE_SPEECH_INPUT = 100
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -27,16 +30,23 @@ class MainActivity : AppCompatActivity() {
             NavigationManager.goToDashboardFragment(supportFragmentManager)
         }
         binding.toolbar.title = getString(R.string.dashboard)
-        NavigationManager.goToDashboardFragment(
-            supportFragmentManager
-        )
+        NavigationManager.goToDashboardFragment(supportFragmentManager)
     }
-
 
     override fun onStart() {
         super.onStart()
         setSupportActionBar(binding.toolbar)
         setupDrawerMenu()
+
+        binding.fabMicrophone.setOnClickListener {
+            val speechIntent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
+            speechIntent.putExtra(
+                RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
+            )
+            startActivityForResult(speechIntent, REQUEST_CODE_SPEECH_INPUT)
+
+        }
     }
 
     override fun onBackPressed() {
@@ -52,7 +62,6 @@ class MainActivity : AppCompatActivity() {
             this,
             binding.drawer, binding.toolbar,
             R.string.drawer_open, R.string.drawer_close
-
         )
         binding.navDrawer.setNavigationItemSelectedListener {
             onClickNavigationItem(it)
@@ -71,27 +80,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun onClickNavigationItem(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.nav_dashboard ->
-
-                NavigationManager.goToDashboardFragment(
-                    supportFragmentManager
-                )
-            R.id.nav_regist ->
-                NavigationManager.goToRegistFragment(
-                    supportFragmentManager
-                )
-            R.id.nav_list ->
-                NavigationManager.goToListFragment(
-                    supportFragmentManager
-                )
-            R.id.nav_map ->
-                NavigationManager.goToMapFragment(
-                    supportFragmentManager
-                )
-            R.id.para_ver ->
-                NavigationManager.goToParaVerFragment(
-                    supportFragmentManager
-                )
+            R.id.nav_dashboard -> NavigationManager.goToDashboardFragment(supportFragmentManager)
+            R.id.nav_regist -> NavigationManager.goToRegistFragment(supportFragmentManager)
+            R.id.nav_list -> NavigationManager.goToListFragment(supportFragmentManager)
+            R.id.nav_map -> NavigationManager.goToMapFragment(supportFragmentManager)
+            R.id.para_ver -> NavigationManager.goToParaVerFragment(supportFragmentManager)
         }
         binding.drawer.closeDrawer(GravityCompat.START)
         return true
@@ -99,35 +92,26 @@ class MainActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        val REQUEST_CODE_SPEECH_INPUT = 100
-        if (requestCode == REQUEST_CODE_SPEECH_INPUT && resultCode == RESULT_OK) {
+        if (requestCode == REQUEST_CODE_SPEECH_INPUT && resultCode == Activity.RESULT_OK) {
             val result = data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
-            // handle the speech recognition result here
+            val spokenText = result?.get(0)
+            val movieMatch = listaTodosFilmes.find { it.title.equals(spokenText, ignoreCase = true) }
+            if (movieMatch != null) {
+                Toast.makeText(this, "Movie found: ${movieMatch.title}", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, "Movie not found", Toast.LENGTH_SHORT).show()
+
+            }
         }
     }
 
     private fun onClickNavigationItemBottom(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.bottom_dashboard ->
-                NavigationManager.goToDashboardFragment(
-                    supportFragmentManager
-                )
-            R.id.bottom_regist ->
-                NavigationManager.goToRegistFragment(
-                    supportFragmentManager
-                )
-            R.id.bottom_list ->
-                NavigationManager.goToListFragment(
-                    supportFragmentManager
-                )
-            R.id.bottom_map ->
-                NavigationManager.goToMapFragment(
-                    supportFragmentManager
-                )
-            R.id.bottom_paraVer ->
-                NavigationManager.goToParaVerFragment(
-                    supportFragmentManager
-                )
+            R.id.bottom_dashboard -> NavigationManager.goToDashboardFragment(supportFragmentManager)
+            R.id.bottom_regist -> NavigationManager.goToRegistFragment(supportFragmentManager)
+            R.id.bottom_list -> NavigationManager.goToListFragment(supportFragmentManager)
+            R.id.bottom_map -> NavigationManager.goToMapFragment(supportFragmentManager)
+            R.id.bottom_paraVer -> NavigationManager.goToParaVerFragment(supportFragmentManager)
         }
         binding.drawer.closeDrawer(GravityCompat.START)
         return true
