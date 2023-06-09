@@ -13,6 +13,9 @@ interface FilmDao {
     @Insert
     fun insert(filme: TableRoom)
 
+    @Query("SELECT * FROM WatchedFilms WHERE title LIKE :movieTitle")
+    fun getFilmByTitle(movieTitle: String): Filme?
+
     @Query("SELECT COUNT(*) FROM WatchedFilms WHERE title = :movieTitle")
     fun countMoviesWithTitle(movieTitle: String): Int
 

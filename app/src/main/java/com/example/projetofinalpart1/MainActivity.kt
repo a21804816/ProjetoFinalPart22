@@ -10,16 +10,24 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.view.GravityCompat
+import com.example.projetofinalpart1.data.FilmDao
+import com.example.projetofinalpart1.data.FilmeRepository
+import com.example.projetofinalpart1.data.FilmeRoom
+import com.example.projetofinalpart1.data.FilmsDatabase
 import com.example.projetofinalpart1.databinding.ActivityMainBinding
 import com.example.projetofinalpart1.databinding.DialogLayoutBinding
 import com.example.projetofinalpart1.model.Filme
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 val listaTodosFilmes = ArrayList<Filme>()
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-
+    private lateinit var objetoFilme: FilmeRoom
     private val REQUEST_CODE_SPEECH_INPUT = 100
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,6 +45,7 @@ class MainActivity : AppCompatActivity() {
         super.onStart()
         setSupportActionBar(binding.toolbar)
         setupDrawerMenu()
+        objetoFilme = FilmeRoom(FilmsDatabase.getInstance(this).filmDao())
 
         binding.fabMicrophone.setOnClickListener {
             val speechIntent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
@@ -95,15 +104,19 @@ class MainActivity : AppCompatActivity() {
         if (requestCode == REQUEST_CODE_SPEECH_INPUT && resultCode == Activity.RESULT_OK) {
             val result = data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
             val spokenText = result?.get(0)
-            val movieMatch = listaTodosFilmes.find { it.title.equals(spokenText, ignoreCase = true) }
-            if (movieMatch != null) {
-                Toast.makeText(this, "Movie found: ${movieMatch.title}", Toast.LENGTH_SHORT).show()
-            } else {
-                Toast.makeText(this, "Movie not found", Toast.LENGTH_SHORT).show()
 
+            CoroutineScope(Dispatchers.Main).launch {
+                val movieMatch = spokenText?.let { objetoFilme.getFilmByTitle(it) }
+                if (movieMatch != null) {
+                    NavigationManager.goToDetalhesFragment(supportFragmentManager, movieMatch.uuid)
+                } else {
+                    Toast.makeText(this@MainActivity, "Movie not found", Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }
+
+
 
     private fun onClickNavigationItemBottom(item: MenuItem): Boolean {
         when (item.itemId) {

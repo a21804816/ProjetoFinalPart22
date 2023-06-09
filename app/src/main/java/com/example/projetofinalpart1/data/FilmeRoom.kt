@@ -43,6 +43,20 @@ class FilmeRoom(private val dao: FilmDao) : ObjetoFilme() {
         onFinished(movies > 0)
     }
 
+    suspend fun getFilmByTitle(movieTitle: String): Filme? {
+        return withContext(Dispatchers.IO) {
+            val film = dao.getFilmByTitle(movieTitle)
+            film?.let {
+                Filme(
+                    it.title, it.released, it.runtime, it.genre, it.actors, it.plot, it.poster,
+                    it.imdbRating, it.imdbVotes, it.imdbID, it.type, it.userAvaliated, it.userPhotos,
+                    it.userObservations, it.userCinema, it.userRating, it.userDate, it.uuid, it.userToSee
+                )
+            }
+        }
+    }
+
+
     fun getFilmList(onFinished: (Result<List<Filme>>) -> Unit) {
         val allFilms = dao.getAll()
         val films = allFilms.map {
