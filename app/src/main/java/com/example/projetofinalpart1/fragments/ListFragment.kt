@@ -92,11 +92,7 @@ class ListFragment : Fragment() {
             val dialog = Dialog(requireContext())
             dialog.setContentView(dialogBinding.root)
             dialog.setCancelable(false)
-
-            val spokenTextView: TextView = dialogBinding.spokenTextView
-            println(spokenTextView)
-            val cancelButton = dialogBinding.cancelButton
-
+            
             val speechIntent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
             speechIntent.putExtra(
                 RecognizerIntent.EXTRA_LANGUAGE_MODEL,
@@ -104,11 +100,6 @@ class ListFragment : Fragment() {
             )
             startActivityForResult(speechIntent, REQUEST_CODE_SPEECH_INPUT)
 
-            cancelButton.setOnClickListener {
-                dialog.dismiss()
-            }
-
-            dialog.show()
         }
     }
 

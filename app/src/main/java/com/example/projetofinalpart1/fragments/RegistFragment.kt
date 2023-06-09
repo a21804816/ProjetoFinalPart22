@@ -36,6 +36,7 @@ class RegistFragment : Fragment() {
     val imageList = ArrayList<String>()
     private lateinit var objetoFilme: FilmeRoom
     val repository = FilmeRepository.getInstance()
+    var mapFragment = MapFragment()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -95,7 +96,7 @@ class RegistFragment : Fragment() {
                                     onFinished = { added, msg ->
                                         requireActivity().runOnUiThread {
                                             Toast.makeText(requireContext(), msg, Toast.LENGTH_LONG).show()
-                                            MapFragment().addMarkerOnMap(cinema.latitude, cinema.longitude, cinema.name)
+                                            mapFragment.addMarkerOnMap(cinema.latitude, cinema.longitude, cinema.name)
                                         }
                                     }
                                 )

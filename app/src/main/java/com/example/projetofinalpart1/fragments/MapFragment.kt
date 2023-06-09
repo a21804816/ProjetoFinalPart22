@@ -46,11 +46,6 @@ class MapFragment : Fragment() {
                 ) == PackageManager.PERMISSION_GRANTED
             ) {
                 map?.isMyLocationEnabled = true
-                map?.addMarker(
-                    MarkerOptions()
-                        .position(LatLng(38.75814, -9.15179))
-                        .title("ULHT 1")
-                )
                 addMarkerOnMap(39.75815, -9.15178, "Cinema do Parque")
 
             } else {
