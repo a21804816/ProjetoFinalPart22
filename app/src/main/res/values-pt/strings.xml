@@ -47,5 +47,7 @@
     <string name="mensagemConfirma">Confirma que o nome do filme é %1$s</string>
     <string name="pesquisarFilmeVoz">Indique o filme que quer pesquisar</string>
     <string name="erroVoz">Erro ao reconhecer fala.</string>
+    <string name="pesquisar">Pesquisar</string>
+    <string name="tentarNovamente">Tentar novamente</string>
 
 </resources>

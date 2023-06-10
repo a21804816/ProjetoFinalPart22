@@ -45,7 +45,9 @@
     <string name="mensagemRegistado">Le film %1$s a déjà été enregistré</string>
     <string name="confirmar">Confirmer</string>
     <string name="mensagemConfirma">Confirmer que le nom du film est %1$s</string>
-    <string name="pesquisarFilmeVoz">Indique o filme que quer pesquisar</string>
-    <string name="erroVoz">Erro ao reconhecer fala.</string>
+    <string name="pesquisarFilmeVoz">Indiquez le film que vous souhaitez rechercher</string>
+    <string name="erroVoz">Erreur de reconnaissance vocale.</string>
+    <string name="pesquisar">Rechercher</string>
+    <string name="tentarNovamente">Réessayer</string>
 
 </resources>

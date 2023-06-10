@@ -29,6 +29,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var objetoFilme: FilmeRoom
     private val REQUEST_CODE_SPEECH_INPUT = 100
+    private var recognizedText: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,7 +61,19 @@ class MainActivity : AppCompatActivity() {
             )
 
             dialogBinding.searchButton.setOnClickListener {
-                dialog.dismiss()
+                CoroutineScope(Dispatchers.Main).launch {
+                    if (recognizedText != null) {
+                        dialog.dismiss()
+                        val movieMatch = recognizedText?.let { objetoFilme.getFilmByTitle(it) }
+                        if (movieMatch != null) {
+                            NavigationManager.goToDetalhesFragment(supportFragmentManager, movieMatch.uuid)
+                        } else {
+                            Toast.makeText(this@MainActivity, "Movie not found", Toast.LENGTH_SHORT).show()
+                        }
+                    } else {
+                        Toast.makeText(this@MainActivity, "Please speak to search for a movie", Toast.LENGTH_SHORT).show()
+                    }
+                }
             }
 
             dialogBinding.cancelButton.setOnClickListener {
@@ -69,14 +82,22 @@ class MainActivity : AppCompatActivity() {
 
             dialogBinding.retryButton.setOnClickListener {
                 dialogBinding.promptTextView.text = ""
-                startActivityForResult(speechIntent, REQUEST_CODE_SPEECH_INPUT)
+                recognizedText = null
             }
 
-
             startActivityForResult(speechIntent, REQUEST_CODE_SPEECH_INPUT)
-            dialogBinding.promptTextView.text = RecognizerIntent.EXTRA_RESULTS
+            dialogBinding.promptTextView.text = recognizedText
 
             dialog.show()
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_CODE_SPEECH_INPUT && resultCode == Activity.RESULT_OK) {
+            val result = data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
+            recognizedText = result?.get(0)
+
         }
     }
 
@@ -120,27 +141,6 @@ class MainActivity : AppCompatActivity() {
         binding.drawer.closeDrawer(GravityCompat.START)
         return true
     }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == REQUEST_CODE_SPEECH_INPUT && resultCode == Activity.RESULT_OK) {
-            val result = data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
-            val spokenText = result?.get(0)
-
-
-
-            CoroutineScope(Dispatchers.Main).launch {
-                val movieMatch = spokenText?.let { objetoFilme.getFilmByTitle(it) }
-                if (movieMatch != null) {
-                    NavigationManager.goToDetalhesFragment(supportFragmentManager, movieMatch.uuid)
-                } else {
-                    Toast.makeText(this@MainActivity, "Movie not found", Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
-    }
-
-
 
     private fun onClickNavigationItemBottom(item: MenuItem): Boolean {
         when (item.itemId) {

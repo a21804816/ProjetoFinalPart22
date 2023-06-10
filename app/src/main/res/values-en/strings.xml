@@ -45,7 +45,9 @@
     <string name="mensagemRegistado">The film %1$s has already been registered</string>
     <string name="confirmar">Confirm</string>
     <string name="mensagemConfirma">Confirm that the name of the film is %1$s</string>
-    <string name="pesquisarFilmeVoz">Indique o filme que quer pesquisar</string>
-    <string name="erroVoz">Erro ao reconhecer fala.</string>
+    <string name="pesquisarFilmeVoz">Please indicate the movie you want to search for</string>
+    <string name="erroVoz">Error recognizing speech.</string>
+    <string name="pesquisar">Search</string>
+    <string name="tentarNovamente">Try again</string>
 
 </resources>

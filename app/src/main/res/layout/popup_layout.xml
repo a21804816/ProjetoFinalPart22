@@ -1,26 +1,38 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    android:background="@color/cardview_light_background"
     android:orientation="vertical"
     android:padding="16dp">
 
     <TextView
-        android:id="@+id/popup_countdown"
+        android:id="@+id/promptTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center"
-        android:textSize="24sp"
-        android:textStyle="bold" />
+        android:textSize="16sp"
+        android:textColor="@android:color/black" />
 
-    <TextView
+    <Button
+        android:id="@+id/searchButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Texto do pop-up"
-        android:textColor="@android:color/black"
-        android:textSize="18sp" />
+        android:text="@string/pesquisar"
+        android:padding="16dp"
+        style="@style/Widget.AppCompat.Button" />
+
+    <Button
+        android:id="@+id/retryButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/tentarNovamente"
+        android:padding="16dp"
+        style="@style/Widget.AppCompat.Button" />
+
+    <Button
+        android:id="@+id/cancelButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/cancelar"
+        android:padding="16dp"
+        style="@style/Widget.AppCompat.Button" />
 
 </LinearLayout>
