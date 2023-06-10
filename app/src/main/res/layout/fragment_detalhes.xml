@@ -75,11 +75,12 @@
                     android:text="Nome Filme:"
                     android:textAppearance="?android:textAppearanceMedium" />
 
-                <EditText
+                <TextView
                     android:id="@+id/nome_filme"
                     style="@style/TextColorTheme"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_margin="16dp"
                     android:textAppearance="?android:textAppearanceMedium" />
             </LinearLayout>
 
@@ -97,11 +98,12 @@
                     android:text="Nome Cinema:"
                     android:textAppearance="?android:textAppearanceMedium" />
 
-                <EditText
+                <TextView
                     android:id="@+id/nome_cinema"
                     style="@style/TextColorTheme"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_margin="16dp"
                     android:textAppearance="?android:textAppearanceMedium" />
             </LinearLayout>
 
@@ -141,11 +143,12 @@
                     android:text="Data de visualização:"
                     android:textAppearance="?android:textAppearanceMedium" />
 
-                <EditText
+                <TextView
                     android:id="@+id/data_visualizacao"
                     style="@style/TextColorTheme"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_margin="16dp"
                     android:textAppearance="?android:textAppearanceMedium" />
             </LinearLayout>
 
@@ -216,6 +219,28 @@
                     android:layout_margin="16dp"
                     android:textAppearance="?android:textAppearanceMedium" />
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/actors_text"
+                    style="@style/TextColorTheme"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:text="Atores:"
+                    android:textAppearance="?android:textAppearanceMedium" />
+
+                <TextView
+                    android:id="@+id/actors"
+                    style="@style/TextColorTheme"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:textAppearance="?android:textAppearanceMedium" />
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -246,6 +271,29 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/runTime_text"
+                    style="@style/TextColorTheme"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:text="Duração:"
+                    android:textAppearance="?android:textAppearanceMedium" />
+
+                <TextView
+                    android:id="@+id/runTime"
+                    style="@style/TextColorTheme"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="16dp"
+                    android:textAppearance="?android:textAppearanceMedium" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
                     android:id="@+id/avaliacao_imdb_text"
                     style="@style/TextColorTheme"
                     android:layout_width="wrap_content"
@@ -256,6 +304,29 @@
 
                 <TextView
                     android:id="@+id/avaliacao_imdb"
+                    style="@style/TextColorTheme"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="16dp"
+                    android:textAppearance="?android:textAppearanceMedium" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/votos_imdb_text"
+                    style="@style/TextColorTheme"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:text="Votos IMDB:"
+                    android:textAppearance="?android:textAppearanceMedium" />
+
+                <TextView
+                    android:id="@+id/votos_imdb"
                     style="@style/TextColorTheme"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"

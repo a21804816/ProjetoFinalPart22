@@ -2,6 +2,7 @@ package com.example.projetofinalpart1.fragments
 
 import FilmeAdapter
 import android.app.Activity
+import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
 import android.speech.RecognizerIntent
@@ -9,16 +10,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.projetofinalpart1.NavigationManager
 import com.example.projetofinalpart1.R
 import com.example.projetofinalpart1.data.FilmeRepository
+import com.example.projetofinalpart1.databinding.DialogLayoutBinding
 import com.example.projetofinalpart1.databinding.FragmentListBinding
 import com.example.projetofinalpart1.model.Filme
 import com.example.projetofinalpart1.model.listaFilmesParaVer
-import com.example.projetofinalpart1.model.listaFilmesVistos
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -79,17 +79,13 @@ class ParaVerFragment : Fragment() {
         })
 
         binding.fabMicrophone.setOnClickListener {
-            val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
-            intent.putExtra(
+            val speechIntent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
+            speechIntent.putExtra(
                 RecognizerIntent.EXTRA_LANGUAGE_MODEL,
                 RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
             )
-            intent.putExtra(RecognizerIntent.EXTRA_PROMPT, getString(R.string.pesquisarFilmeVoz))
-            try {
-                startActivityForResult(intent, REQUEST_CODE_SPEECH_INPUT)
-            } catch (e: Exception) {
-                Toast.makeText(context, getString(R.string.erroVoz), Toast.LENGTH_SHORT).show()
-            }
+            startActivityForResult(speechIntent, REQUEST_CODE_SPEECH_INPUT)
+
         }
     }
 
@@ -101,7 +97,8 @@ class ParaVerFragment : Fragment() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_CODE_SPEECH_INPUT && resultCode == Activity.RESULT_OK) {
             val result = data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
-            binding.searchView.setQuery(result.toString(), true)
+            binding.searchView.setQuery(result?.get(0), true)
+
         }
     }
 }

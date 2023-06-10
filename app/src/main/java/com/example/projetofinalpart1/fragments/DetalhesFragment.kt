@@ -68,7 +68,7 @@ class DetalhesFragment : Fragment() {
         }
 
         (binding.voltarButton).setOnClickListener {
-            requireActivity().onBackPressed()
+            requireActivity().supportFragmentManager.popBackStack()
         }
 
         (binding.paraVerButton).setOnClickListener {
@@ -137,6 +137,9 @@ class DetalhesFragment : Fragment() {
         binding.dataLancamento.text = ui.released
         binding.avaliacaoImdb.text = ui.imdbRating
         binding.linkImdb.text = ui.imdbID
+        binding.votosImdb.text = ui.imdbVotes
+        binding.actors.text = ui.actors
+        binding.runTime.text = ui.runtime
 
         if (ui.userAvaliated) {
             binding.nomeCinema.setText(ui.userCinema)
