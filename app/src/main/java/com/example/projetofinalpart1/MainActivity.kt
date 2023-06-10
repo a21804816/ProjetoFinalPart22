@@ -60,7 +60,6 @@ class MainActivity : AppCompatActivity() {
             )
 
             dialogBinding.searchButton.setOnClickListener {
-                startActivityForResult(speechIntent, REQUEST_CODE_SPEECH_INPUT)
                 dialog.dismiss()
             }
 
@@ -69,8 +68,13 @@ class MainActivity : AppCompatActivity() {
             }
 
             dialogBinding.retryButton.setOnClickListener {
+                dialogBinding.promptTextView.text = ""
                 startActivityForResult(speechIntent, REQUEST_CODE_SPEECH_INPUT)
             }
+
+
+            startActivityForResult(speechIntent, REQUEST_CODE_SPEECH_INPUT)
+            dialogBinding.promptTextView.text = RecognizerIntent.EXTRA_RESULTS
 
             dialog.show()
         }
@@ -122,6 +126,8 @@ class MainActivity : AppCompatActivity() {
         if (requestCode == REQUEST_CODE_SPEECH_INPUT && resultCode == Activity.RESULT_OK) {
             val result = data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
             val spokenText = result?.get(0)
+
+
 
             CoroutineScope(Dispatchers.Main).launch {
                 val movieMatch = spokenText?.let { objetoFilme.getFilmByTitle(it) }

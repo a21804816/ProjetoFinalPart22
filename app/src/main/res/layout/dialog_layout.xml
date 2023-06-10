@@ -8,7 +8,6 @@
         android:id="@+id/promptTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Diga sua pesquisa por voz:"
         android:textSize="16sp"
         android:textColor="@android:color/black"
         android:padding="16dp" />
