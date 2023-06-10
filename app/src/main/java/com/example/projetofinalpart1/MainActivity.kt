@@ -48,13 +48,31 @@ class MainActivity : AppCompatActivity() {
         objetoFilme = FilmeRoom(FilmsDatabase.getInstance(this).filmDao())
 
         binding.fabMicrophone.setOnClickListener {
+            val dialogBinding = DialogLayoutBinding.inflate(layoutInflater)
+            val dialog = Dialog(this)
+            dialog.setContentView(dialogBinding.root)
+            dialog.setCancelable(false)
+
             val speechIntent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
             speechIntent.putExtra(
                 RecognizerIntent.EXTRA_LANGUAGE_MODEL,
                 RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
             )
-            startActivityForResult(speechIntent, REQUEST_CODE_SPEECH_INPUT)
 
+            dialogBinding.searchButton.setOnClickListener {
+                startActivityForResult(speechIntent, REQUEST_CODE_SPEECH_INPUT)
+                dialog.dismiss()
+            }
+
+            dialogBinding.cancelButton.setOnClickListener {
+                dialog.dismiss()
+            }
+
+            dialogBinding.retryButton.setOnClickListener {
+                startActivityForResult(speechIntent, REQUEST_CODE_SPEECH_INPUT)
+            }
+
+            dialog.show()
         }
     }
 
