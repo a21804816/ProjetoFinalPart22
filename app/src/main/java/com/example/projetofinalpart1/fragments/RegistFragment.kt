@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.DatePickerDialog
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.graphics.Bitmap
 import android.graphics.Matrix
 import android.os.Bundle
@@ -49,6 +50,7 @@ class RegistFragment : Fragment() {
         mapFragment = MapFragment()
         return binding.root
     }
+
 
     @SuppressLint("QueryPermissionsNeeded", "SuspiciousIndentation")
     override fun onStart() {
