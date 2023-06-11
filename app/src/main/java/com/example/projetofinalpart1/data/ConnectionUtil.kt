@@ -5,7 +5,6 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.util.Log
 import android.widget.Toast
-import androidx.core.content.ContentProviderCompat.requireContext
 import com.example.projetofinalpart1.R
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -21,7 +20,7 @@ object ConnectivityUtil {
       GlobalScope.launch(Dispatchers.Main) {
         Toast.makeText(
           context,
-          "User online",
+          context.getString(R.string.user_online),
           Toast.LENGTH_LONG
         ).show()
       }
@@ -40,7 +39,7 @@ object ConnectivityUtil {
     GlobalScope.launch(Dispatchers.Main) {
       Toast.makeText(
         context,
-        "User online",
+        context.getString(R.string.user_online),
         Toast.LENGTH_LONG
       ).show()
     }

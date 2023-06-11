@@ -49,5 +49,19 @@
     <string name="erroVoz">Error recognizing speech.</string>
     <string name="pesquisar">Search</string>
     <string name="tentarNovamente">Try again</string>
+    <string name="filme_adicionado_lista_ver">Movie added to watchlist</string>
+    <string name="filme_removido_lista_ver">Movie removed from watchlist</string>
+    <string name="erro_registo_filme">Error registering the movie</string>
+    <string name="campos_preencher">Please fill in all required fields</string>
+    <string name="confirmacao_adicao_filme">Confirm Movie Addition</string>
+    <string name="confirmar_adicionar_filme">Are you sure you want to add %1\$s?</string>
+    <string name="sim">Yes</string>
+    <string name="nao">No</string>
+    <string name="cinema_nao_existe">Cinema does not exist</string>
+    <string name="filme_nao_encontrado">Movie not found</string>
+    <string name="falar_para_pesquisar_filme">Please speak to search for a movie</string>
+    <string name="user_online">User online</string>
+
+
 
 </resources>

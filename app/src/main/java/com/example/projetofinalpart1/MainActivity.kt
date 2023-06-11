@@ -68,13 +68,14 @@ class MainActivity : AppCompatActivity() {
                         if (movieMatch != null) {
                             NavigationManager.goToDetalhesFragment(supportFragmentManager, movieMatch.imdbID)
                         } else {
-                            Toast.makeText(this@MainActivity, "Movie not found", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@MainActivity, getString(R.string.filme_nao_encontrado), Toast.LENGTH_SHORT).show()
                         }
                     } else {
-                        Toast.makeText(this@MainActivity, "Please speak to search for a movie", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@MainActivity, getString(R.string.falar_para_pesquisar_filme), Toast.LENGTH_SHORT).show()
                     }
                 }
             }
+
 
             dialogBinding.cancelButton.setOnClickListener {
                 dialog.dismiss()

@@ -54,7 +54,7 @@ class RegistFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         objetoFilme = FilmeRoom(FilmsDatabase.getInstance(requireContext()).filmDao())
-        binding.nomeFilmeEditText
+
         binding.registarButton.setOnClickListener {
             val nomeFilme = binding.nomeFilmeEditText.text.toString()
             val nomeCinema = binding.cinemaEditText.text.toString()
@@ -66,7 +66,7 @@ class RegistFragment : Fragment() {
             val filme = objetoFilme.verificarCampos(nomeFilme, nomeCinema, data)
 
             if (filme) {
-                val errorMessage = getString(R.string.erroRegistoFilme)
+                val errorMessage = getString(R.string.erro_registo_filme)
                 if (objetoFilme.verificarNomeCinemaVazio(nomeCinema)) {
                     binding.cinemaEditText.error = errorMessage
                 }
@@ -78,42 +78,41 @@ class RegistFragment : Fragment() {
                 }
                 Toast.makeText(
                     requireContext(),
-                    getString(R.string.camposPorPreencher),
+                    getString(R.string.campos_preencher),
                     Toast.LENGTH_LONG
                 ).show()
             } else {
-            val errorMessage = "cinema não existe"
-            val (existe, cinema) = objetoFilme.verificarCinemaExiste(nomeCinema, context)
-            if (!existe) {
-                binding.cinemaEditText.error = errorMessage
-            } else {
-                AlertDialog.Builder(requireContext())
-                    .setTitle("Confirm Film Addition")
-                    .setMessage("Are you sure you want to add $nomeFilme?")
-                    .setPositiveButton("Yes") { dialog, _ ->
-                        CoroutineScope(Dispatchers.IO).launch {
-                            cinema?.name?.let { it1 ->
-                                repository.checkIfFilmExist(
-                                    nomeFilme, it1, avaliacao, data, observacoes, fotos,
-                                    onFinished = { added, msg ->
-                                        requireActivity().runOnUiThread {
-                                            Toast.makeText(requireContext(), msg, Toast.LENGTH_LONG).show()
+                val errorMessage = getString(R.string.cinema_nao_existe)
+                val (existe, cinema) = objetoFilme.verificarCinemaExiste(nomeCinema, context)
+                if (!existe) {
+                    binding.cinemaEditText.error = errorMessage
+                } else {
+                    AlertDialog.Builder(requireContext())
+                        .setTitle(getString(R.string.confirmacao_adicao_filme))
+                        .setMessage(getString(R.string.confirmar_adicionar_filme) + nomeFilme)
+                        .setPositiveButton(getString(R.string.sim)) { dialog, _ ->
+                            CoroutineScope(Dispatchers.IO).launch {
+                                cinema?.name?.let { it1 ->
+                                    repository.checkIfFilmExist(
+                                        nomeFilme, it1, avaliacao, data, observacoes, fotos,
+                                        onFinished = { added, msg ->
+                                            requireActivity().runOnUiThread {
+                                                Toast.makeText(requireContext(), msg, Toast.LENGTH_LONG).show()
+                                            }
                                         }
-                                    }
-                                )
+                                    )
+                                }
                             }
+                            dialog.dismiss()
                         }
-                        dialog.dismiss()
-                    }
-                    .setNegativeButton("No", null)
-                    .show()
+                        .setNegativeButton(getString(R.string.nao), null)
+                        .show()
+                }
             }
         }
 
 
-    }
-
-        binding.tirarFotoButton.setOnClickListener {
+    binding.tirarFotoButton.setOnClickListener {
             val options = arrayOf<CharSequence>(
                 getString(R.string.tirarFoto),
                 getString(R.string.selecionarGaleria),

@@ -54,7 +54,7 @@ class DetalhesFragment : Fragment() {
         CoroutineScope(Dispatchers.Main).launch {
             filmeUuid?.let { uuid ->
                 withContext(Dispatchers.IO) {
-                    objetoFilme.getFilmByImdbIdDashboard(uuid){
+                    objetoFilme.getFilmByImdbIdDashboard(uuid) {
                         if (it != null) {
                             requireActivity().runOnUiThread {
                                 placeDataDashboard(it)
@@ -70,7 +70,7 @@ class DetalhesFragment : Fragment() {
                 }
 
                 withContext(Dispatchers.IO) {
-                    objetoFilme.getFilmByImdbId(uuid){
+                    objetoFilme.getFilmByImdbId(uuid) {
                         if (it != null) {
                             requireActivity().runOnUiThread {
                                 placeData(it)
@@ -92,55 +92,53 @@ class DetalhesFragment : Fragment() {
 
         (binding.paraVerButton).setOnClickListener {
             CoroutineScope(Dispatchers.Main).launch {
-                filmeUuid?.let { it ->
+                filmeUuid?.let {
                     objetoFilme.getFilmByImdbId(it) { film ->
                         if (film != null) {
                             if (!film.userToSee) {
-                                objetoFilme.updateFilmToSee(film.imdbID,true)
+                                objetoFilme.updateFilmToSee(film.imdbID, true)
                                 GlobalScope.launch(Dispatchers.Main) {
                                     binding.paraVerButton.setBackgroundResource(R.drawable.baseline_turned_in_24)
                                     Toast.makeText(
                                         requireContext(),
-                                        "Filme adicionado à lista para ver",
+                                        getString(R.string.filme_adicionado_lista_ver),
                                         Toast.LENGTH_LONG
                                     ).show()
-
                                 }
                             } else {
-                                objetoFilme.updateFilmToSee(film.imdbID,false)
+                                objetoFilme.updateFilmToSee(film.imdbID, false)
                                 GlobalScope.launch(Dispatchers.Main) {
                                     binding.paraVerButton.setBackgroundResource(R.drawable.baseline_turned_in_not_24)
                                     Toast.makeText(
                                         requireContext(),
-                                        "Filme removido da lista para ver",
+                                        getString(R.string.filme_removido_lista_ver),
                                         Toast.LENGTH_LONG
                                     ).show()
                                 }
                             }
                         }
                     }
-                    objetoFilme.getFilmByImdbIdDashboard(it){ film->
+                    objetoFilme.getFilmByImdbIdDashboard(it) { film ->
                         if (film != null) {
                             if (!film.userToSee) {
-                                objetoFilme.updateFilmToSeeDashboard(film.imdbID,true)
-                                film.userToSee=true
+                                objetoFilme.updateFilmToSeeDashboard(film.imdbID, true)
+                                film.userToSee = true
                                 GlobalScope.launch(Dispatchers.Main) {
                                     binding.paraVerButton.setBackgroundResource(R.drawable.baseline_turned_in_24)
                                     Toast.makeText(
                                         requireContext(),
-                                        "Filme adicionado à lista para ver",
+                                        getString(R.string.filme_adicionado_lista_ver),
                                         Toast.LENGTH_LONG
                                     ).show()
-
                                 }
                             } else {
-                                objetoFilme.updateFilmToSeeDashboard(film.imdbID,false)
-                                film.userToSee=false
+                                objetoFilme.updateFilmToSeeDashboard(film.imdbID, false)
+                                film.userToSee = false
                                 GlobalScope.launch(Dispatchers.Main) {
                                     binding.paraVerButton.setBackgroundResource(R.drawable.baseline_turned_in_not_24)
                                     Toast.makeText(
                                         requireContext(),
-                                        "Filme removido da lista para ver",
+                                        getString(R.string.filme_removido_lista_ver),
                                         Toast.LENGTH_LONG
                                     ).show()
                                 }
@@ -150,33 +148,9 @@ class DetalhesFragment : Fragment() {
                 }
             }
         }
-
-        binding.editButton.setOnClickListener {
-            binding.avaliacao.isEnabled = true
-            binding.observacoes.isEnabled = true
-
-            binding.editButton.setBackgroundResource(R.drawable.baseline_check_circle_24)
-
-            binding.editButton.setOnClickListener {
-                CoroutineScope(Dispatchers.IO).launch {
-                    objetoFilme.updateFilm(filmeUuid!!,binding.avaliacao.text.toString(),binding.observacoes.text.toString())
-                }
-
-                binding.avaliacao.isEnabled = false
-                binding.dataVisualizacao.isEnabled = false
-                Toast.makeText(
-                    requireContext(),
-                    "Filme editado",
-                    Toast.LENGTH_LONG
-                ).show()
-
-                binding.editButton.setBackgroundResource(R.drawable.ic_baseline_edit_24)
-            }
-        }
-
     }
 
-    private fun placeData(ui: Filme) {
+        private fun placeData(ui: Filme) {
         binding.nomeFilme.setText(ui.title)
         binding.genero.text = ui.genre
         binding.sinopse.text = ui.plot

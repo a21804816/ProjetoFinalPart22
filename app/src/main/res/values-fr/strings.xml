@@ -49,5 +49,19 @@
     <string name="erroVoz">Erreur de reconnaissance vocale.</string>
     <string name="pesquisar">Rechercher</string>
     <string name="tentarNovamente">Réessayer</string>
+    <string name="filme_adicionado_lista_ver">Film ajouté à la liste de visionnage</string>
+    <string name="filme_removido_lista_ver">Film retiré de la liste de visionnage</string>
+    <string name="erro_registo_filme">Erreur lors de l\'enregistrement du film</string>
+    <string name="campos_preencher">Veuillez remplir tous les champs obligatoires</string>
+    <string name="confirmacao_adicao_filme">Confirmer l\'ajout du film</string>
+    <string name="confirmar_adicionar_filme">Êtes-vous sûr de vouloir ajouter %1\$s ?</string>
+    <string name="sim">Oui</string>
+    <string name="nao">Non</string>
+    <string name="cinema_nao_existe">Le cinéma n\'existe pas</string>
+    <string name="filme_nao_encontrado">Film introuvable</string>
+    <string name="falar_para_pesquisar_filme">Veuillez parler pour rechercher un film</string>
+    <string name="user_online">Utilisateur en ligne</string>
+
+
 
 </resources>
