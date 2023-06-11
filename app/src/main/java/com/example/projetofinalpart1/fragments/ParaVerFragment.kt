@@ -28,6 +28,8 @@ class ParaVerFragment : Fragment() {
     val repository = FilmeRepository.getInstance()
     private val filmList = mutableListOf<Filme>()
     private val filteredFilmList = mutableListOf<Filme>()
+    private val allFilmList = mutableListOf<Filme>()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -48,25 +50,28 @@ class ParaVerFragment : Fragment() {
                     CoroutineScope(Dispatchers.Main).launch {
                         filmList.clear()
                         filmList.addAll(result.getOrDefault(emptyList()))
+                        allFilmList.clear()
+                        allFilmList.addAll(filmList)
                         filteredFilmList.clear()
-                        filteredFilmList.addAll(filmList)
+                        filteredFilmList.addAll(allFilmList)
                         adapter.setData(filteredFilmList)
                     }
                 }
             }
+
             repository.getFilmToSeeListDashboard { result ->
                 if (result.isSuccess) {
                     CoroutineScope(Dispatchers.Main).launch {
                         filmList.clear()
                         filmList.addAll(result.getOrDefault(emptyList()))
+                        allFilmList.addAll(filmList)
                         filteredFilmList.addAll(filmList)
                         adapter.setData(filteredFilmList)
                     }
                 }
             }
+
         }
-
-
 
         binding.searchView.setOnQueryTextListener(object :
             SearchView.OnQueryTextListener, androidx.appcompat.widget.SearchView.OnQueryTextListener {
@@ -77,15 +82,16 @@ class ParaVerFragment : Fragment() {
             override fun onQueryTextChange(newText: String?): Boolean {
                 filteredFilmList.clear()
                 if (!newText.isNullOrEmpty()) {
-                    filteredFilmList.addAll(filmList.filter { filme ->
+                    filteredFilmList.addAll(allFilmList.filter { filme ->
                         filme.title.contains(newText, ignoreCase = true)
                     })
                 } else {
-                    filteredFilmList.addAll(filmList)
+                    filteredFilmList.addAll(allFilmList)
                 }
                 adapter.setData(filteredFilmList)
                 return true
             }
+
         })
 
         binding.fabMicrophone.setOnClickListener {
