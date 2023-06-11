@@ -89,7 +89,7 @@ class RegistFragment : Fragment() {
                 } else {
                     AlertDialog.Builder(requireContext())
                         .setTitle(getString(R.string.confirmacao_adicao_filme))
-                        .setMessage(getString(R.string.confirmar_adicionar_filme) + nomeFilme + "?")
+                        .setMessage(getString(R.string.confirmar_adicionar_filme) + " $nomeFilme ?")
                         .setPositiveButton(getString(R.string.sim)) { dialog, _ ->
                             CoroutineScope(Dispatchers.IO).launch {
                                 cinema?.name?.let { it1 ->
@@ -97,7 +97,7 @@ class RegistFragment : Fragment() {
                                         nomeFilme, it1, avaliacao, data, observacoes, fotos,
                                         onFinished = { added, msg ->
                                             requireActivity().runOnUiThread {
-                                                Toast.makeText(requireContext(), msg, Toast.LENGTH_LONG).show()
+                                                Toast.makeText(requireContext(), R.string.filme_adicionado, Toast.LENGTH_LONG).show()
                                             }
                                         }
                                     )

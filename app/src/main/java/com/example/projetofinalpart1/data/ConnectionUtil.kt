@@ -36,13 +36,6 @@ object ConnectivityUtil {
         return true
       }
     }
-    GlobalScope.launch(Dispatchers.Main) {
-      Toast.makeText(
-        context,
-        context.getString(R.string.user_online),
-        Toast.LENGTH_LONG
-      ).show()
-    }
     return false
   }
 }
