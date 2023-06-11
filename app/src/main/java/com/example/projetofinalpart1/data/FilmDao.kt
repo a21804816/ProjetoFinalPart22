@@ -46,8 +46,8 @@ interface FilmDao {
     @Query("SELECT * FROM FilmsDashboard WHERE userToSee = 1 ORDER BY imdbRating DESC")
     fun getAllToSeeDashboard(): List<FilmeDashboard>
 
-    @Query("SELECT * FROM WatchedFilms WHERE uuid = :uuid")
-    fun getFilmByUUID(uuid: String): TableRoom?
+    @Query("SELECT * FROM WatchedFilms WHERE imdbID = :imdbId")
+    fun getFilmByUUID(imdbId: String): TableRoom?
 
     @Query("SELECT * FROM FilmsDashboard WHERE imdbID = :imdbID")
     fun getFilmByImdbIdDashboard(imdbID: String): Table2Room?

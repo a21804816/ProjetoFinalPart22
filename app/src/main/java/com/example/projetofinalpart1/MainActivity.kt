@@ -68,7 +68,7 @@ class MainActivity : AppCompatActivity() {
                         dialog.dismiss()
                         val movieMatch = recognizedText?.let { objetoFilme.getFilmByTitle(it) }
                         if (movieMatch != null) {
-                            NavigationManager.goToDetalhesFragment(supportFragmentManager, movieMatch.uuid)
+                            NavigationManager.goToDetalhesFragment(supportFragmentManager, movieMatch.imdbID)
                         } else {
                             Toast.makeText(this@MainActivity, "Movie not found", Toast.LENGTH_SHORT).show()
                         }

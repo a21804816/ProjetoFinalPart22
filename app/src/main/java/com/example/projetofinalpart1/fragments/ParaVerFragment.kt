@@ -56,9 +56,6 @@ class ParaVerFragment : Fragment() {
                     }
                 }
             }
-        }
-
-        CoroutineScope(Dispatchers.IO).launch {
             repository.getFilmToSeeListDashboard { result ->
                 if (result.isSuccess) {
                     CoroutineScope(Dispatchers.Main).launch {
@@ -70,6 +67,8 @@ class ParaVerFragment : Fragment() {
                 }
             }
         }
+
+
 
         binding.searchView.setOnQueryTextListener(object :
             SearchView.OnQueryTextListener, androidx.appcompat.widget.SearchView.OnQueryTextListener {

@@ -140,7 +140,7 @@ class FilmeRoom(private val dao: FilmDao) : ObjetoFilme() {
         TODO("Not yet implemented")
     }
 
-    suspend fun getFilmByUUID(uuid: String, onFinished: (Filme?) -> Unit) {
+    suspend fun getFilmByImdbId(uuid: String, onFinished: (Filme?) -> Unit) {
         withContext(Dispatchers.IO) {
             val film = dao.getFilmByUUID(uuid)
             val mappedFilm = film?.let {

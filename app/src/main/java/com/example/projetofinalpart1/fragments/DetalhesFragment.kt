@@ -70,7 +70,7 @@ class DetalhesFragment : Fragment() {
                 }
 
                 withContext(Dispatchers.IO) {
-                    objetoFilme.getFilmByUUID(uuid){
+                    objetoFilme.getFilmByImdbId(uuid){
                         if (it != null) {
                             requireActivity().runOnUiThread {
                                 placeData(it)
@@ -93,7 +93,7 @@ class DetalhesFragment : Fragment() {
         (binding.paraVerButton).setOnClickListener {
             CoroutineScope(Dispatchers.Main).launch {
                 filmeUuid?.let {
-                    objetoFilme.getFilmByUUID(it) { film ->
+                    objetoFilme.getFilmByImdbId(it) { film ->
                         if (film != null) {
                             if (!film.userToSee) {
                                 objetoFilme.updateFilmToSee(filmeUuid!!,true)

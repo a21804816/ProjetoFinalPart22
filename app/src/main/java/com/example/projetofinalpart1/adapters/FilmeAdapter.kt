@@ -33,7 +33,7 @@ class FilmeAdapter(
 
     override fun onBindViewHolder(holder: FilmeViewHolder, position: Int) {
         val orientation = holder.itemView.context.resources.configuration.orientation
-        holder.itemView.setOnClickListener { onClick(items[position].uuid) }
+        holder.itemView.setOnClickListener { onClick(items[position].imdbID) }
         holder.binding.nomeFilmeEditText.text = items[position].title
         holder.binding.cinemaEditText.text = items[position].userCinema
         holder.binding.avaliacaoValor.text = items[position].userRating
