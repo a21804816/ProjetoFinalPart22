@@ -199,9 +199,6 @@ class RegistFragment : Fragment() {
     }
 
     private fun removerCampos() {
-        binding.nomeFilmeEditText.text.clear()
-        binding.cinemaEditText.text.clear()
-        binding.observacoesEditText.text.clear()
         if(imageList.isNotEmpty()){
             imageList.clear()
         }
