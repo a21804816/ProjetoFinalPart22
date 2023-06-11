@@ -1,5 +1,6 @@
 package com.example.projetofinalpart1.fragments
 
+import android.annotation.SuppressLint
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -185,13 +186,14 @@ class DetalhesFragment : Fragment() {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun placeData(ui: Filme) {
         binding.nomeFilme.setText(ui.title)
         binding.genero.text = ui.genre
         binding.sinopse.text = ui.plot
         binding.dataLancamento.text = ui.released
         binding.avaliacaoImdb.text = ui.imdbRating
-        binding.linkImdb.text = "imdb.com/tittle/" + ui.imdbID + "/"
+        binding.linkImdb.text = "imdb.com/title/"  +ui.imdbID + "/"
         binding.votosImdb.text = ui.imdbVotes
         binding.actors.text = ui.actors
         binding.runTime.text = ui.runtime
