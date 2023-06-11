@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ProjetFinalPart1</string>
+    <string name="app_name">CineMemo</string>
     <string name="drawer_open">Ouvert</string>
     <string name="drawer_close">Fermé</string>
     <string name="regist">Enregistrement</string>
