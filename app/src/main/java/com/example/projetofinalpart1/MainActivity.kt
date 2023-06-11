@@ -34,12 +34,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        if (!screenRotated(savedInstanceState)) {
+        binding.toolbar.title = getString(R.string.dashboard)
+        if (savedInstanceState == null) {
             NavigationManager.goToDashboardFragment(supportFragmentManager)
         }
-
-        binding.toolbar.title = getString(R.string.dashboard)
-        NavigationManager.goToDashboardFragment(supportFragmentManager)
     }
 
     override fun onStart() {
@@ -155,7 +153,4 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
-    private fun screenRotated(savedInstanceState: Bundle?): Boolean {
-        return savedInstanceState != null
-    }
 }

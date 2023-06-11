@@ -1,6 +1,7 @@
 package com.example.projetofinalpart1.fragments
 
 import android.annotation.SuppressLint
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -34,8 +35,10 @@ class DashboardFragment : Fragment() {
             R.layout.fragment_dashboard, container, false
         )
         binding = FragmentDashboardBinding.bind(view)
+        requireActivity().requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         return binding.root
     }
+
 
     @SuppressLint("SetTextI18n")
     override fun onStart() {
