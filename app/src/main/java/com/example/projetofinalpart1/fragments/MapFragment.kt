@@ -1,6 +1,7 @@
 package com.example.projetofinalpart1.fragments
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -74,7 +75,7 @@ class MapFragment : Fragment() {
             map?.setOnInfoWindowClickListener { clickedMarker ->
                 val clickedFilme = clickedMarker.tag as? Filme
                 clickedFilme?.let {
-                    NavigationManager.goToDetalhesFragment(parentFragmentManager, clickedFilme.uuid)
+                    NavigationManager.goToDetalhesFragment(parentFragmentManager, clickedFilme.imdbID)
                 }
             }
 
@@ -87,6 +88,7 @@ class MapFragment : Fragment() {
         binding.map.onResume()
     }
 
+    @SuppressLint("MissingPermission")
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
@@ -109,8 +111,6 @@ class MapFragment : Fragment() {
                 if (existe && cinema != null) {
                     val cinemaLocation = LatLng(cinema.latitude, cinema.longitude)
                     val markerOptions = MarkerOptions().position(cinemaLocation).title(filme.title + " " + filme.userRating).icon(getMarkerIcon(filme.userRating.toInt()))
-
-
                     map?.addMarker(markerOptions)?.apply {
                         tag = filme
                     }

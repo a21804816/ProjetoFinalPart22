@@ -6,6 +6,10 @@ import android.net.NetworkCapabilities
 import android.util.Log
 import android.widget.Toast
 import androidx.core.content.ContentProviderCompat.requireContext
+import com.example.projetofinalpart1.R
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 object ConnectivityUtil {
 
@@ -14,11 +18,14 @@ object ConnectivityUtil {
 
     val capabilities = connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
     if (capabilities != null) {
-      Toast.makeText(
-        context,
-        "User online",
-        Toast.LENGTH_LONG
-      ).show()
+      GlobalScope.launch(Dispatchers.Main) {
+        Toast.makeText(
+          context,
+          "User online",
+          Toast.LENGTH_LONG
+        ).show()
+      }
+
       if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)) {
         Log.i("Internet", "NetworkCapabilities.TRANSPORT_CELLULAR")
         return true
@@ -30,11 +37,13 @@ object ConnectivityUtil {
         return true
       }
     }
-    Toast.makeText(
-      context,
-      "user offline",
-      Toast.LENGTH_LONG
-    ).show()
+    GlobalScope.launch(Dispatchers.Main) {
+      Toast.makeText(
+        context,
+        "User online",
+        Toast.LENGTH_LONG
+      ).show()
+    }
     return false
   }
 }
