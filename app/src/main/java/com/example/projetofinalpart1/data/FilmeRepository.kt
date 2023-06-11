@@ -2,6 +2,7 @@ package com.example.projetofinalpart1.data
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.provider.Settings.Secure.getString
 import android.util.Log
 import com.example.projetofinalpart1.R
 import com.example.projetofinalpart1.model.Filme
@@ -173,10 +174,10 @@ class FilmeRepository(
                                 )
                             }
                             Log.i("APP", "Filme adicionado")
-                            onFinished(true,R.string.filme_adicionado.toString())
+                            onFinished(true,context.getString(R.string.filme_adicionado))
                         } else {
                             Log.i("APP", "Filme não existe")
-                            onFinished(false, R.string.filmeNaoExiste.toString())
+                            onFinished(false, context.getString(R.string.filmeNaoExiste))
                         }
                     }
                 }
@@ -212,10 +213,10 @@ class FilmeRepository(
                                 )
                             }
                             Log.i("APP", "Filme adicionado")
-                            onFinished(true, R.string.filme_adicionado.toString())
+                            onFinished(true, context.getString(R.string.filme_adicionado))
                         } else {
                             Log.i("APP", "Filme não existe")
-                            onFinished(false, R.string.filmeNaoExiste.toString())
+                            onFinished(false, context.getString(R.string.filmeNaoExiste))
                         }
                     }
                 }

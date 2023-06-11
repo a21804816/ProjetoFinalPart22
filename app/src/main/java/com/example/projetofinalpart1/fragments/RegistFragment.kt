@@ -108,7 +108,7 @@ class RegistFragment : Fragment() {
                                         nomeFilme, it1, avaliacao, data, observacoes, fotos,
                                         onFinished = { added, msg ->
                                             requireActivity().runOnUiThread {
-                                                Toast.makeText(requireContext(), R.string.filme_adicionado, Toast.LENGTH_LONG).show()
+                                                Toast.makeText(requireContext(), msg, Toast.LENGTH_LONG).show()
                                             }
                                         }
                                     )
