@@ -108,9 +108,7 @@ class MapFragment : Fragment() {
                 val (existe, cinema) = objetoFilme.verificarCinemaExiste(cinemaName, context)
                 if (existe && cinema != null) {
                     val cinemaLocation = LatLng(cinema.latitude, cinema.longitude)
-                    val vectorIcon = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)
                     val markerOptions = MarkerOptions().position(cinemaLocation).title(filme.title + " " + filme.userRating).icon(getMarkerIcon(filme.userRating.toInt()))
-
 
                     map?.addMarker(markerOptions)?.apply {
                         tag = filme
