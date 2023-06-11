@@ -239,7 +239,7 @@ class DetalhesFragment : Fragment() {
         binding.sinopse.text = ui.plot
         binding.dataLancamento.text = ui.released
         binding.avaliacaoImdb.text = ui.imdbRating
-        binding.linkImdb.text = "imdb.com/tittle/" + ui.imdbID + "/"
+        binding.linkImdb.text = "imdb.com/title/" + ui.imdbID + "/"
         binding.votosImdb.text = ui.imdbVotes
         binding.actors.text = ui.actors
         binding.runTime.text = ui.runtime
