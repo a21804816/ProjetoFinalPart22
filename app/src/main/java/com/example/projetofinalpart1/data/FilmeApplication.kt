@@ -12,7 +12,7 @@ class FilmeApplication : Application() {
 
   override fun onCreate() {
     super.onCreate()
-
+    ConnectivityUtil.isOnline(this)
     FilmeRepository.init(
       local = FilmeRoom(FilmsDatabase.getInstance(this).filmDao()),
       remote = FilmeOkHttp("http://www.omdbapi.com/", "b0cf79db", OkHttpClient()),
