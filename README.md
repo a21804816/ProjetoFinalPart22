@@ -4,9 +4,12 @@ Dados:
 	21804816 Ricardo Cunha
 	
 Itens a verde são os existentes na app
+
 ![image](https://github.com/ULHT-CM-2022-23/projeto-android-nativo-21703860-21804816/assets/43844932/4a9f0aa9-c179-42be-9a31-db45b8bc1c83)
 
+Auto avaliação parte2 -> 15
 	
+
   
 Itens a verde são os existentes na app
 
