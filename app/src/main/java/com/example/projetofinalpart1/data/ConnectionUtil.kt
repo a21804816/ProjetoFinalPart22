@@ -36,6 +36,13 @@ object ConnectivityUtil {
         return true
       }
     }
+    GlobalScope.launch(Dispatchers.Main) {
+      Toast.makeText(
+        context,
+        "user offline",
+        Toast.LENGTH_LONG
+      ).show()
+    }
     return false
   }
 }

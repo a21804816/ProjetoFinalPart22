@@ -90,6 +90,29 @@ class DetalhesFragment : Fragment() {
             requireActivity().supportFragmentManager.popBackStack()
         }
 
+        binding.editButton.setOnClickListener {
+            binding.avaliacao.isEnabled = true
+            binding.observacoes.isEnabled = true
+
+            binding.editButton.setBackgroundResource(R.drawable.baseline_check_circle_24)
+
+            binding.editButton.setOnClickListener {
+                CoroutineScope(Dispatchers.IO).launch {
+                    objetoFilme.updateFilm(filmeUuid!!,binding.avaliacao.text.toString(),binding.observacoes.text.toString())
+                }
+
+                binding.avaliacao.isEnabled = false
+                binding.dataVisualizacao.isEnabled = false
+                Toast.makeText(
+                    requireContext(),
+                    "Filme editado",
+                    Toast.LENGTH_LONG
+                ).show()
+
+                binding.editButton.setBackgroundResource(R.drawable.ic_baseline_edit_24)
+            }
+        }
+
         (binding.paraVerButton).setOnClickListener {
             CoroutineScope(Dispatchers.Main).launch {
                 filmeUuid?.let {

@@ -1,17 +1,21 @@
 package com.example.projetofinalpart1.adapters
 
+import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.projetofinalpart1.data.ConnectivityUtil
 import com.example.projetofinalpart1.databinding.FotosDetalhesItemBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.File
+import java.io.FileInputStream
+import java.io.FileOutputStream
 import java.io.IOException
 import java.net.HttpURLConnection
 import java.net.URL
@@ -37,7 +41,7 @@ class FotosDetalhesAdapter(val fotos: List<String>, val imagemCartaz: String) :
         if (position == 0) {
             val url = imagemCartaz
             CoroutineScope(Dispatchers.Main).launch {
-                val bitmap = getBitmapFromURL(url)
+                val bitmap = getBitmapFromURL(holder.images.context, url)
                 if (bitmap != null) {
                     holder.images.setImageBitmap(bitmap)
                 }
@@ -55,21 +59,62 @@ class FotosDetalhesAdapter(val fotos: List<String>, val imagemCartaz: String) :
         }
     }
 
+    private suspend fun getBitmapFromURL(context: Context, src: String): Bitmap? {
+        val fileName = getFileNameFromURL(src)
+        val cacheDir = context.cacheDir
+        val file = File(cacheDir, fileName)
 
-    private suspend fun getBitmapFromURL(src: String): Bitmap? {
-        return withContext(Dispatchers.IO) {
-            try {
-                val url = URL(src)
-                val connection = url.openConnection() as HttpURLConnection
-                connection.doInput = true
-                connection.connect()
-                val inputStream = connection.inputStream
-                BitmapFactory.decodeStream(inputStream)
-            } catch (e: IOException) {
-                e.printStackTrace()
+        return if (file.exists()) {
+            decodeBitmapFromFile(file)
+        } else {
+            if (ConnectivityUtil.isOnline(context)) {
+                withContext(Dispatchers.IO) {
+                    try {
+                        val url = URL(src)
+                        val connection = url.openConnection() as HttpURLConnection
+                        connection.doInput = true
+                        connection.connect()
+                        val inputStream = connection.inputStream
+                        val bitmap = BitmapFactory.decodeStream(inputStream)
+                        saveBitmapToCache(context, bitmap, fileName)
+                        bitmap
+                    } catch (e: IOException) {
+                        e.printStackTrace()
+                        null
+                    }
+                }
+            } else {
                 null
             }
         }
+    }
+
+    private fun saveBitmapToCache(context: Context, bitmap: Bitmap, fileName: String) {
+        val cacheDir = context.cacheDir
+        val file = File(cacheDir, fileName)
+
+        try {
+            FileOutputStream(file).use { outputStream ->
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
+                outputStream.flush()
+            }
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+    }
+
+    private fun decodeBitmapFromFile(file: File): Bitmap? {
+        return try {
+            val inputStream = FileInputStream(file)
+            BitmapFactory.decodeStream(inputStream)
+        } catch (e: IOException) {
+            e.printStackTrace()
+            null
+        }
+    }
+
+    private fun getFileNameFromURL(url: String): String {
+        return url.substringAfterLast("/")
     }
 
     private suspend fun getBitmapFromFilePath(filePath: String): Bitmap? {

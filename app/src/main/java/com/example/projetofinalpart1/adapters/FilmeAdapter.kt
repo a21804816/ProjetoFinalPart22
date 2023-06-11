@@ -1,16 +1,22 @@
+import android.content.Context
 import android.content.res.Configuration
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.projetofinalpart1.data.ConnectivityUtil
 import com.example.projetofinalpart1.databinding.FilmeItemBinding
 import com.example.projetofinalpart1.model.Filme
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.io.File
+import java.io.FileInputStream
+import java.io.FileOutputStream
 import java.io.IOException
 import java.net.HttpURLConnection
 import java.net.URL
@@ -20,7 +26,9 @@ class FilmeAdapter(
     private var items: List<Filme> = listOf()
 ) : RecyclerView.Adapter<FilmeAdapter.FilmeViewHolder>() {
 
-    class FilmeViewHolder(val binding: FilmeItemBinding) : RecyclerView.ViewHolder(binding.root)
+    class FilmeViewHolder(val binding: FilmeItemBinding) : RecyclerView.ViewHolder(binding.root){
+        val movieImage:ImageView=binding.filmeFotografiaImageView
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FilmeViewHolder {
         return FilmeViewHolder(
@@ -41,7 +49,7 @@ class FilmeAdapter(
         holder.binding.observacoesEditText.text = items[position].userObservations
         val url = items[position].poster
         CoroutineScope(Dispatchers.Main).launch {
-            val bitmap = getBitmapFromURL(url)
+            val bitmap = getBitmapFromURL(holder.movieImage.context, url)
             if (bitmap != null) {
                 holder.binding.filmeFotografiaImageView.setImageBitmap(bitmap)
             }
@@ -61,20 +69,62 @@ class FilmeAdapter(
         notifyDataSetChanged()
     }
 
-    private suspend fun getBitmapFromURL(src: String): Bitmap? {
-        return withContext(Dispatchers.IO) {
-            try {
-                val url = URL(src)
-                val connection = url.openConnection() as HttpURLConnection
-                connection.doInput = true
-                connection.connect()
-                val inputStream = connection.inputStream
-                BitmapFactory.decodeStream(inputStream)
-            } catch (e: IOException) {
-                e.printStackTrace()
+    private suspend fun getBitmapFromURL(context: Context, src: String): Bitmap? {
+        val fileName = getFileNameFromURL(src)
+        val cacheDir = context.cacheDir
+        val file = File(cacheDir, fileName)
+
+        return if (file.exists()) {
+            decodeBitmapFromFile(file)
+        } else {
+            if (ConnectivityUtil.isOnline(context)) {
+                withContext(Dispatchers.IO) {
+                    try {
+                        val url = URL(src)
+                        val connection = url.openConnection() as HttpURLConnection
+                        connection.doInput = true
+                        connection.connect()
+                        val inputStream = connection.inputStream
+                        val bitmap = BitmapFactory.decodeStream(inputStream)
+                        saveBitmapToCache(context, bitmap, fileName)
+                        bitmap
+                    } catch (e: IOException) {
+                        e.printStackTrace()
+                        null
+                    }
+                }
+            } else {
                 null
             }
         }
+    }
+
+    private fun saveBitmapToCache(context: Context, bitmap: Bitmap, fileName: String) {
+        val cacheDir = context.cacheDir
+        val file = File(cacheDir, fileName)
+
+        try {
+            FileOutputStream(file).use { outputStream ->
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
+                outputStream.flush()
+            }
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+    }
+
+    private fun decodeBitmapFromFile(file: File): Bitmap? {
+        return try {
+            val inputStream = FileInputStream(file)
+            BitmapFactory.decodeStream(inputStream)
+        } catch (e: IOException) {
+            e.printStackTrace()
+            null
+        }
+    }
+
+    private fun getFileNameFromURL(url: String): String {
+        return url.substringAfterLast("/")
     }
 }
 
