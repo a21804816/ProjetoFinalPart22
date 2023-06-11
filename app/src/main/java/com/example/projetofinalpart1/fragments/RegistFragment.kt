@@ -202,7 +202,9 @@ class RegistFragment : Fragment() {
         binding.nomeFilmeEditText.text.clear()
         binding.cinemaEditText.text.clear()
         binding.observacoesEditText.text.clear()
-        imageList.clear()
+        if(imageList.isNotEmpty()){
+            imageList.clear()
+        }
     }
 
     private fun updateLable() {
