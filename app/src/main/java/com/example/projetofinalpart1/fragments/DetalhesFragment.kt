@@ -104,7 +104,7 @@ class DetalhesFragment : Fragment() {
                             CoroutineScope(Dispatchers.IO).launch {
                                 if (film != null) {
                                     objetoFilme.updateFilm(
-                                        film.imdbID,binding.avaliacao.text.toString(),
+                                        film.imdbID, binding.avaliacao.text.toString(),
                                         binding.observacoes.text.toString()
                                     )
                                 }
@@ -185,13 +185,13 @@ class DetalhesFragment : Fragment() {
         }
     }
 
-        private fun placeData(ui: Filme) {
+    private fun placeData(ui: Filme) {
         binding.nomeFilme.setText(ui.title)
         binding.genero.text = ui.genre
         binding.sinopse.text = ui.plot
         binding.dataLancamento.text = ui.released
         binding.avaliacaoImdb.text = ui.imdbRating
-        binding.linkImdb.text = ui.imdbID
+        binding.linkImdb.text = "imdb.com/tittle/" + ui.imdbID + "/"
         binding.votosImdb.text = ui.imdbVotes
         binding.actors.text = ui.actors
         binding.runTime.text = ui.runtime
@@ -212,15 +212,15 @@ class DetalhesFragment : Fragment() {
             binding.observacoes.visibility = View.GONE
         }
         val fotos = ui.userPhotos
-            val fotosList = fotos.split(",").map { it.trim() }
+        val fotosList = fotos.split(",").map { it.trim() }
 
-            val layoutManager =
-                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-            binding.fotosLista.layoutManager = layoutManager
-            binding.fotosLista.adapter = FotosDetalhesAdapter(fotosList, ui.poster)
+        val layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.fotosLista.layoutManager = layoutManager
+        binding.fotosLista.adapter = FotosDetalhesAdapter(fotosList, ui.poster)
 
 
-        }
+    }
 
     private fun placeDataDashboard(ui: FilmeDashboard) {
         binding.nomeCinemaText.visibility = View.GONE
@@ -237,7 +237,7 @@ class DetalhesFragment : Fragment() {
         binding.sinopse.text = ui.plot
         binding.dataLancamento.text = ui.released
         binding.avaliacaoImdb.text = ui.imdbRating
-        binding.linkImdb.text = ui.imdbID
+        binding.linkImdb.text = "imdb.com/tittle/" + ui.imdbID + "/"
         binding.votosImdb.text = ui.imdbVotes
         binding.actors.text = ui.actors
         binding.runTime.text = ui.runtime
