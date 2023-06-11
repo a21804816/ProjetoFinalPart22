@@ -1,7 +1,6 @@
 package com.example.projetofinalpart1.fragments
 
 import android.Manifest
-import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,16 +9,22 @@ import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.example.projetofinalpart1.NavigationManager
 import com.example.projetofinalpart1.R
 import com.example.projetofinalpart1.data.FilmeRepository
+import com.example.projetofinalpart1.data.FilmeRoom
+import com.example.projetofinalpart1.data.FilmsDatabase
 import com.example.projetofinalpart1.databinding.FragmentMapBinding
+import com.example.projetofinalpart1.model.Filme
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.LocationSource
-import com.google.android.gms.maps.model.CameraPosition
+import com.google.android.gms.maps.model.BitmapDescriptor
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import com.google.android.gms.maps.LocationSource.OnLocationChangedListener
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 class MapFragment : Fragment() {
@@ -27,6 +32,8 @@ class MapFragment : Fragment() {
     private lateinit var binding: FragmentMapBinding
     private var map: GoogleMap? = null
     val repository = FilmeRepository.getInstance()
+    private lateinit var objetoFilme: FilmeRoom
+    private val filmList = mutableListOf<Filme>()
 
 
     private val LOCATION_PERMISSION_REQUEST_CODE = 100
@@ -35,6 +42,7 @@ class MapFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         val view = inflater.inflate(R.layout.fragment_map, container, false)
+        objetoFilme = FilmeRoom(FilmsDatabase.getInstance(requireContext()).filmDao())
         binding = FragmentMapBinding.bind(view)
         binding.map.onCreate(savedInstanceState)
         binding.map.getMapAsync { googleMap ->
@@ -46,13 +54,6 @@ class MapFragment : Fragment() {
                 ) == PackageManager.PERMISSION_GRANTED
             ) {
                 map?.isMyLocationEnabled = true
-                map?.addMarker(
-                    MarkerOptions()
-                        .position(LatLng(38.75814, -9.15179))
-                        .title("ULHT 1")
-                )
-                addMarkerOnMap(39.75815, -9.15178, "Cinema do Parque")
-
             } else {
                 ActivityCompat.requestPermissions(
                     requireActivity(),
@@ -60,6 +61,23 @@ class MapFragment : Fragment() {
                     LOCATION_PERMISSION_REQUEST_CODE
                 )
             }
+            CoroutineScope(Dispatchers.IO).launch {
+                repository.getFilmList { result ->
+                    if (result.isSuccess) {
+                        CoroutineScope(Dispatchers.Main).launch {
+                            filmList.addAll(result.getOrDefault(emptyList()))
+                            addMarkersOnMap()
+                        }
+                    }
+                }
+            }
+            map?.setOnInfoWindowClickListener { clickedMarker ->
+                val clickedFilme = clickedMarker.tag as? Filme
+                clickedFilme?.let {
+                    NavigationManager.goToDetalhesFragment(parentFragmentManager, clickedFilme.uuid)
+                }
+            }
+
         }
         return binding.root
     }
@@ -68,6 +86,7 @@ class MapFragment : Fragment() {
         super.onResume()
         binding.map.onResume()
     }
+
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
@@ -76,18 +95,42 @@ class MapFragment : Fragment() {
         if (requestCode == LOCATION_PERMISSION_REQUEST_CODE) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 map?.isMyLocationEnabled = true
-                addMarkerOnMap(38.75814, -9.15179, "ULHT")
             }
         }
     }
 
-    fun addMarkerOnMap(latitude: Double, longitude: Double, nomeCinema: String) {
-        val cinemaLocation = LatLng(latitude, longitude)
-        val markerOptions = MarkerOptions().position(cinemaLocation).title(nomeCinema)
-        map?.addMarker(markerOptions)
-        map?.moveCamera(CameraUpdateFactory.newLatLngZoom(cinemaLocation, 0f))
+    fun addMarkersOnMap() {
+        val cinemaNames = mutableListOf<String>()
+        for (filme in filmList) {
+            val cinemaName = filme.userCinema
+            if (!cinemaNames.contains(cinemaName)) {
+                cinemaNames.add(cinemaName)
+                val (existe, cinema) = objetoFilme.verificarCinemaExiste(cinemaName, context)
+                if (existe && cinema != null) {
+                    val cinemaLocation = LatLng(cinema.latitude, cinema.longitude)
+                    val vectorIcon = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)
+                    val markerOptions = MarkerOptions().position(cinemaLocation).title(filme.title + " " + filme.userRating).icon(getMarkerIcon(filme.userRating.toInt()))
+
+
+                    map?.addMarker(markerOptions)?.apply {
+                        tag = filme
+                    }
+                }
+            }
+        }
     }
 
+    private fun getMarkerIcon(userRating: Int): BitmapDescriptor {
+        return when {
+            userRating >= 10 -> BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)
+            userRating >= 8 -> BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW)
+            userRating >= 6 -> BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)
+            userRating >= 4 -> BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA)
+            userRating >= 2 -> BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)
+            else -> BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)
+        }
+    }
 
 }
+
 

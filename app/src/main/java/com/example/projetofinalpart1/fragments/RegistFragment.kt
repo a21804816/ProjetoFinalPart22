@@ -98,8 +98,6 @@ class RegistFragment : Fragment() {
                                     onFinished = { added, msg ->
                                         requireActivity().runOnUiThread {
                                             Toast.makeText(requireContext(), msg, Toast.LENGTH_LONG).show()
-                                            mapFragment.addMarkerOnMap(cinema.latitude, cinema.longitude, cinema.name)
-
                                         }
                                     }
                                 )

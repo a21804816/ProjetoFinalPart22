@@ -2,7 +2,6 @@ package com.example.projetofinalpart1.fragments
 
 import FilmeAdapter
 import android.app.Activity
-import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
 import android.speech.RecognizerIntent
@@ -15,7 +14,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.projetofinalpart1.NavigationManager
 import com.example.projetofinalpart1.R
 import com.example.projetofinalpart1.data.FilmeRepository
-import com.example.projetofinalpart1.databinding.DialogLayoutBinding
 import com.example.projetofinalpart1.databinding.FragmentListBinding
 import com.example.projetofinalpart1.model.Filme
 import com.example.projetofinalpart1.model.listaFilmesParaVer

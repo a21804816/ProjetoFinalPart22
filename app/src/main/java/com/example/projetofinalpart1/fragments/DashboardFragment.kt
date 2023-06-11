@@ -1,6 +1,5 @@
 package com.example.projetofinalpart1.fragments
 
-import FilmeAdapter
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,7 +13,6 @@ import com.example.projetofinalpart1.adapters.TendeciasAdapter
 import com.example.projetofinalpart1.data.FilmeRepository
 import com.example.projetofinalpart1.databinding.FragmentDashboardBinding
 import com.example.projetofinalpart1.listaTodosFilmes
-import com.example.projetofinalpart1.model.listaFilmesVistos
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
