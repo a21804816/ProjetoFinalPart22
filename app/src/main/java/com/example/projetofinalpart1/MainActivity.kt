@@ -28,6 +28,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var objetoFilme: FilmeRoom
     private val REQUEST_CODE_SPEECH_INPUT = 100
     private var recognizedText: String? = null
+    val repository = FilmeRepository.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +37,7 @@ class MainActivity : AppCompatActivity() {
         if (!screenRotated(savedInstanceState)) {
             NavigationManager.goToDashboardFragment(supportFragmentManager)
         }
+
         binding.toolbar.title = getString(R.string.dashboard)
         NavigationManager.goToDashboardFragment(supportFragmentManager)
     }
@@ -64,7 +66,7 @@ class MainActivity : AppCompatActivity() {
                         dialog.dismiss()
                         val movieMatch = recognizedText?.let { objetoFilme.getFilmByTitle(it) }
                         if (movieMatch != null) {
-                            NavigationManager.goToDetalhesFragment(supportFragmentManager, movieMatch.uuid)
+                            NavigationManager.goToDetalhesFragment(supportFragmentManager, movieMatch.imdbID)
                         } else {
                             Toast.makeText(this@MainActivity, "Movie not found", Toast.LENGTH_SHORT).show()
                         }

@@ -13,6 +13,7 @@ import com.example.projetofinalpart1.data.FilmeRoom
 import com.example.projetofinalpart1.data.FilmsDatabase
 import com.example.projetofinalpart1.databinding.FragmentDetalhesBinding
 import com.example.projetofinalpart1.model.Filme
+import com.example.projetofinalpart1.model.FilmeDashboard
 import kotlinx.coroutines.*
 
 private const val ARG_FILME_UUID = "ARG_FILME_UUID"
@@ -51,15 +52,33 @@ class DetalhesFragment : Fragment() {
         binding.observacoes.isEnabled = false
 
         CoroutineScope(Dispatchers.Main).launch {
-            filmeUuid?.let {
-                objetoFilme.getFilmByUUID(it) { film ->
-                    if (film != null) {
-                        requireActivity().runOnUiThread {
-                            placeData(film)
-                            if (film.userToSee) {
-                                binding.paraVerButton.setBackgroundResource(R.drawable.baseline_turned_in_24)
-                            } else {
-                                binding.paraVerButton.setBackgroundResource(R.drawable.baseline_turned_in_not_24)
+            filmeUuid?.let { uuid ->
+                withContext(Dispatchers.IO) {
+                    objetoFilme.getFilmByImdbIdDashboard(uuid){
+                        if (it != null) {
+                            requireActivity().runOnUiThread {
+                                placeDataDashboard(it)
+                                binding.editButton.visibility = View.GONE
+                                if (it.userToSee) {
+                                    binding.paraVerButton.setBackgroundResource(R.drawable.baseline_turned_in_24)
+                                } else {
+                                    binding.paraVerButton.setBackgroundResource(R.drawable.baseline_turned_in_not_24)
+                                }
+                            }
+                        }
+                    }
+                }
+
+                withContext(Dispatchers.IO) {
+                    objetoFilme.getFilmByImdbId(uuid){
+                        if (it != null) {
+                            requireActivity().runOnUiThread {
+                                placeData(it)
+                                if (it.userToSee) {
+                                    binding.paraVerButton.setBackgroundResource(R.drawable.baseline_turned_in_24)
+                                } else {
+                                    binding.paraVerButton.setBackgroundResource(R.drawable.baseline_turned_in_not_24)
+                                }
                             }
                         }
                     }
@@ -73,13 +92,13 @@ class DetalhesFragment : Fragment() {
 
         (binding.paraVerButton).setOnClickListener {
             CoroutineScope(Dispatchers.Main).launch {
-                filmeUuid?.let {
-                    objetoFilme.getFilmByUUID(it) { film ->
+                filmeUuid?.let { it ->
+                    objetoFilme.getFilmByImdbId(it) { film ->
                         if (film != null) {
                             if (!film.userToSee) {
-                                objetoFilme.updateFilmToSee(filmeUuid!!,true)
-                                binding.paraVerButton.setBackgroundResource(R.drawable.baseline_turned_in_24)
+                                objetoFilme.updateFilmToSee(film.imdbID,true)
                                 GlobalScope.launch(Dispatchers.Main) {
+                                    binding.paraVerButton.setBackgroundResource(R.drawable.baseline_turned_in_24)
                                     Toast.makeText(
                                         requireContext(),
                                         "Filme adicionado à lista para ver",
@@ -88,10 +107,37 @@ class DetalhesFragment : Fragment() {
 
                                 }
                             } else {
-                                objetoFilme.updateFilmToSee(filmeUuid!!,false)
-                                binding.paraVerButton.setBackgroundResource(R.drawable.baseline_turned_in_not_24)
+                                objetoFilme.updateFilmToSee(film.imdbID,false)
                                 GlobalScope.launch(Dispatchers.Main) {
+                                    binding.paraVerButton.setBackgroundResource(R.drawable.baseline_turned_in_not_24)
+                                    Toast.makeText(
+                                        requireContext(),
+                                        "Filme removido da lista para ver",
+                                        Toast.LENGTH_LONG
+                                    ).show()
+                                }
+                            }
+                        }
+                    }
+                    objetoFilme.getFilmByImdbIdDashboard(it){ film->
+                        if (film != null) {
+                            if (!film.userToSee) {
+                                objetoFilme.updateFilmToSeeDashboard(film.imdbID,true)
+                                film.userToSee=true
+                                GlobalScope.launch(Dispatchers.Main) {
+                                    binding.paraVerButton.setBackgroundResource(R.drawable.baseline_turned_in_24)
+                                    Toast.makeText(
+                                        requireContext(),
+                                        "Filme adicionado à lista para ver",
+                                        Toast.LENGTH_LONG
+                                    ).show()
 
+                                }
+                            } else {
+                                objetoFilme.updateFilmToSeeDashboard(film.imdbID,false)
+                                film.userToSee=false
+                                GlobalScope.launch(Dispatchers.Main) {
+                                    binding.paraVerButton.setBackgroundResource(R.drawable.baseline_turned_in_not_24)
                                     Toast.makeText(
                                         requireContext(),
                                         "Filme removido da lista para ver",
@@ -157,6 +203,35 @@ class DetalhesFragment : Fragment() {
             binding.observacoes.visibility = View.GONE
         }
         val fotos = ui.userPhotos
+
+        val layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.fotosLista.layoutManager = layoutManager
+        binding.fotosLista.adapter = FotosDetalhesAdapter(fotos.toList(), ui.poster)
+
+    }
+
+    private fun placeDataDashboard(ui: FilmeDashboard) {
+        binding.nomeCinemaText.visibility = View.GONE
+        binding.nomeCinema.visibility = View.GONE
+        binding.avaliacao.visibility = View.GONE
+        binding.avaliacaoText.visibility = View.GONE
+        binding.dataVisualizacaoText.visibility = View.GONE
+        binding.dataVisualizacao.visibility = View.GONE
+        binding.observacoesText.visibility = View.GONE
+        binding.observacoes.visibility = View.GONE
+
+        binding.nomeFilme.setText(ui.title)
+        binding.genero.text = ui.genre
+        binding.sinopse.text = ui.plot
+        binding.dataLancamento.text = ui.released
+        binding.avaliacaoImdb.text = ui.imdbRating
+        binding.linkImdb.text = ui.imdbID
+        binding.votosImdb.text = ui.imdbVotes
+        binding.actors.text = ui.actors
+        binding.runTime.text = ui.runtime
+
+        val fotos = ui.poster
 
         val layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)

@@ -54,7 +54,19 @@ class ParaVerFragment : Fragment() {
                     }
                 }
             }
+            repository.getFilmToSeeListDashboard { result ->
+                if (result.isSuccess) {
+                    CoroutineScope(Dispatchers.Main).launch {
+                        filmList.clear()
+                        filmList.addAll(result.getOrDefault(emptyList()))
+                        filteredFilmList.addAll(filmList)
+                        adapter.setData(filteredFilmList)
+                    }
+                }
+            }
         }
+
+
 
         binding.searchView.setOnQueryTextListener(object :
             SearchView.OnQueryTextListener, androidx.appcompat.widget.SearchView.OnQueryTextListener {

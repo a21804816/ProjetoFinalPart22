@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.projetofinalpart1.databinding.TendenciasItemBinding
 import com.example.projetofinalpart1.listaTodosFilmes
 import com.example.projetofinalpart1.model.Filme
+import com.example.projetofinalpart1.model.FilmeDashboard
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -19,7 +20,7 @@ import java.net.URL
 
 class TendeciasAdapter(
     private val onClick: (String) -> Unit,
-    private var items: List<Filme> = listOf()
+    private var items: List<FilmeDashboard> = listOf()
 ) : RecyclerView.Adapter<TendeciasAdapter.TodosViewHolder>() {
     inner class TodosViewHolder(binding: TendenciasItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -36,7 +37,7 @@ class TendeciasAdapter(
     }
 
     override fun onBindViewHolder(holder: TodosViewHolder, position: Int) {
-        holder.itemView.setOnClickListener { onClick(items[position].uuid) }
+        holder.itemView.setOnClickListener { onClick(items[position].imdbID) }
         val url = items[position].poster
         CoroutineScope(Dispatchers.Main).launch {
             val bitmap = getBitmapFromURL(url)
@@ -48,7 +49,7 @@ class TendeciasAdapter(
 
     override fun getItemCount(): Int = items.size
 
-    fun setData(newItems: List<Filme>) {
+    fun setData(newItems: List<FilmeDashboard>) {
         items = newItems
         notifyDataSetChanged()
     }
