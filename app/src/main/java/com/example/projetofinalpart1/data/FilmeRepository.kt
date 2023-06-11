@@ -3,6 +3,7 @@ package com.example.projetofinalpart1.data
 import android.annotation.SuppressLint
 import android.content.Context
 import android.util.Log
+import com.example.projetofinalpart1.R
 import com.example.projetofinalpart1.model.Filme
 import com.example.projetofinalpart1.model.FilmeApi
 import com.example.projetofinalpart1.model.FilmeDashboard
@@ -144,7 +145,7 @@ class FilmeRepository(
              local.checkIfFilmExist(nomeFilme) {
                 if (it){
                     Log.i("APP", "Existe na DB")
-                    onFinished(false,"Filme existe na bd")
+                    onFinished(false,R.string.filme_existe_bd.toString())
                 }else if (ConnectivityUtil.isOnline(context)) {
                     Log.i("APP", "App online...")
                     remote.checkIfFilmExist(nomeFilme) { movies, error ->
@@ -172,10 +173,10 @@ class FilmeRepository(
                                 )
                             }
                             Log.i("APP", "Filme adicionado")
-                            onFinished(true,"Filme adicionado")
+                            onFinished(true,R.string.filme_adicionado.toString())
                         } else {
                             Log.i("APP", "Filme não existe")
-                            onFinished(false, "Filme não existe")
+                            onFinished(false, R.string.filmeNaoExiste.toString())
                         }
                     }
                 }
@@ -191,7 +192,7 @@ class FilmeRepository(
         withContext(Dispatchers.IO) {
             local.checkIfFilmExistDashboard(imdbId){
                 if (it){
-                    onFinished(false, "Filme já esta na bd")
+                    onFinished(false, R.string.filme_existe_bd.toString())
                 }else{
                     remote.checkIfFilmExistDashboard(imdbId) { movies, error ->
                         if (movies != null) {
@@ -211,10 +212,10 @@ class FilmeRepository(
                                 )
                             }
                             Log.i("APP", "Filme adicionado")
-                            onFinished(true, "Filme adicionado")
+                            onFinished(true, R.string.filme_adicionado.toString())
                         } else {
                             Log.i("APP", "Filme não existe")
-                            onFinished(false, "Filme não existe")
+                            onFinished(false, R.string.filmeNaoExiste.toString())
                         }
                     }
                 }

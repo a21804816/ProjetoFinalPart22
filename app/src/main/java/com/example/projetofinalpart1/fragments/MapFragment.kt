@@ -3,6 +3,7 @@ package com.example.projetofinalpart1.fragments
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
+import android.location.Location
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -17,6 +18,8 @@ import com.example.projetofinalpart1.data.FilmeRoom
 import com.example.projetofinalpart1.data.FilmsDatabase
 import com.example.projetofinalpart1.databinding.FragmentMapBinding
 import com.example.projetofinalpart1.model.Filme
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.BitmapDescriptor
@@ -35,6 +38,7 @@ class MapFragment : Fragment() {
     val repository = FilmeRepository.getInstance()
     private lateinit var objetoFilme: FilmeRoom
     private val filmList = mutableListOf<Filme>()
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
 
 
     private val LOCATION_PERMISSION_REQUEST_CODE = 100
@@ -44,6 +48,7 @@ class MapFragment : Fragment() {
     ): View {
         val view = inflater.inflate(R.layout.fragment_map, container, false)
         objetoFilme = FilmeRoom(FilmsDatabase.getInstance(requireContext()).filmDao())
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
         binding = FragmentMapBinding.bind(view)
         binding.map.onCreate(savedInstanceState)
         binding.map.getMapAsync { googleMap ->
@@ -55,6 +60,7 @@ class MapFragment : Fragment() {
                 ) == PackageManager.PERMISSION_GRANTED
             ) {
                 map?.isMyLocationEnabled = true
+                zoomToCurrentLocation()
             } else {
                 ActivityCompat.requestPermissions(
                     requireActivity(),
@@ -127,6 +133,14 @@ class MapFragment : Fragment() {
             userRating >= 4 -> BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA)
             userRating >= 2 -> BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)
             else -> BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)
+        }
+    }
+    private fun zoomToCurrentLocation() {
+        fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
+            if (location != null) {
+                val latLng = LatLng(location.latitude, location.longitude)
+                map?.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10f))
+            }
         }
     }
 
