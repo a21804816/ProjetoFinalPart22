@@ -2,7 +2,6 @@ package com.example.projetofinalpart1.adapters
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -17,7 +16,7 @@ import java.io.IOException
 import java.net.HttpURLConnection
 import java.net.URL
 
-class FotosDetalhesAdapter(val fotos: List<Char>, val imagemCartaz: String) :
+class FotosDetalhesAdapter(val fotos: List<String>, val imagemCartaz: String) :
     RecyclerView.Adapter<FotosDetalhesAdapter.FotosViewHolder>() {
     inner class FotosViewHolder(binding: FotosDetalhesItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -30,6 +29,10 @@ class FotosDetalhesAdapter(val fotos: List<Char>, val imagemCartaz: String) :
         return FotosViewHolder(binding)
     }
 
+    override fun getItemCount(): Int {
+        return fotos.size+1
+    }
+
     override fun onBindViewHolder(holder: FotosViewHolder, position: Int) {
         if (position == 0) {
             val url = imagemCartaz
@@ -40,14 +43,18 @@ class FotosDetalhesAdapter(val fotos: List<Char>, val imagemCartaz: String) :
                 }
             }
         } else {
-            val filePath = fotos[position - 1]
-            holder.images.setImageURI(Uri.parse(filePath.toString()))
+            val filePath = fotos[position-1]
+            val cleanedList = filePath.replace("[", "").replace("]", "")
+            CoroutineScope(Dispatchers.Main).launch {
+                val bitmap = getBitmapFromFilePath(cleanedList)
+                if (bitmap != null) {
+                    holder.images.setImageBitmap(bitmap)
+                }
+            }
+
         }
     }
 
-
-
-    override fun getItemCount(): Int = fotos.size + 1
 
     private suspend fun getBitmapFromURL(src: String): Bitmap? {
         return withContext(Dispatchers.IO) {

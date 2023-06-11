@@ -177,13 +177,15 @@ class DetalhesFragment : Fragment() {
             binding.observacoes.visibility = View.GONE
         }
         val fotos = ui.userPhotos
+            val fotosList = fotos.split(",").map { it.trim() }
 
-        val layoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        binding.fotosLista.layoutManager = layoutManager
-        binding.fotosLista.adapter = FotosDetalhesAdapter(fotos.toList(), ui.poster)
+            val layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            binding.fotosLista.layoutManager = layoutManager
+            binding.fotosLista.adapter = FotosDetalhesAdapter(fotosList, ui.poster)
 
-    }
+
+        }
 
     private fun placeDataDashboard(ui: FilmeDashboard) {
         binding.nomeCinemaText.visibility = View.GONE
@@ -210,7 +212,7 @@ class DetalhesFragment : Fragment() {
         val layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.fotosLista.layoutManager = layoutManager
-        binding.fotosLista.adapter = FotosDetalhesAdapter(fotos.toList(), ui.poster)
+        binding.fotosLista.adapter = FotosDetalhesAdapter(listOf(fotos), ui.poster)
 
     }
 
