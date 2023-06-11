@@ -2,6 +2,7 @@ package com.example.projetofinalpart1.fragments
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
@@ -92,6 +93,12 @@ class MapFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         binding.map.onResume()
+        requireActivity().requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+    }
+
+    override fun onPause() {
+        super.onPause()
+        requireActivity().requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
     }
 
     @SuppressLint("MissingPermission")

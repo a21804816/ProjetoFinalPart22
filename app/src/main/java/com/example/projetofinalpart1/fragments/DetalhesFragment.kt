@@ -1,5 +1,6 @@
 package com.example.projetofinalpart1.fragments
 
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -97,8 +98,19 @@ class DetalhesFragment : Fragment() {
             binding.editButton.setBackgroundResource(R.drawable.baseline_check_circle_24)
 
             binding.editButton.setOnClickListener {
-                CoroutineScope(Dispatchers.IO).launch {
-                    objetoFilme.updateFilm(filmeUuid!!,binding.avaliacao.text.toString(),binding.observacoes.text.toString())
+                CoroutineScope(Dispatchers.Main).launch {
+                    filmeUuid?.let {
+                        objetoFilme.getFilmByImdbId(it) { film ->
+                            CoroutineScope(Dispatchers.IO).launch {
+                                if (film != null) {
+                                    objetoFilme.updateFilm(
+                                        film.imdbID,binding.avaliacao.text.toString(),
+                                        binding.observacoes.text.toString()
+                                    )
+                                }
+                            }
+                        }
+                    }
                 }
 
                 binding.avaliacao.isEnabled = false

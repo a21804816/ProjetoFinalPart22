@@ -32,7 +32,6 @@ object NavigationManager {
         placeFragment(fm, ParaVerFragment())
     }
 
-
     fun goToDetalhesFragment(fm: FragmentManager, uuid: String) {
         placeFragment(fm, DetalhesFragment.newInstance(uuid))
     }

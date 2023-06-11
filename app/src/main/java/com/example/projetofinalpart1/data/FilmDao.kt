@@ -52,8 +52,8 @@ interface FilmDao {
     @Query("SELECT * FROM FilmsDashboard WHERE imdbID = :imdbID")
     fun getFilmByImdbIdDashboard(imdbID: String): Table2Room?
 
-    @Query("UPDATE WatchedFilms SET userRating = :newRating, userObservations = :newObservations WHERE uuid = :filmUUID")
-    fun updateFilm(filmUUID: String, newRating: String, newObservations: String): Int
+    @Query("UPDATE WatchedFilms SET userRating = :newRating, userObservations = :newObservations WHERE imdbID = :imdbId")
+    fun updateFilm(imdbId: String, newRating: String, newObservations: String): Int
 
     @Query("UPDATE WatchedFilms SET userToSee = :newTooSee WHERE imdbID = :filmUUID")
     fun updateFilmToSee(filmUUID: String, newTooSee: Boolean): Int

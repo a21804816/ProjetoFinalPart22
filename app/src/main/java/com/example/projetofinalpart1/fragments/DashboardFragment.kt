@@ -35,10 +35,18 @@ class DashboardFragment : Fragment() {
             R.layout.fragment_dashboard, container, false
         )
         binding = FragmentDashboardBinding.bind(view)
-        requireActivity().requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         return binding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+        requireActivity().requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+    }
+
+    override fun onPause() {
+        super.onPause()
+        requireActivity().requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
+    }
 
     @SuppressLint("SetTextI18n")
     override fun onStart() {
