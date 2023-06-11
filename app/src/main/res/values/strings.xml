@@ -54,15 +54,18 @@
     <string name="erro_registo_filme">Erro no registro do filme</string>
     <string name="campos_preencher">Por favor, preencha todos os campos obrigatórios</string>
     <string name="confirmacao_adicao_filme">Confirmar adição do filme</string>
-    <string name="confirmar_adicionar_filme">Tem certeza de que deseja adicionar %1\$s?</string>
+    <string name="confirmar_adicionar_filme">Tem certeza de que deseja adicionar </string>
     <string name="sim">Sim</string>
     <string name="nao">Não</string>
     <string name="cinema_nao_existe">Cinema não existe</string>
     <string name="filme_nao_encontrado">Filme não encontrado</string>
     <string name="falar_para_pesquisar_filme">Por favor, fale para pesquisar um filme</string>
     <string name="user_online">User online</string>
-
-
+    <string name="atores_detalhes">Atores:</string>
+    <string name="duracao_detalhes">Duração:</string>
+    <string name="votos_imdb_detalhes">Votos IMDB:</string>
+    <string name="filme_adicionado">Filme adicionado</string>
+    <string name="filme_existe_bd">Filme já existe na base de dados</string>
 
 
 

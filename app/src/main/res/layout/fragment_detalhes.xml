@@ -72,7 +72,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
-                    android:text="Nome Filme:"
+                    android:text="@string/nome_filme_detalhes"
                     android:textAppearance="?android:textAppearanceMedium" />
 
                 <TextView
@@ -95,7 +95,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
-                    android:text="Nome Cinema:"
+                    android:text="@string/nome_cinema_detalhes"
                     android:textAppearance="?android:textAppearanceMedium" />
 
                 <TextView
@@ -118,7 +118,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
-                    android:text="Avaliação:"
+                    android:text="@string/avaliacao_detalhes"
                     android:textAppearance="?android:textAppearanceMedium" />
 
                 <EditText
@@ -140,7 +140,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
-                    android:text="Data de visualização:"
+                    android:text="@string/data_de_visualizacao_detalhes"
                     android:textAppearance="?android:textAppearanceMedium" />
 
                 <TextView
@@ -163,7 +163,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
-                    android:text="Observações:"
+                    android:text="@string/observaces_detalhes"
                     android:textAppearance="?android:textAppearanceMedium" />
 
                 <EditText
@@ -185,7 +185,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
-                    android:text="Género:"
+                    android:text="@string/genero_detalhes"
                     android:textAppearance="?android:textAppearanceMedium" />
 
                 <TextView
@@ -208,7 +208,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
-                    android:text="Sinopse:"
+                    android:text="@string/sinopse_detalhes"
                     android:textAppearance="?android:textAppearanceMedium" />
 
                 <TextView
@@ -230,7 +230,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
-                    android:text="Atores:"
+                    android:text="@string/atores_detalhes"
                     android:textAppearance="?android:textAppearanceMedium" />
 
                 <TextView
@@ -253,7 +253,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
-                    android:text="Data de lançamento:"
+                    android:text="@string/data_de_lancamento_detalhes"
                     android:textAppearance="?android:textAppearanceMedium" />
 
                 <TextView
@@ -276,7 +276,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
-                    android:text="Duração:"
+                    android:text="@string/duracao_detalhes"
                     android:textAppearance="?android:textAppearanceMedium" />
 
                 <TextView
@@ -299,7 +299,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
-                    android:text="Avaliação IMDB:"
+                    android:text="@string/avaliacao_imdb_detalhes"
                     android:textAppearance="?android:textAppearanceMedium" />
 
                 <TextView
@@ -322,7 +322,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
-                    android:text="Votos IMDB:"
+                    android:text="@string/votos_imdb_detalhes"
                     android:textAppearance="?android:textAppearanceMedium" />
 
                 <TextView
@@ -345,7 +345,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
-                    android:text="Link IMDB:"
+                    android:text="@string/link_imdb_detalhes"
                     android:textAppearance="?android:textAppearanceMedium" />
 
                 <TextView

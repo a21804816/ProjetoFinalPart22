@@ -54,13 +54,20 @@
     <string name="erro_registo_filme">Erreur lors de l\'enregistrement du film</string>
     <string name="campos_preencher">Veuillez remplir tous les champs obligatoires</string>
     <string name="confirmacao_adicao_filme">Confirmer l\'ajout du film</string>
-    <string name="confirmar_adicionar_filme">Êtes-vous sûr de vouloir ajouter %1\$s ?</string>
+    <string name="confirmar_adicionar_filme">Êtes-vous sûr de vouloir ajouter </string>
     <string name="sim">Oui</string>
     <string name="nao">Non</string>
     <string name="cinema_nao_existe">Le cinéma n\'existe pas</string>
     <string name="filme_nao_encontrado">Film introuvable</string>
     <string name="falar_para_pesquisar_filme">Veuillez parler pour rechercher un film</string>
     <string name="user_online">Utilisateur en ligne</string>
+    <string name="atores_detalhes">Acteurs :</string>
+    <string name="duracao_detalhes">Durée :</string>
+    <string name="votos_imdb_detalhes">Votes IMDB :</string>
+    <string name="filme_adicionado">Film ajouté</string>
+    <string name="filme_existe_bd">Le film existe déjà dans la base de données</string>
+
+
 
 
 
