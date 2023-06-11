@@ -252,7 +252,6 @@ class DetalhesFragment : Fragment() {
         binding.fotosLista.adapter = FotosDetalhesAdapter(listOf(fotos), ui.poster)
 
     }
-
     companion object {
         @JvmStatic
         fun newInstance(uuid: String) =

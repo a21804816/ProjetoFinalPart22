@@ -58,6 +58,8 @@ class MainActivity : AppCompatActivity() {
                 RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
             )
 
+            dialogBinding.promptTextView.text = recognizedText
+
             dialogBinding.searchButton.setOnClickListener {
                 CoroutineScope(Dispatchers.Main).launch {
                     if (recognizedText != null) {
