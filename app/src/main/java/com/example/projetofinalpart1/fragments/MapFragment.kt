@@ -110,6 +110,7 @@ class MapFragment : Fragment() {
                     val cinemaLocation = LatLng(cinema.latitude, cinema.longitude)
                     val markerOptions = MarkerOptions().position(cinemaLocation).title(filme.title + " " + filme.userRating).icon(getMarkerIcon(filme.userRating.toInt()))
 
+
                     map?.addMarker(markerOptions)?.apply {
                         tag = filme
                     }
