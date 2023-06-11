@@ -5,6 +5,7 @@ import android.content.Context
 import android.util.Log
 import com.example.projetofinalpart1.model.Filme
 import com.example.projetofinalpart1.model.FilmeApi
+import com.example.projetofinalpart1.model.FilmeDashboard
 import com.example.projetofinalpart1.model.ObjetoFilme
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -23,8 +24,27 @@ class FilmeRepository(
             onFinished(result)
         }
     }
+
+    suspend fun getFilmListDashboard(onFinished: (Result<List<FilmeDashboard>>) -> Unit) {
+        local.getFilmListDashboard { result ->
+            onFinished(result)
+        }
+    }
+
+    suspend fun getDashboardTop10(onFinished: (Result<List<FilmeDashboard>>) -> Unit) {
+        local.getDashboardTop10 { result ->
+            onFinished(result)
+        }
+    }
+
     suspend fun getFilmToSeeList(onFinished: (Result<List<Filme>>) -> Unit) {
         local.getFilmToSeeList { result ->
+            onFinished(result)
+        }
+    }
+
+    suspend fun getFilmToSeeListDashboard(onFinished: (Result<List<Filme>>) -> Unit) {
+        local.getFilmToSeeListDashboard { result ->
             onFinished(result)
         }
     }
@@ -32,20 +52,6 @@ class FilmeRepository(
     suspend fun getFilmListOrder(onFinished: (Result<List<Filme>>) -> Unit) {
         local.getFilmListOrder { result ->
             onFinished(result)
-        }
-    }
-
-    private fun refreshHistory(onFinished: () -> Unit) {
-        if (ConnectivityUtil.isOnline(context)) {
-            remote.getFilmList() { result ->
-                if (result.isSuccess) {
-                    local.insertFilms(result.getOrDefault(mutableListOf())) {
-                        onFinished()
-                    }
-                } else {
-                    onFinished()
-                }
-            }
         }
     }
 
@@ -94,6 +100,37 @@ class FilmeRepository(
         }
     }
 
+    suspend fun addMoviesDasboard(
+        title: String,
+        released: String,
+        runtime: String,
+        genre: String,
+        actors: String,
+        plot: String,
+        poster: String,
+        imdbRating: String,
+        imdbVotes: String,
+        imdbID: String,
+        type: String
+    ) {
+        Log.i("APP", "A adicionar Filme...")
+        CoroutineScope(Dispatchers.IO).launch {
+            local.addMoviesDashboard(
+                title,
+                released,
+                runtime,
+                genre,
+                actors,
+                plot,
+                poster,
+                imdbRating,
+                imdbVotes,
+                imdbID,
+                type
+            )
+        }
+    }
+
     suspend fun checkIfFilmExist(
         nomeFilme: String,
         nomeCinema: String,
@@ -136,16 +173,54 @@ class FilmeRepository(
                             }
                             Log.i("APP", "Filme adicionado")
                             onFinished(true,"Filme adicionado")
-                        }else{
+                        } else {
                             Log.i("APP", "Filme não existe")
-                            onFinished(false,"Filme não existe")
+                            onFinished(false, "Filme não existe")
                         }
                     }
-
                 }
+             }
+        }
 
+    }
 
+    suspend fun checkIfFilmExistDasboard(
+        imdbId: String,
+        onFinished: (Boolean, String) -> Unit
+    ) {
+        withContext(Dispatchers.IO) {
+            local.checkIfFilmExistDashboard(imdbId){
+                if (it){
+                    onFinished(false, "Filme já esta na bd")
+                }else{
+                    remote.checkIfFilmExistDashboard(imdbId) { movies, error ->
+                        if (movies != null) {
+                            CoroutineScope(Dispatchers.IO).launch {
+                                addMoviesDasboard(
+                                    movies.title,
+                                    movies.released,
+                                    movies.runtime,
+                                    movies.genre,
+                                    movies.actors,
+                                    movies.plot,
+                                    movies.poster,
+                                    movies.imdbRating,
+                                    movies.imdbVotes,
+                                    movies.imdbID,
+                                    movies.type
+                                )
+                            }
+                            Log.i("APP", "Filme adicionado")
+                            onFinished(true, "Filme adicionado")
+                        } else {
+                            Log.i("APP", "Filme não existe")
+                            onFinished(false, "Filme não existe")
+                        }
+                    }
+                }
             }
+
+
         }
 
     }

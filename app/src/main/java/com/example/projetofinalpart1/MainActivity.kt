@@ -30,6 +30,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var objetoFilme: FilmeRoom
     private val REQUEST_CODE_SPEECH_INPUT = 100
     private var recognizedText: String? = null
+    val repository = FilmeRepository.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +39,7 @@ class MainActivity : AppCompatActivity() {
         if (!screenRotated(savedInstanceState)) {
             NavigationManager.goToDashboardFragment(supportFragmentManager)
         }
+
         binding.toolbar.title = getString(R.string.dashboard)
         NavigationManager.goToDashboardFragment(supportFragmentManager)
     }
