@@ -17,14 +17,6 @@ object ConnectivityUtil {
 
     val capabilities = connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
     if (capabilities != null) {
-      GlobalScope.launch(Dispatchers.Main) {
-        Toast.makeText(
-          context,
-          context.getString(R.string.user_online),
-          Toast.LENGTH_LONG
-        ).show()
-      }
-
       if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)) {
         Log.i("Internet", "NetworkCapabilities.TRANSPORT_CELLULAR")
         return true
@@ -39,7 +31,7 @@ object ConnectivityUtil {
     GlobalScope.launch(Dispatchers.Main) {
       Toast.makeText(
         context,
-        "user offline",
+        "Utilizador Offline",
         Toast.LENGTH_LONG
       ).show()
     }

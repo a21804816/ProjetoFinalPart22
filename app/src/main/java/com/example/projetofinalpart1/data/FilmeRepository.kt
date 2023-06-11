@@ -146,7 +146,7 @@ class FilmeRepository(
              local.checkIfFilmExist(nomeFilme) {
                 if (it){
                     Log.i("APP", "Existe na DB")
-                    onFinished(false,R.string.filme_existe_bd.toString())
+                    onFinished(false,context.getString(R.string.filme_existe_bd))
                 }else if (ConnectivityUtil.isOnline(context)) {
                     Log.i("APP", "App online...")
                     remote.checkIfFilmExist(nomeFilme) { movies, error ->
