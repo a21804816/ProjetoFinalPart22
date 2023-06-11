@@ -107,6 +107,9 @@ class RegistFragment : Fragment() {
                                     repository.checkIfFilmExist(
                                         nomeFilme, it1, avaliacao, data, observacoes, fotos,
                                         onFinished = { added, msg ->
+                                            if(added){
+                                                removerCampos()
+                                            }
                                             requireActivity().runOnUiThread {
                                                 Toast.makeText(requireContext(), msg, Toast.LENGTH_LONG).show()
                                             }
@@ -196,18 +199,9 @@ class RegistFragment : Fragment() {
     }
 
     private fun removerCampos() {
-        Toast.makeText(
-            requireContext(),
-            getString(R.string.sucesso_registo_filme),
-            Toast.LENGTH_LONG
-        ).show()
-        objetoFilme.limparCampos();
-
-        binding.nomeFilmeEditText.setText(objetoFilme.nomeFilm)
-        binding.cinemaEditText.setText(objetoFilme.cinema)
-        binding.avaliacaoSlider.progress = objetoFilme.avaliacaoFilme.toIntOrNull() ?: 0
-        binding.dataEditText.text = objetoFilme.data
-        binding.observacoesEditText.setText(objetoFilme.observacoesFilme)
+        binding.nomeFilmeEditText.text.clear()
+        binding.cinemaEditText.text.clear()
+        binding.observacoesEditText.text.clear()
         imageList.clear()
     }
 
