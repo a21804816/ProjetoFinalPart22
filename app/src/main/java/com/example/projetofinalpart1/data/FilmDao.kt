@@ -55,7 +55,7 @@ interface FilmDao {
     @Query("UPDATE WatchedFilms SET userRating = :newRating, userObservations = :newObservations WHERE uuid = :filmUUID")
     fun updateFilm(filmUUID: String, newRating: String, newObservations: String): Int
 
-    @Query("UPDATE WatchedFilms SET userToSee = :newTooSee WHERE uuid = :filmUUID")
+    @Query("UPDATE WatchedFilms SET userToSee = :newTooSee WHERE imdbID = :filmUUID")
     fun updateFilmToSee(filmUUID: String, newTooSee: Boolean): Int
 
     @Query("UPDATE FilmsDashboard SET userToSee = :newTooSee WHERE imdbID = :filmUUID")

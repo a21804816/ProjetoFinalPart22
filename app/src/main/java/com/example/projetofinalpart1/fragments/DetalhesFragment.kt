@@ -92,11 +92,11 @@ class DetalhesFragment : Fragment() {
 
         (binding.paraVerButton).setOnClickListener {
             CoroutineScope(Dispatchers.Main).launch {
-                filmeUuid?.let {
+                filmeUuid?.let { it ->
                     objetoFilme.getFilmByImdbId(it) { film ->
                         if (film != null) {
                             if (!film.userToSee) {
-                                objetoFilme.updateFilmToSee(filmeUuid!!,true)
+                                objetoFilme.updateFilmToSee(film.imdbID,true)
                                 GlobalScope.launch(Dispatchers.Main) {
                                     binding.paraVerButton.setBackgroundResource(R.drawable.baseline_turned_in_24)
                                     Toast.makeText(
@@ -107,7 +107,7 @@ class DetalhesFragment : Fragment() {
 
                                 }
                             } else {
-                                objetoFilme.updateFilmToSee(filmeUuid!!,false)
+                                objetoFilme.updateFilmToSee(film.imdbID,false)
                                 GlobalScope.launch(Dispatchers.Main) {
                                     binding.paraVerButton.setBackgroundResource(R.drawable.baseline_turned_in_not_24)
                                     Toast.makeText(
@@ -119,10 +119,11 @@ class DetalhesFragment : Fragment() {
                             }
                         }
                     }
-                    objetoFilme.getFilmByImdbIdDashboard(it){
-                        if (it != null) {
-                            if (!it.userToSee) {
-                                objetoFilme.updateFilmToSeeDashboard(it.imdbID,true)
+                    objetoFilme.getFilmByImdbIdDashboard(it){ film->
+                        if (film != null) {
+                            if (!film.userToSee) {
+                                objetoFilme.updateFilmToSeeDashboard(film.imdbID,true)
+                                film.userToSee=true
                                 GlobalScope.launch(Dispatchers.Main) {
                                     binding.paraVerButton.setBackgroundResource(R.drawable.baseline_turned_in_24)
                                     Toast.makeText(
@@ -133,7 +134,8 @@ class DetalhesFragment : Fragment() {
 
                                 }
                             } else {
-                                objetoFilme.updateFilmToSeeDashboard(it.imdbID,false)
+                                objetoFilme.updateFilmToSeeDashboard(film.imdbID,false)
+                                film.userToSee=false
                                 GlobalScope.launch(Dispatchers.Main) {
                                     binding.paraVerButton.setBackgroundResource(R.drawable.baseline_turned_in_not_24)
                                     Toast.makeText(

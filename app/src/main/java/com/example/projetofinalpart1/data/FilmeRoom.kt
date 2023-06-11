@@ -160,7 +160,7 @@ class FilmeRoom(private val dao: FilmDao) : ObjetoFilme() {
             val mappedFilm = film?.let {
                 FilmeDashboard(
                     it.title, it.released, it.runtime, it.genre, it.actors, it.plot, it.poster,
-                    it.imdbRating, it.imdbVotes, it.imdbID, it.type
+                    it.imdbRating, it.imdbVotes, it.imdbID, it.type,it.userToSee
                 )
             }
             onFinished(mappedFilm)
