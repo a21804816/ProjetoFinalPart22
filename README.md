@@ -3,6 +3,7 @@ Dados:
 	21703860 Pedro Nogueira
 	21804816 Ricardo Cunha
 	
+Link do video parte dois [https://youtu.be/HY6LEh2J-y0](https://www.youtube.com/watch?v=HY6LEh2J-y0&t=9s)
 Itens a verde são os existentes na app
 
 ![image](https://github.com/ULHT-CM-2022-23/projeto-android-nativo-21703860-21804816/assets/43844932/4a9f0aa9-c179-42be-9a31-db45b8bc1c83)
