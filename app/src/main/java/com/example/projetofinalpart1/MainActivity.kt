@@ -81,6 +81,12 @@ class MainActivity : AppCompatActivity() {
             dialogBinding.retryButton.setOnClickListener {
                 dialogBinding.promptTextView.text = ""
                 recognizedText = null
+                val speechIntent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
+                speechIntent.putExtra(
+                    RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                    RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
+                )
+                startActivityForResult(speechIntent, REQUEST_CODE_SPEECH_INPUT)
             }
 
             startActivityForResult(speechIntent, REQUEST_CODE_SPEECH_INPUT)
