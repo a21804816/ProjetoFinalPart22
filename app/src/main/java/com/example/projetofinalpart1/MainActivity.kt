@@ -29,6 +29,7 @@ class MainActivity : AppCompatActivity() {
     private val REQUEST_CODE_SPEECH_INPUT = 100
     private var recognizedText: String? = null
     val repository = FilmeRepository.getInstance()
+    private lateinit var dialogBinding: DialogLayoutBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,8 +58,6 @@ class MainActivity : AppCompatActivity() {
                 RecognizerIntent.EXTRA_LANGUAGE_MODEL,
                 RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
             )
-
-            dialogBinding.promptTextView.text = recognizedText
 
             dialogBinding.searchButton.setOnClickListener {
                 CoroutineScope(Dispatchers.Main).launch {
@@ -98,6 +97,7 @@ class MainActivity : AppCompatActivity() {
         if (requestCode == REQUEST_CODE_SPEECH_INPUT && resultCode == Activity.RESULT_OK) {
             val result = data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
             recognizedText = result?.get(0)
+            dialogBinding.promptTextView.text = recognizedText
 
         }
     }
