@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity() {
         objetoFilme = FilmeRoom(FilmsDatabase.getInstance(this).filmDao())
 
         binding.fabMicrophone.setOnClickListener {
-            val dialogBinding = DialogLayoutBinding.inflate(layoutInflater)
+            dialogBinding = DialogLayoutBinding.inflate(layoutInflater)
             val dialog = Dialog(this)
             dialog.setContentView(dialogBinding.root)
             dialog.setCancelable(false)
