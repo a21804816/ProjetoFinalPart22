@@ -10,7 +10,6 @@ import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
-import com.example.projetofinalpart1.data.FilmDao
 import com.example.projetofinalpart1.data.FilmeRepository
 import com.example.projetofinalpart1.data.FilmeRoom
 import com.example.projetofinalpart1.data.FilmsDatabase

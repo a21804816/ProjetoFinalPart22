@@ -4,7 +4,6 @@ import FilmeAdapter
 import android.app.Activity.RESULT_OK
 import android.app.Dialog
 import android.content.Intent
-import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.speech.RecognizerIntent
 import android.view.LayoutInflater
@@ -17,7 +16,6 @@ import com.example.projetofinalpart1.NavigationManager
 import com.example.projetofinalpart1.R
 import com.example.projetofinalpart1.data.FilmeRepository
 import com.example.projetofinalpart1.databinding.DialogLayoutBinding
-
 import com.example.projetofinalpart1.databinding.FragmentListBinding
 import com.example.projetofinalpart1.model.Filme
 import com.example.projetofinalpart1.model.listaFilmesVistos

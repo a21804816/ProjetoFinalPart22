@@ -2,7 +2,6 @@ package com.example.projetofinalpart1.data
 
 import android.app.Application
 import android.util.Log
-import androidx.core.content.ContentProviderCompat.requireContext
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
