@@ -2,7 +2,6 @@ package com.example.projetofinalpart1.data
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.provider.Settings.Secure.getString
 import android.util.Log
 import com.example.projetofinalpart1.R
 import com.example.projetofinalpart1.model.Filme
