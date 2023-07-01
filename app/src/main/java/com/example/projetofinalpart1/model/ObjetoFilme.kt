@@ -1,6 +1,7 @@
 package com.example.projetofinalpart1.model
 
 import android.content.Context
+import com.example.projetofinalpart1.data.FilmeRepository
 import com.example.projetofinalpart1.listaTodosFilmes
 import org.json.JSONObject
 import java.text.SimpleDateFormat
@@ -8,8 +9,12 @@ import java.util.*
 
 var listaFilmesVistos = mutableListOf<Filme>()
 var listaFilmesParaVer = mutableListOf<Filme>()
+val filmesCinemasList = mutableListOf<Pair<String, String>>()
+val repository = FilmeRepository.getInstance()
+
 
 abstract class ObjetoFilme {
+
 
     var nomeFilm: String = ""
         private set
@@ -71,7 +76,8 @@ abstract class ObjetoFilme {
                 val cinemaName = cinemaObject.getString("cinema_name")
                 val cinemaLat = cinemaObject.getDouble("latitude")
                 val cinemaLong = cinemaObject.getDouble("longitude")
-                val cinema = Cinema(cinemaName, cinemaLat, cinemaLong)
+                val postcode = cinemaObject.getString("postcode")
+                val cinema = Cinema(cinemaName, cinemaLat, cinemaLong, postcode)
                 cinemas.add(cinema)
             }
         } catch (e: Exception) {
@@ -81,7 +87,12 @@ abstract class ObjetoFilme {
         return cinemas
     }
 
-    data class Cinema(val name: String, val latitude: Double, val longitude: Double)
+    data class Cinema(
+        val name: String,
+        val latitude: Double,
+        val longitude: Double,
+        val postcode: String
+    )
 
 
     fun verificarCinemaExiste(nome: String, context: Context?): Pair<Boolean, Cinema?> {
@@ -115,6 +126,15 @@ abstract class ObjetoFilme {
 
     fun getOperationById(uuid: String): Filme? {
         return listaTodosFilmes.find { it.uuid == uuid }
+    }
+
+    suspend fun getFilmesCinemasList(): List<Pair<String, String>> {
+        return filmesCinemasList
+    }
+
+    fun adicionarFilmeCinema(filme: String, cinema: String) {
+        val pair = Pair(filme, cinema)
+        filmesCinemasList.add(pair)
     }
 
     abstract fun insertFilms(films: List<FilmeApi>, onFinished: () -> Unit)

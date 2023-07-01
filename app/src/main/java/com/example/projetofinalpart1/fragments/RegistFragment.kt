@@ -18,6 +18,7 @@ import android.widget.SeekBar
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import com.example.projetofinalpart1.MainActivity
 import com.example.projetofinalpart1.R
 import com.example.projetofinalpart1.data.FilmeRepository
 import com.example.projetofinalpart1.data.FilmeRoom
@@ -38,6 +39,7 @@ class RegistFragment : Fragment() {
     private lateinit var objetoFilme: FilmeRoom
     val repository = FilmeRepository.getInstance()
     private lateinit var mapFragment: MapFragment
+
 
 
     override fun onCreateView(
@@ -64,7 +66,16 @@ class RegistFragment : Fragment() {
     @SuppressLint("QueryPermissionsNeeded", "SuspiciousIndentation")
     override fun onStart() {
         super.onStart()
+
         objetoFilme = FilmeRoom(FilmsDatabase.getInstance(requireContext()).filmDao())
+
+        CoroutineScope(Dispatchers.IO).launch {
+            val filmesCinemasList = objetoFilme.getFilmesCinemasList()
+            requireActivity().runOnUiThread {
+                println(filmesCinemasList.size)            }
+        }
+
+
 
         binding.registarButton.setOnClickListener {
             val nomeFilme = binding.nomeFilmeEditText.text.toString()
@@ -109,6 +120,7 @@ class RegistFragment : Fragment() {
                                         onFinished = { added, msg ->
                                             if(added){
                                                 removerCampos()
+                                                objetoFilme.adicionarFilmeCinema(nomeFilme,cinema.name)
                                             }
                                             requireActivity().runOnUiThread {
                                                 Toast.makeText(requireContext(), msg, Toast.LENGTH_LONG).show()
@@ -126,7 +138,7 @@ class RegistFragment : Fragment() {
         }
 
 
-    binding.tirarFotoButton.setOnClickListener {
+        binding.tirarFotoButton.setOnClickListener {
             val options = arrayOf<CharSequence>(
                 getString(R.string.tirarFoto),
                 getString(R.string.selecionarGaleria),
@@ -170,6 +182,8 @@ class RegistFragment : Fragment() {
                     updateLable()
                 }
             }
+            val minDate = Calendar.getInstance()
+            minDate.add(Calendar.DAY_OF_MONTH, -2)
             val dialog = DatePickerDialog(
                 requireContext(),
                 datePicker,
@@ -178,6 +192,7 @@ class RegistFragment : Fragment() {
                 objetoFilme.calendario.get(Calendar.DAY_OF_MONTH)
             )
             dialog.datePicker.maxDate = hoje.timeInMillis
+            //dialog.datePicker.minDate = minDate.timeInMillis
             dialog.show()
             binding.dataEditText.error = null
         }

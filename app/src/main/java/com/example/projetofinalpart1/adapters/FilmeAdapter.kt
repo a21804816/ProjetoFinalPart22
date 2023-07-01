@@ -6,10 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.RecyclerView
+import com.example.projetofinalpart1.NavigationManager
 import com.example.projetofinalpart1.data.ConnectivityUtil
+import com.example.projetofinalpart1.data.FilmeRoom
+import com.example.projetofinalpart1.data.FilmsDatabase
 import com.example.projetofinalpart1.databinding.FilmeItemBinding
 import com.example.projetofinalpart1.model.Filme
+import com.example.projetofinalpart1.model.repository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -24,10 +29,13 @@ import java.net.URL
 class FilmeAdapter(
     private val onClick: (String) -> Unit,
     private var items: List<Filme> = listOf()
+
 ) : RecyclerView.Adapter<FilmeAdapter.FilmeViewHolder>() {
 
-    class FilmeViewHolder(val binding: FilmeItemBinding) : RecyclerView.ViewHolder(binding.root){
-        val movieImage:ImageView=binding.filmeFotografiaImageView
+    private lateinit var objetoFilme: FilmeRoom
+
+    class FilmeViewHolder(val binding: FilmeItemBinding) : RecyclerView.ViewHolder(binding.root) {
+        val movieImage: ImageView = binding.filmeFotografiaImageView
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FilmeViewHolder {
@@ -40,6 +48,25 @@ class FilmeAdapter(
     }
 
     override fun onBindViewHolder(holder: FilmeViewHolder, position: Int) {
+
+        /*objetoFilme = FilmeRoom(FilmsDatabase.getInstance(holder.itemView.context).filmDao())
+        var listaFilmes = mutableListOf<String>()
+        CoroutineScope(Dispatchers.IO).launch {
+            val filmesCinemasList = objetoFilme.getFilmesCinemasList()
+
+            var (listaFilmes, listaCinemas) = filmesCinemasList.unzip()
+
+
+            var filme1 = objetoFilme.getFilmByTitle(listaFilmes[0])
+            println(filme1!!.imdbID)
+            var cinema1 = objetoFilme.verificarCinemaExiste(listaCinemas[0],holder.itemView.context)
+            println(cinema1)
+
+            if (items[position].title == listaFilmes[position]){
+                objetoFilme.getFilmByTitle(items[position].title)
+            }
+        }*/
+
         val orientation = holder.itemView.context.resources.configuration.orientation
         holder.itemView.setOnClickListener { onClick(items[position].imdbID) }
         holder.binding.nomeFilmeEditText.text = items[position].title
@@ -56,10 +83,10 @@ class FilmeAdapter(
         }
         holder.binding.cinemaEditText.visibility =
             if (orientation == Configuration.ORIENTATION_PORTRAIT) View.GONE else View.VISIBLE
-        holder.binding.avaliacaoValor.visibility =
-            if (orientation == Configuration.ORIENTATION_PORTRAIT) View.GONE else View.VISIBLE
         holder.binding.observacoesEditText.visibility =
             if (orientation == Configuration.ORIENTATION_PORTRAIT) View.GONE else View.VISIBLE
+
+        holder.binding.avaliacaoValor.visibility = View.VISIBLE
     }
 
     override fun getItemCount(): Int = items.size
