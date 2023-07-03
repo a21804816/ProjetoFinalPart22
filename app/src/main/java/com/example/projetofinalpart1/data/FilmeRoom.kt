@@ -175,6 +175,7 @@ class FilmeRoom(private val dao: FilmDao) : ObjetoFilme() {
         dao.updateFilmToSee(uuid, toSee)
     }
 
+
     fun updateFilmToSeeDashboard(uuid: String, toSee: Boolean) {
         dao.updateFilmToSeeDashboard(uuid, toSee)
     }
