@@ -85,7 +85,7 @@ class MainActivity : AppCompatActivity() {
                         if (movieMatch != null) {
                             NavigationManager.goToDetalhesFragment(
                                 supportFragmentManager,
-                                movieMatch.imdbID
+                                movieMatch.imdbID, "Pesquisa voz"
                             )
                         } else {
                             Toast.makeText(

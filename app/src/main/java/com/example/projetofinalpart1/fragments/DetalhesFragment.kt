@@ -18,17 +18,20 @@ import com.example.projetofinalpart1.model.FilmeDashboard
 import kotlinx.coroutines.*
 
 private const val ARG_FILME_UUID = "ARG_FILME_UUID"
+private const val Origem = "Origem"
 
 class DetalhesFragment : Fragment() {
 
     private lateinit var binding: FragmentDetalhesBinding
     private var filmeUuid: String? = null
     private lateinit var objetoFilme: FilmeRoom
+    private var origem: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             filmeUuid = it.getString(ARG_FILME_UUID)
+            origem = it.getString(Origem)
         }
     }
 
@@ -51,6 +54,7 @@ class DetalhesFragment : Fragment() {
         binding.avaliacao.isEnabled = false
         binding.dataVisualizacao.isEnabled = false
         binding.observacoes.isEnabled = false
+        binding.listaoumapa.text=origem
 
         CoroutineScope(Dispatchers.Main).launch {
             filmeUuid?.let { uuid ->
@@ -253,10 +257,11 @@ class DetalhesFragment : Fragment() {
     }
     companion object {
         @JvmStatic
-        fun newInstance(uuid: String) =
+        fun newInstance(uuid: String, origem:String) =
             DetalhesFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_FILME_UUID, uuid)
+                    putString(Origem,origem)
                 }
             }
     }

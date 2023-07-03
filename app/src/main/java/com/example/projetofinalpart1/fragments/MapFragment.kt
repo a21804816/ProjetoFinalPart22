@@ -82,7 +82,7 @@ class MapFragment : Fragment() {
             map?.setOnInfoWindowClickListener { clickedMarker ->
                 val clickedFilme = clickedMarker.tag as? Filme
                 clickedFilme?.let {
-                    NavigationManager.goToDetalhesFragment(parentFragmentManager, clickedFilme.imdbID)
+                    NavigationManager.goToDetalhesFragment(parentFragmentManager, clickedFilme.imdbID, "Mapa")
                 }
             }
 
@@ -118,7 +118,7 @@ class MapFragment : Fragment() {
         val cinemaNames = mutableListOf<String>()
         for (filme in filmList) {
             val cinemaName = filme.userCinema
-            if (!cinemaNames.contains(cinemaName)) {
+            if (!cinemaNames.contains(cinemaName)) {  // && filme.genre.contains("Action")
                 cinemaNames.add(cinemaName)
                 val (existe, cinema) = objetoFilme.verificarCinemaExiste(cinemaName, context)
                 if (existe && cinema != null) {

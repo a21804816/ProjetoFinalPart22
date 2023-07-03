@@ -89,7 +89,7 @@ class DashboardFragment : Fragment() {
     }
 
     private fun onOperationClick(uuid: String) {
-        NavigationManager.goToDetalhesFragment(parentFragmentManager, uuid)
+        NavigationManager.goToDetalhesFragment(parentFragmentManager, uuid, "Dashboard")
     }
 
 }

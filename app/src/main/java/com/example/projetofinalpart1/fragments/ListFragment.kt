@@ -216,7 +216,7 @@ class ListFragment : Fragment(), FusedLocation.OnLocationChangedListener {
     }
 
     private fun onOperationClick(uuid: String) {
-        NavigationManager.goToDetalhesFragment(parentFragmentManager, uuid)
+        NavigationManager.goToDetalhesFragment(parentFragmentManager, uuid, "Lista")
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
