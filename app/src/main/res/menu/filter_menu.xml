@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/filter_500m"
+        android:title="500 metros" />
+    <item
+        android:id="@+id/filter_1000m"
+        android:title="1000 metros" />
+
+    <item
+        android:id="@+id/filter_crescente"
+        android:title="Avaliação Crescente" />
+    <item
+        android:id="@+id/filter_decrescente"
+        android:title="Avaliação Decrescente" />
+
+    <item
+        android:id="@+id/filter_reset"
+        android:title="Reset" />
+</menu>
