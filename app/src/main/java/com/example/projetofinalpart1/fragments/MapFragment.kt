@@ -55,20 +55,7 @@ class MapFragment : Fragment() {
         binding.map.getMapAsync { googleMap ->
             map = googleMap
 
-            if (ContextCompat.checkSelfPermission(
-                    requireContext(),
-                    Manifest.permission.ACCESS_FINE_LOCATION
-                ) == PackageManager.PERMISSION_GRANTED
-            ) {
-                map?.isMyLocationEnabled = true
-                zoomToCurrentLocation()
-            } else {
-                ActivityCompat.requestPermissions(
-                    requireActivity(),
-                    arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-                    LOCATION_PERMISSION_REQUEST_CODE
-                )
-            }
+
             CoroutineScope(Dispatchers.IO).launch {
                 repository.getFilmList { result ->
                     if (result.isSuccess) {

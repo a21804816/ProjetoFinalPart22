@@ -118,7 +118,7 @@ class ListFragment : Fragment(), FusedLocation.OnLocationChangedListener {
 
         resetFilter()
 
-        binding.textEmptyList!!.text = filteredFilmList.size.toString()
+       // binding.textEmptyList!!.text = filteredFilmList.size.toString()
 
         binding.searchView.setOnQueryTextListener(object :
             SearchView.OnQueryTextListener,
@@ -247,6 +247,8 @@ class ListFragment : Fragment(), FusedLocation.OnLocationChangedListener {
     override fun onLocationChanged(latitude: Double, longitude: Double) {
         currentLatitude = latitude
         currentLongitude = longitude
+
+
 
     }
 
