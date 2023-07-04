@@ -39,7 +39,7 @@ class FilmeRoom(private val dao: FilmDao) : ObjetoFilme() {
         dao.insert(film)
     }
 
-    suspend fun deleteDashboard(){
+    fun deleteDashboard(){
         dao.deleteAllDashboard()
     }
 

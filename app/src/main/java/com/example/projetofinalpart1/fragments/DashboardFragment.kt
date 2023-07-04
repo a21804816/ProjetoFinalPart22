@@ -68,7 +68,6 @@ class DashboardFragment : Fragment() {
             }
         }
 
-
         CoroutineScope(Dispatchers.IO).launch {
             repository.getDashboardTop10 { result ->
                 if(result.isSuccess) {
@@ -85,6 +84,7 @@ class DashboardFragment : Fragment() {
                 }
             }
         }
+
 
     }
 

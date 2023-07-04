@@ -230,7 +230,7 @@ class ListFragment : Fragment(), FusedLocation.OnLocationChangedListener {
     private fun calculateDistance(
         lat1: Double, lon1: Double, lat2: Double, lon2: Double
     ): Double {
-        val earthRadius = 6371000.0 // Raio médio da Terra em metros
+        val earthRadius = 6371000.0
 
         val dLat = Math.toRadians(lat2 - lat1)
         val dLon = Math.toRadians(lon2 - lon1)
@@ -254,7 +254,6 @@ class ListFragment : Fragment(), FusedLocation.OnLocationChangedListener {
         Log.i(TAG, locationResult?.lastLocation.toString())
         notifyListeners(locationResult)
 
-        // Atualizar os valores de currentLatitude e currentLongitude
         currentLatitude = locationResult.lastLocation!!.latitude
         currentLongitude = locationResult.lastLocation!!.longitude
     }
