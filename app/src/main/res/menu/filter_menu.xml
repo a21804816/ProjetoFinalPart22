@@ -17,4 +17,16 @@
     <item
         android:id="@+id/filter_reset"
         android:title="Reset" />
+
+    <item
+        android:id="@+id/ultimos_7"
+        android:title="Últimos 7 dias" />
+
+    <item
+        android:id="@+id/alfabeticaCrescente"
+        android:title="Alfabetica Crescente" />
+
+    <item
+        android:id="@+id/alfabeticaDecrescente"
+        android:title="Alfabetica Decrescente" />
 </menu>

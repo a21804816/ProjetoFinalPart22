@@ -55,8 +55,6 @@ class MainActivity : AppCompatActivity() {
 
         objetoFilme = FilmeRoom(FilmsDatabase.getInstance(this).filmDao())
 
-
-
         CoroutineScope(Dispatchers.IO).launch {
             repository.getFilmList { result ->
                 if (result.isSuccess) {
@@ -137,7 +135,6 @@ class MainActivity : AppCompatActivity() {
         super.onPause()
         shakeDetector.stop()
     }
-
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

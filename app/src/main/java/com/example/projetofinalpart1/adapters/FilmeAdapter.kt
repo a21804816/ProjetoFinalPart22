@@ -154,4 +154,3 @@ class FilmeAdapter(
         return url.substringAfterLast("/")
     }
 }
-
